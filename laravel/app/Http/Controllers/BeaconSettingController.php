@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Beacon;
+use App\Kid;
+use App\Repository\BeaconSettingRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use DB;
+
+use App\Http\Requests;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Yaml\Tests\B;
+
+//This controller is for managing beacon settings
+class BeaconSettingController extends Controller
+{
+	
+	/**
+     * The task repository instance.
+     *
+     * @var BeaconSettingRepository
+     */
+    protected $beacon_settings;
+	
+	/**
+     * Create a new controller instance.
+     *
+     * @param  BeaconSettingRepository  $beacon_settings
+     * @return void
+     */
+    public function __construct()//BeaconSettingRepository $beacon_settings)
+    {
+        //Requires authentication
+        $this->middleware('auth');
+
+        //Type hinting for repository
+        //$this->beacon_settings = $beacon_settings;
+    }
+	
+	 /**
+     * Display a list of all of the beacon settings
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function index(Request $request) 
+    {
+    	$beacons = NULL;
+		
+		//Get the beacons that are linked to the current kid
+        $kidID = Session::get('current_kid');
+        $currentKid = Kid::find($kidID);
+		if ($currentKid != NULL) {
+			$beacons = $currentKid->beacons()->get();	
+		}
+        
+		return view('beacons', ['beacons' => $beacons]);
+		
+		//TODO return all beacons if we want
+//		//Return all the beacons for all existing kids
+//		$kids = $request->user()->kids()->get();
+//		$allBeacons = collect();
+//
+//		foreach ($kids as $kid) {
+//			$beacons = $kid->beacons()->get();
+//			foreach ($beacons as $beacon) {
+//				$allBeacons->prepend($beacon);
+//			}
+//		}
+    }	
+	
+	/**
+     * Create a new beacon setting.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        //Validate our parameters
+        $this->validate($request, [
+            'location' => 'required|max:255',
+            'major' => 'integer|required',
+            'minor' => 'integer|required'
+        ]);
+
+
+        $kid = Kid::all()->random(1);
+        $beacon = Beacon::create($request->all());
+
+
+        //This is working correctly!
+        $kid->beacons()->attach($beacon->id);
+
+
+        //Three different ways to create beacons
+
+//        Creating unlinked beacons
+//        DB::table('beacons')->insert(
+//                ['location' => $request->location, 'minor' =>$request->minor, 'major' => $request->major]
+//        );
+
+        //object
+//        $beacon = new Beacon;
+//        $beacon->location = $request->location;
+//        $beacon->major = $request->major;
+//        $beacon->minor = $request->minor;
+//        $beacon->save();
+
+        //mass assignment
+        //$beacon1 = Beacon::create($request->all());
+
+        return redirect('/beacons');
+    }
+	
+	/**
+	 * Delete selected beacon setting
+	 * 
+	 * @param Request $request
+	 * 		  Beacon $beacon_setting
+	 * @return Response
+	 */
+	 public function destroy(Request $request, Beacon $beacon_setting)
+     {
+        //This is our authorise request for to check policies
+        //TODO
+         //// $this->authorize('destroy', $beacon_setting);
+
+         
+
+        $beacon_setting->delete();
+        return redirect('/beacons');
+     }
+	
+}
