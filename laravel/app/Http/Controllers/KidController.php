@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\Storage;
 //This controller is for managing kids
 class KidController extends Controller
 {
-
     /**
      * The task repository instance.
      *
      * @var KidRepository
      */
     protected $kids;
-    
+
 
     /**
      * Create a new controller instance.
@@ -56,7 +55,7 @@ class KidController extends Controller
         //Alternative using Repository and Type hinting
 
         //Session::put('current_kid', -1);
-		
+
         return view('kids', [
             'kids' => $this->kids->forUser($request->user()),
         ]);

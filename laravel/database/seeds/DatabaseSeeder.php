@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     	$this->call(KidsTableSeeder::class);
-		
+
         //Can be created without seeding other tables
         $this->call(AppsTableSeeder::class);
         $this->call(WebsitesTableSeeder::class);
@@ -33,5 +33,8 @@ class DatabaseSeeder extends Seeder
 
         //These are all associated with the user
         $this->call(MessagesTableSeeder::class);
+
+        $this->call(CategoriesTableSeeder::class);
+        // $this->call(TitleTableSeeder::class);
     }
 }

@@ -1,4 +1,4 @@
 @extends('layouts.admin2')
 @section('content')
-	test text
+test 
 @endsection

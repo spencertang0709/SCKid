@@ -54,8 +54,8 @@
     		<a href="/kids">
     			<button>Change</button>
     		</a>
-    	</li>	
-    	
+    	</li>
+
         <li class="text-primary">{{Auth::user()->name}} </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -117,12 +117,13 @@
                 </li>
 
                 <li>
-                    <a href="#">Overview<span class="fa arrow"></span></a>
+                    <a href="#">Management<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         {{--<li>--}}
                             {{--<a href="kid"><i class='fa fa-tachometer fa-fw'></i>Kid Dashboard</a>--}}
                         {{--</li>--}}
-                        <li>
+
+                        <!-- <li>
                             <a href="/kids"><i class="fa fa-child fa-fw"></i>Kids</a>
                         </li>
                         <li>
@@ -139,18 +140,18 @@
                         </li>
                         <li>
                             <a href="/panics"><i class="fa fa-exclamation fa-fw"></i>Child Panics</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#">Mobile Control<span class="fa arrow"></span></a>
+                    <a href="#">knowledge Base<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/apps"><i class="fa fa-android fa-fw"></i>Apps</a>
+                            <a href="knowledge/addArticle"><i class="fa fa-android fa-fw"></i>Add an article</a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="/sms"><i class="fa fa-envelope fa-fw"></i>SMS</a>
                         </li>
                         <li>
@@ -167,12 +168,12 @@
                         </li>
                         <li>
                             <a href="/settings"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="#">Social Media<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -203,7 +204,7 @@
                             <a href="/knowledge/categories"><i class="fa fa-question fa-fw"></i>Learn About Privacy</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
 
 

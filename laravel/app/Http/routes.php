@@ -23,6 +23,7 @@ Route::get('/elements', function () {
     return view('knowledgeContent.elements');
 });
 
+
 Route::get('/file',function(){
     echo asset('storage/file.txt');
 });
@@ -35,6 +36,12 @@ Route::get('/filemake',function(){
 Route::get('/arrangeTimeSlots', 'ArrangeTimeSlotsController@arrange');
 
 Route::get('/selectKid', 'CurrentKidController@Select');
+
+Route::get('/knowledge/addArticle','KnowledgeAddArticleController@index');
+// Route::get('/knowledge/addArticle',function () {
+//     return view('knowledge.addArticle');
+// });
+
 
 Route::get('/knowledge/search', 'SearchController@knowledgeSearch');
 
@@ -110,21 +117,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/apps', 'AppController@index');
     Route::put('/apps', 'AppController@update');
     Route::post('/apps', 'AppController@store');
-	
+
 	Route::get('/beacons', 'BeaconSettingController@index');
 	Route::post('/beacons', 'BeaconSettingController@store');
 	Route::delete('/beacons/destroy/{beacon_setting}', 'BeaconSettingController@destroy');
-    
+
     Route::get('/websites', 'WebsiteController@index');
     Route::post('/websites', 'WebsiteController@store');
     Route::delete('/websites/destroy/{website}', 'WebsiteController@destroy');
-	
+
 	Route::get('/posts', 'PostController@index');
-	
+
 	Route::get('/likes', 'LikeController@index');
 
     Route::get('/devices', 'DeviceController@index');
-    
+
     Route::get('/settings', 'SettingController@index');
 
     Route::get('/time', 'TimeController@index');
@@ -176,7 +183,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Password change
     Route::post('/password/change', 'Auth\PasswordController@change');
-    
+
     //Social Media
     Route::get('/facebook', 'FacebookController@index');
     Route::get('/auth/facebook', 'Auth\FacebookController@redirectToProvider');

@@ -162,6 +162,18 @@ $factory->define(App\ContextPolicy::class, function (Faker\Generator $faker) {
 	];
 });
 
+$factory->define(App\Category::class,function(Faker\Generator $faker){
+  return[
+  'name'=>$faker->realText(10),
+];
+});
+
+$factory->define(App\Title::class,function(Faker\Generator $faker){
+return[
+  'name'=>$faker->realText(10),
+];
+});
+
 /*
 $factory->define(App\TimeSlot::class, function (Faker\Generator $faker) {
 	return [
@@ -169,11 +181,6 @@ $factory->define(App\TimeSlot::class, function (Faker\Generator $faker) {
 		'day' => $faker->date->today,
 		'start_time' => $faker->dateTime,
 		'end_time' => $faker->dateTime,
-	]; 
+	];
 });
 */
-
-
-
-
-
