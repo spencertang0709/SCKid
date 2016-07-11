@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Repository\KidRepository;
@@ -20,7 +19,7 @@ class HomeController extends Controller
      * @var KidRepository
      */
     protected $kids;
-	
+
     /**
      * Create a new controller instance.
      *
@@ -48,11 +47,11 @@ class HomeController extends Controller
 		foreach ($roles as $role) {
 			if ($role->name == "admin") {
 				$isAdmin = true;
-			} 
+			}
 		}
 		if ($isAdmin) {
-			
-			
+
+
 			return view('home2');
 		} else {
 			$locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
@@ -64,7 +63,7 @@ class HomeController extends Controller
 	            ->orderBy('count','desc')
 	            ->take(5)
 	            ->get();
-						
+
 	        return view('home',[
 	        	'locations' => $locations,
 	        	'sms'=>$sms,
@@ -72,7 +71,7 @@ class HomeController extends Controller
 			]);
 		}
     }
-	
+
 	 /**
      * Create a new kid.
      *

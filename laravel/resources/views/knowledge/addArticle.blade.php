@@ -1,8 +1,37 @@
 @extends('layouts.admin2')
 @section('content')
-<form action=
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Fred</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+<div class="row" style="margin-top:50px;">
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-4">
+    <form action="saveArticle" method="post">
+          <div class="form-group">
+              <label class="inline" for="category">Categories:</label>
+              <select class="form-control" name="category" id="category">
+                  @foreach($categories as $category)
+                    <option>{{$category->name}}</option>
+                  @endforeach
+              </select>
+          </div>
+          <!-- <div class="form-group">
+              <label class="inline" for="category">Category:</label>
+              <input class="form-control" type="text" name="category" id="category" value="{{ Request::old('category') }}">
+          </div> -->
+          <div class="form-group">
+              <label class="inline" for="title">Title:</label>
+              <input class="form-control" type="text" name="title" id="title" value="{{ Request::old('title') }}">
+          </div>
+          <div class="form-group">
+              <label class="inline" for="article">Article:</label>
+              <input class="form-control" type="text" name="article" id="article" value="{{ Request::old('article') }}">
+          </div>
+          <div class="form-group">
+              <label class="inline" for="content">Content:</label>
+              <input class="form-control" type="text" name="content" id="content" value="{{ Request::old('content') }}">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <input type="hidden" name="_token" value="{{ Session::token() }}">
+      </form>
+  </div>
+</div>
 </div>
 @endsection
