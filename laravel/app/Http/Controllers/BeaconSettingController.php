@@ -17,14 +17,14 @@ use Symfony\Component\Yaml\Tests\B;
 //This controller is for managing beacon settings
 class BeaconSettingController extends Controller
 {
-	
+
 	/**
      * The task repository instance.
      *
      * @var BeaconSettingRepository
      */
     protected $beacon_settings;
-	
+
 	/**
      * Create a new controller instance.
      *
@@ -39,26 +39,26 @@ class BeaconSettingController extends Controller
         //Type hinting for repository
         //$this->beacon_settings = $beacon_settings;
     }
-	
+
 	 /**
      * Display a list of all of the beacon settings
      *
      * @param  Request  $request
      * @return Response
      */
-    public function index(Request $request) 
+    public function index(Request $request)
     {
     	$beacons = NULL;
-		
+
 		//Get the beacons that are linked to the current kid
         $kidID = Session::get('current_kid');
         $currentKid = Kid::find($kidID);
 		if ($currentKid != NULL) {
-			$beacons = $currentKid->beacons()->get();	
+			$beacons = $currentKid->beacons()->get();
 		}
-        
+
 		return view('beacons', ['beacons' => $beacons]);
-		
+
 		//TODO return all beacons if we want
 //		//Return all the beacons for all existing kids
 //		$kids = $request->user()->kids()->get();
@@ -70,8 +70,8 @@ class BeaconSettingController extends Controller
 //				$allBeacons->prepend($beacon);
 //			}
 //		}
-    }	
-	
+    }
+
 	/**
      * Create a new beacon setting.
      *
@@ -115,10 +115,10 @@ class BeaconSettingController extends Controller
 
         return redirect('/beacons');
     }
-	
+
 	/**
 	 * Delete selected beacon setting
-	 * 
+	 *
 	 * @param Request $request
 	 * 		  Beacon $beacon_setting
 	 * @return Response
@@ -129,10 +129,10 @@ class BeaconSettingController extends Controller
         //TODO
          //// $this->authorize('destroy', $beacon_setting);
 
-         
+
 
         $beacon_setting->delete();
         return redirect('/beacons');
      }
-	
+
 }

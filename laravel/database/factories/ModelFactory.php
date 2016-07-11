@@ -174,6 +174,13 @@ return[
 ];
 });
 
+$factory->define(App\Article::class,function(Faker\Generator $faker){
+  return[
+    'subheading'=>$faker->realText(10),
+    'content'=>$faker->realText(10)
+];
+});
+
 /*
 $factory->define(App\TimeSlot::class, function (Faker\Generator $faker) {
 	return [

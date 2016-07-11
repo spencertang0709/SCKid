@@ -148,7 +148,8 @@
                     <a href="#">knowledge Base<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="knowledge/addArticle"><i class="fa fa-android fa-fw"></i>Add an article</a>
+                            <!-- <a href="knowledge/addArticle"><i class="fa fa-android fa-fw"></i>Add an article</a> -->
+                            <a href="{{ route('addArticle.knowledge') }}"><i class="fa fa-android fa-fw"></i>Add an article</a>
                         </li>
 
                         <!-- <li>

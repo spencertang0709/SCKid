@@ -37,11 +37,16 @@ Route::get('/arrangeTimeSlots', 'ArrangeTimeSlotsController@arrange');
 
 Route::get('/selectKid', 'CurrentKidController@Select');
 
-Route::get('/knowledge/addArticle','KnowledgeAddArticleController@index');
-// Route::get('/knowledge/addArticle',function () {
-//     return view('knowledge.addArticle');
-// });
+//use this way to avid routes appending itself
+Route::get('/knowledge/addArticle',[
+'uses'=>'KnowledgeAddArticleController@index',
+'as'=>'addArticle.knowledge'
+]);
 
+Route::post('/knowledge/saveArticle', [
+    'uses' => 'KnowledgeAddArticleController@saveArticle',
+    'as' => 'saveArticle'
+]);
 
 Route::get('/knowledge/search', 'SearchController@knowledgeSearch');
 

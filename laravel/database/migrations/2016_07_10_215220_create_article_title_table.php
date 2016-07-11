@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTitleTable extends Migration
+class CreateArticleTitleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateCategoryTitleTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_title', function (Blueprint $table) {
+        Schema::create('article_title', function (Blueprint $table) {
             $table->increments('id');
 
-        $table->integer('category_id')->unsigned();
-        $table->foreign('category_id')->references('id')->on('categories');
+        $table->integer('article_id')->unsigned();
+        $table->foreign('article_id')->references('id')->on('articles');
 
         $table->integer('title_id')->unsigned();
         $table->foreign('title_id')->references('id')->on('titles')->onDelete('cascade');
@@ -32,6 +32,6 @@ class CreateCategoryTitleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('category_title');
+      Schema::drop('article_title');
     }
 }
