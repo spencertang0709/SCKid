@@ -37,7 +37,7 @@ class KidController extends Controller
 
         return Response::json(
             array(
-            'kids' => $kids
+            	'kids' => $kids
             )
         );
     }
