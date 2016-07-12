@@ -82,6 +82,7 @@ Root Directory (Example): /Users/pippo/Desktop/OPCCloud/
 4. Make sure all databases are migrated and seeded
 5. Clear cache `php artisan cache:clear`
 
+
 ##Todo:
 1. Realtime communication
 2. Bidrectional Sync complexity
