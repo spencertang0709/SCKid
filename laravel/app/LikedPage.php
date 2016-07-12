@@ -12,7 +12,7 @@ class LikedPage extends Model
      * @var array
      */
     protected $fillable = [
-        'url'
+        'name'
     ];
     
     //Relationships

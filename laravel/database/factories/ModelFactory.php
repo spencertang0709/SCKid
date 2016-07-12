@@ -150,14 +150,47 @@ $factory->define(App\SocialMedia::class, function (Faker\Generator $faker) {
 	];
 });
 
-//TODO tables related to socialmedia
-
+	$factory->define(App\LikedPage::class, function (Faker\Generator $faker) {
+		return [
+			'name' => $faker->realText(6),
+		];
+	});
+	
+	$factory->define(App\Post::class, function (Faker\Generator $faker) {
+		return [
+			'message' => $faker->realText(20),
+			'comments' => $faker->realText(10),
+			'likes' => $faker->numberBetween(0, 50),
+			'post_time' => $faker->dateTime,
+			'story' => $faker->realText(5),
+			'location' => $faker->city,
+        	'major' => $faker->numberBetween(1000,99999),
+        	'minor' => $faker->numberBetween(1000,99999),
+		];
+	});
+	
+	$factory->define(App\Album::class, function (Faker\Generator $faker) {
+		return [
+			'name' => $faker->name,
+			'comments' => $faker->realText(10),
+			'count' => $faker->numberBetween(1, 100),
+			'privacy' => $faker->realText(5),
+		];
+	});
+	
+	$factory->define(App\Photo::class, function (Faker\Generator $faker) {
+		return [
+			'name' => $faker->realText(8),
+			'source' => $faker->domainName,
+		];
+	});
+	
 $factory->define(App\Website::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->domainWord,
         'host' => $faker->domainName,
         'ip' => $faker->ipv4,
-//        'ipv6' => $faker->ipv6,
+		//'ipv6' => $faker->ipv6,
         'type' => $faker->randomLetter,
     ];
 });

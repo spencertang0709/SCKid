@@ -21,23 +21,24 @@ class SocialMedia extends Model
     public function kids()
     {
         return $this->belongsToMany(Kid::class) 
-        			->withPivot('isBlocked', 'isMonitored', 'token')->withTimestamps();
+        			->withPivot('is_blocked', 'is_monitored', 'token', 'account_id', 'nickname', 'name', 'avatar')
+        			->withTimestamps();
     }
 	
 	//Many-One
-	public function post()
+	public function posts()
 	{
 		return $this->hasMany(Post::class);
 	}
 	
-	public function image()
-	{
-		return $this->hasMany(Image::class);
-	}
-	
-	public function likedPage()
+	public function likedPages()
 	{
 		return $this->hasMany(LikedPage::class);
+	}
+	
+	public function albums()
+	{
+		return $this->hasMany(Album::class);
 	}
 	
 }

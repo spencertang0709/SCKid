@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Photo extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,12 +12,12 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'message', 'comments', 'likes', 'post_time', 'story', 'location', 'latitude', 'longitude'
+        'name', 'source'
     ];
     
     //Relationships
-    public function socialMedia()
+    public function album()
     {
-        return $this->belongsTo(SocialMedia::class);
+        return $this->belongsTo(Album::class);
     }
 }

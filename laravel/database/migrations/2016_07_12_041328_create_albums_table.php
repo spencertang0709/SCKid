@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,21 +12,16 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('message');
+			$table->string('name');
 			$table->string('comments');
-			$table->integer('likes');
-			$table->dateTime('post_time');
-			$table->string('story');
-			$table->string('location');
-			$table->integer('latitude');
-			$table->integer('longitude');
+			$table->integer('count');
+			$table->string('privacy');
+            $table->timestamps();
 			
 			$table->integer('social_media_id')->unsigned();
             $table->foreign('social_media_id')->references('id')->on('social_media');
-
-            $table->timestamps();
         });
     }
 
@@ -37,6 +32,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('posts');
+        Schema::drop('albums');
     }
 }
