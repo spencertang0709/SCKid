@@ -38,7 +38,7 @@
     {{--<!-- DataTables -->--}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.css">
-
+    
     @yield('customStyle')
 </head>
 

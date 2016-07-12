@@ -33,6 +33,7 @@ class KnowledgeAddArticleController extends Controller
       return view('knowledge.addArticle',['categories'=>$categories]);
     }
 
+//save title, article and category
     public function saveArticle(Request $request)
     {
       $this->validate($request, [
@@ -42,7 +43,7 @@ class KnowledgeAddArticleController extends Controller
 
       // echo $request['category'];
       // echo "this is test";
-      
+
       $category = new Category();
       $category->name = $request['category'];
       $category->save();
@@ -60,4 +61,24 @@ class KnowledgeAddArticleController extends Controller
 
       return redirect()->back();
     }
+
+
+    public function showCategory(){
+    $categories=Category::get();
+    return view('knowledge.showCategory',['categories'=>$categories]);
+    }
+
+    public function showTitle($category_id){
+      $category=Category::where('id', $category_id)->first();
+      $title=$category->titles()->get();
+      return view('knowledge.showTitle',['titles'=>$title]);
+    }
+
+    public function showArticle($title_id){
+      $title=Title::where('id', $title_id)->first();
+      $article=$title->articles()->get();
+      return view('knowledge.showArticle',['articles'=>$article]);
+    }
+
+
 }

@@ -48,6 +48,26 @@ Route::post('/knowledge/saveArticle', [
     'as' => 'saveArticle'
 ]);
 
+Route::get('/knowledge/showCategory', [
+    'uses' => 'KnowledgeAddArticleController@showCategory',
+    'as' => 'showCategory.knowledge'
+]);
+
+Route::get('/knowledge/showTitle/{category_id}', [
+    'uses' => 'KnowledgeAddArticleController@showTitle',
+    'as' => 'showTitle.knowledge',
+]);
+
+Route::get('/knowledge/showArticle/{title_id}', [
+    'uses' => 'KnowledgeAddArticleController@showArticle',
+    'as' => 'showArticle.knowledge',
+]);
+
+Route::post('/knowledge/searchKeyWord',[
+  'uses' => 'SearchController@articleSearch',
+  'as' => 'searchKeyWord.knowledge',
+]);
+
 Route::get('/knowledge/search', 'SearchController@knowledgeSearch');
 
 Route::get('/knowledge/categories', function () {

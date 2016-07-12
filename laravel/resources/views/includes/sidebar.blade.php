@@ -54,8 +54,8 @@
     		<a href="/kids">
     			<button>Change</button>
     		</a>
-    	</li>	
-    	
+    	</li>
+
         <li class="text-primary">{{Auth::user()->name}} </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -202,11 +202,11 @@
                         <li>
                             <a href="/knowledge/categories"><i class="fa fa-question fa-fw"></i>Learn About Privacy</a>
                         </li>
+                        <li>
+                            <a href="/knowledge/showCategory">Knowledge base</a>
+                        </li>
                     </ul>
                 </li>
-
-
-
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

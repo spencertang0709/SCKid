@@ -12,10 +12,6 @@
                   @endforeach
               </select>
           </div>
-          <!-- <div class="form-group">
-              <label class="inline" for="category">Category:</label>
-              <input class="form-control" type="text" name="category" id="category" value="{{ Request::old('category') }}">
-          </div> -->
           <div class="form-group">
               <label class="inline" for="title">Title:</label>
               <input class="form-control" type="text" name="title" id="title" value="{{ Request::old('title') }}">
@@ -23,11 +19,12 @@
           <div class="form-group">
               <label class="inline" for="article">Article:</label>
               <input class="form-control" type="text" name="article" id="article" value="{{ Request::old('article') }}">
-          </div>
+          </div>    
           <div class="form-group">
-              <label class="inline" for="content">Content:</label>
-              <input class="form-control" type="text" name="content" id="content" value="{{ Request::old('content') }}">
+            <label for="content">Content:</label>
+            <textarea class="form-control" rows="5" name="content" id="content" value="{{ Request::old('content') }}"></textarea>
           </div>
+
           <button type="submit" class="btn btn-primary">Submit</button>
           <input type="hidden" name="_token" value="{{ Session::token() }}">
       </form>
