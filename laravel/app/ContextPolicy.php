@@ -15,13 +15,17 @@ class ContextPolicy extends Model
      * @var array
      */
     protected $fillable = [
-        'start_time', 'end_time', 'guardianNearby'
+        'app_list', 'start_time', 'end_time', 'screen_time'
     ];
 
     //Relationships
     public function beacon() {
     	return $this->belongsTo(Beacon::class);
     }
+	
+	public function kid() {
+		return $this->belongsTo(Kid::class);
+	}
 	
 	//Queries
 	

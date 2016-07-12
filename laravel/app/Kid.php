@@ -24,7 +24,7 @@ class Kid extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'age','address','private'
+        'name', 'age', 'address', 'private'
     ];
 
     //Relationships
@@ -36,22 +36,17 @@ class Kid extends Model
 	
 	public function apps() 
 	{
-		return $this->belongsToMany(App::class)->withPivot('is_blocked', 'is_monitored')->withTimestamps();
+		return $this->belongsToMany(App::class)->withPivot('is_blocked', 'is_monitored', 'is_installed')->withTimestamps();
 	}
 	
 	public function websites()
 	{
-		return $this->belongsToMany(Website::class)->withTimestamps();
+		return $this->belongsToMany(Website::class)->withPivot('is_blocked', 'is_monitored')->withTimestamps();
 	}
 	
 	public function socialMedias()
 	{
-		return $this->belongsToMany(SocialMedia::class)->withPivot('is_blocked', 'is_monitored','token')->withTimestamps();
-	}
-	
-	public function beacons()
-	{
-		return $this->belongsToMany(Beacon::class)->withTimestamps();
+		return $this->belongsToMany(SocialMedia::class)->withPivot('is_blocked', 'is_monitored', 'token')->withTimestamps();
 	}
 	
 	public function timeSlots()
@@ -90,7 +85,10 @@ class Kid extends Model
 		return $this->hasMany(Panic::class);
 	}
 	
-	
+	public function contextPolicies() {
+		return $this->hasMany(ContextPolicy::class);
+	}
+		
 	//Queries
 	/**
      * Iterate through all kids

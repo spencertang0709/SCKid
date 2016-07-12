@@ -14,19 +14,17 @@ class CreateContextPolicysTable extends Migration
     {
         Schema::create('context_policys', function (Blueprint $table) {
             $table->increments('id');
+			$table->string('app_list');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-			$table->string('guardianNearby');
-			/*
-            $table->string('longitude');
-            $table->string('latitude');
-            $table->string('beacon');
-			*/
-        
+			$table->boolean('screen_time');
 			
 			$table->integer('beacon_id')->unsigned();
             $table->foreign('beacon_id')->references('id')->on('beacons');
 
+			$table->integer('kid_id')->unsigned();
+            $table->foreign('kid_id')->references('id')->on('kids');
+			
             $table->timestamps();
         });
     }

@@ -45,6 +45,11 @@ class User extends Authenticatable
 	{
 		return $this->belongsToMany(Device::class)->withTimestamps();
 	}
+	
+	public function beacons()
+	{
+		return $this->belongsToMany(Beacon::class)->withTimestamps();
+	}
 
 //    public function beacons(){
 //        return $this->hasManyThrough(Kid, )

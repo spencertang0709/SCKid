@@ -16,6 +16,7 @@ class CreateAppKidTable extends Migration
 			$table->increments('id');
 			$table->boolean('is_blocked');
 			$table->boolean('is_monitored');
+			$table->boolean('is_installed');
 			
 			$table->integer('app_id')->unsigned();
 			$table->foreign('app_id')->references('id')->on('apps');

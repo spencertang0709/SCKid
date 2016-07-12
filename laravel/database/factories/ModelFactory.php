@@ -156,9 +156,10 @@ $factory->define(App\Beacon::class, function (Faker\Generator $faker) {
 
 $factory->define(App\ContextPolicy::class, function (Faker\Generator $faker) {
 	return [
+		'app_list' => $faker->realText(10),
 		'start_time' => $faker->dateTime,
 		'end_time' => $faker->dateTime,
-		'guardianNearby' => $faker->boolean,
+		'screen_time' => $faker->boolean,
 	];
 });
 
