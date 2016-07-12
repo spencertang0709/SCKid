@@ -26,7 +26,7 @@ class LocationController extends Controller
 			$locations = $currentKid->locations()->get();	
 		}
        
-        return view('location',['locations' => $locations,]);
+        return view('location',['locations' => $locations]);
     }
 
     /**
