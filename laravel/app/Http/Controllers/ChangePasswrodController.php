@@ -1,26 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Request;
+//use App\Http\Requests\Request;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 
-class PasswordController extends Controller
+class ChangePasswrodController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
-
-    use ResetsPasswords;
+    //use ResetsPasswords;
 
     /**
      * Create a new password controller instance.
@@ -29,10 +22,8 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
-
-
 
     /**
      * Reset password for a user
@@ -49,14 +40,18 @@ class PasswordController extends Controller
         ]);
 
         $user = $request->user();
-
+        echo $request['old_password'];
+        echo $request['password'];
         //If password match then save new passowrd
         if (Hash::check($request->get('old_password'), $user->password)) {
             // The passwords match...
             $user->password = bcrypt($request->get('password'));
             $user->save();
+            echo $user->password;
+        }else{
+            echo 'no';
         }
 
-         return view('settings');         
+        //  return view('settings');
     }
 }

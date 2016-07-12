@@ -104,6 +104,19 @@ Route::get('/login', function () {
     return view('login');
 });
 
+// //Password change
+// Route::post('/password/change', [
+// 'uses' => 'Auth\PasswordController@change',
+// 'as' => 'changePassword'
+// ]);
+
+//Password change
+Route::post('/password/change', [
+'uses' => 'ChangePasswrodController@change',
+'as' => 'changePassword'
+]);
+
+
 ////////////////////////////////////////////////////////
 
 Route::get('/email','UserController@sendEmail');
@@ -206,8 +219,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('smart_filter');
     });
 
-    //Password change
-    Route::post('/password/change', 'Auth\PasswordController@change');
+
 
     //Social Media
     Route::get('/facebook', 'FacebookController@index');
