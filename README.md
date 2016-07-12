@@ -35,6 +35,7 @@ File can then be accessed at: `http://localhost:8080/dir/newFile.txt`
 
 ## Mac OS Development:
 Root Directory (Example): /Users/pippo/Desktop/OPCCloud/
+
 1. Install your webserver, PHP, MySQL and Composer for PHP dependencies 
 2. ENter into the root directory: `cd /Users/pippo/Desktop/OPCCloud`
 3. Git Clone: `https://github.com/cecil0610/SCKidWeb.git` 
