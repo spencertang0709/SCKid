@@ -18,13 +18,5 @@
 @include('includes.sidebar2')
 @yield('content')
 
-@section('customFunction')
-<script defer>
-$(document).ready(function() {
-	$('#summernote').text("this is test");
-$('#summernote').delay(1000);
-	$('#summernote').summernote();
-});
-</script>
-@append
 @include('includes.footer')
+
