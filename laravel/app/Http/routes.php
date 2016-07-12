@@ -39,8 +39,8 @@ Route::get('/selectKid', 'CurrentKidController@Select');
 
 //use this way to avid routes appending itself
 Route::get('/knowledge/addArticle',[
-'uses'=>'KnowledgeAddArticleController@index',
-'as'=>'addArticle.knowledge'
+	'uses'=>'KnowledgeAddArticleController@index',
+	'as'=>'addArticle.knowledge'
 ]);
 
 Route::post('/knowledge/saveArticle', [
@@ -64,8 +64,8 @@ Route::get('/knowledge/showArticle/{title_id}', [
 ]);
 
 Route::post('/knowledge/searchKeyWord',[
-  'uses' => 'SearchController@articleSearch',
-  'as' => 'searchKeyWord.knowledge',
+	'uses' => 'SearchController@articleSearch',
+	'as' => 'searchKeyWord.knowledge',
 ]);
 
 Route::get('/knowledge/search', 'SearchController@knowledgeSearch');

@@ -29,8 +29,8 @@ class KnowledgeAddArticleController extends Controller
 
     public function index(Request $request)
     {
-      $categories=DB::table('categories')->get();
-      return view('knowledge.addArticle',['categories'=>$categories]);
+      $categories = DB::table('categories')->get();
+      return view('knowledge.addArticle',['categories' => $categories]);
     }
 
 //save title, article and category
@@ -38,7 +38,7 @@ class KnowledgeAddArticleController extends Controller
     {
       $this->validate($request, [
         'title' => 'required',
-        'article'=>'required'
+        'article' => 'required'
       ]);
 
       // echo $request['category'];
@@ -64,20 +64,26 @@ class KnowledgeAddArticleController extends Controller
 
 
     public function showCategory(){
-    $categories=Category::get();
-    return view('knowledge.showCategory',['categories'=>$categories]);
+    	$categories = Category::get();
+    	return view('knowledge.showCategory', [
+    		'categories' => $categories
+    	]);
     }
 
     public function showTitle($category_id){
-      $category=Category::where('id', $category_id)->first();
-      $title=$category->titles()->get();
-      return view('knowledge.showTitle',['titles'=>$title]);
+    	$category = Category::where('id', $category_id)->first();
+    	$title = $category->titles()->get();
+    	return view('knowledge.showTitle', [
+    		'titles' => $title
+    	]);
     }
 
     public function showArticle($title_id){
-      $title=Title::where('id', $title_id)->first();
-      $article=$title->articles()->get();
-      return view('knowledge.showArticle',['articles'=>$article]);
+    	$title = Title::where('id', $title_id)->first();
+    	$article = $title->articles()->get();
+    	return view('knowledge.showArticle', [
+    		'articles' => $article
+    	]);
     }
 
 

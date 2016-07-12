@@ -27,31 +27,37 @@ class SearchController extends Controller
 
     public function articleSearch(Request $request){
       $this->validate($request, [
-        'keyword' => 'required',
+          'keyword' => 'required',
       ]);
-      $keyword=$request['keyword'];
-      $categories=Category::where('name',$keyword)->get();
-      echo "category:";
+	  
+      $keyword = $request['keyword'];
+      $categories = Category::where('name', $keyword)->get();
+      echo "Category:";
       echo "<br>";
       foreach($categories as $c){
-      echo $c->id.": ";
-      echo $c->name.",";
+	      echo $c->id.": ";
+	      echo $c->name.",";
       }
-      echo "TITLE:";
+	  
+      echo "Title:";
       echo "<br>";
-      $titles=Title::where('name',$keyword)->get();
-      foreach($titles as $c)
-      echo $c->name.",";
-
-      echo "Artichle";
+      $titles = Title::where('name', $keyword)->get();
+      foreach($titles as $c) {
+          echo $c->name.",";	
+      }
+      
+      echo "Article";
       echo "<br>";
-      $articles=Article::where('subheading',$keyword)->get();
+      $articles = Article::where('subheading', $keyword)->get();
       foreach($articles as $c){
-      echo $c->id.": ";
-      echo $c->subheading.",";
+	      echo $c->id.": ";
+	      echo $c->subheading.",";
       }
 
-      return view('knowledge.showSearchResult',['categories'=>$categories,
-      'titles'=>$titles,'articles'=>$articles]);
+      return view('knowledge.showSearchResult', [
+          'categories' => $categories,
+          'titles' => $titles,
+          'articles'=> $articles
+      ]);
     }
 }
