@@ -256,6 +256,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
     Route::resource('locations', 'Api\LocationController');
     Route::resource('settings', 'Api\SettingsController');
     Route::resource('messages', 'Api\MessageController');
+	Route::resource('policies', 'Api\PolicyController');
     Route::get('user','Api\AuthApiController@getAuthenticatedUser');
 
     //Sync routes

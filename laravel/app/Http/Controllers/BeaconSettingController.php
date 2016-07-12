@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Beacon;
-use App\Kid;
+use App;
 use App\Repository\BeaconSettingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -52,7 +51,7 @@ class BeaconSettingController extends Controller
 
 		//Get the beacons that are linked to the current kid
         $kidID = Session::get('current_kid');
-        $currentKid = Kid::find($kidID);
+        $currentKid = App\Kid::find($kidID);
 		if ($currentKid != NULL) {
 			$beacons = $currentKid->beacons()->get();
 		}
@@ -87,17 +86,14 @@ class BeaconSettingController extends Controller
             'minor' => 'integer|required'
         ]);
 
+        $kidID = Session::get('current_kid');
+        $currentKid = App\Kid::find($kidID);
+		
+        $beacon = App\Beacon::create($request->all());
 
-        $kid = Kid::all()->random(1);
-        $beacon = Beacon::create($request->all());
-
-
-        //This is working correctly!
-        $kid->beacons()->attach($beacon->id);
-
+        $currentKid->beacons()->attach($beacon->id);
 
         //Three different ways to create beacons
-
 //        Creating unlinked beacons
 //        DB::table('beacons')->insert(
 //                ['location' => $request->location, 'minor' =>$request->minor, 'major' => $request->major]

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DevicesTableSeeder extends Seeder
 {
@@ -16,11 +17,20 @@ class DevicesTableSeeder extends Seeder
 		
 		factory(App\Device::class, 10)->make()
             ->each(function($device){
-
                 //Associate a device with a single random kid picked from the kid table
                 //Then save it
                 $device->kid()->associate(App\Kid::all()->random(1))
                     ->save();
             });
+		
+		factory(App\Device::class, 'device')->create()
+			->each(function($device) {
+				$kid = factory(App\Kid::class, 1)->create();
+				$device->kid()->associate($kid)->save();
+				
+				$contextPolicy = factory(App\ContextPolicy::class, 1)->make();
+				$contextPolicy->beacon()->associate(factory(App\Beacon::class, 1)->create());
+				$contextPolicy->kid()->associate($kid)->save();
+			});
     }
 }

@@ -70,6 +70,15 @@ $factory->define(App\Call::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\ContextPolicy::class, function (Faker\Generator $faker) {
+	return [
+		'app_list' => $faker->realText(10),
+		'start_time' => $faker->dateTime,
+		'end_time' => $faker->dateTime,
+		'screen_time' => $faker->boolean,
+	];
+});
+
 $factory->define(App\Device::class, function (Faker\Generator $faker) {
 
     $models = array('Samsung','Nokia','Huawei','Sony','LG','Lenovo','HTC');
@@ -78,6 +87,14 @@ $factory->define(App\Device::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'model' => $faker->randomElement($models),
         'unique_id' => $faker->uuid,
+    ];
+});
+
+$factory->defineAs(App\Device::class, 'device', function () {
+    return [
+        'name' => 'CATEST',
+        'model' => 'CATEST',
+        'unique_id' => '1234',
     ];
 });
 
@@ -152,14 +169,6 @@ $factory->define(App\Beacon::class, function (Faker\Generator $faker) {
         'major' => $faker->numberBetween(1000,99999),
         'minor' => $faker->numberBetween(1000,99999),
     ];
-});
-
-$factory->define(App\ContextPolicy::class, function (Faker\Generator $faker) {
-	return [
-		'start_time' => $faker->dateTime,
-		'end_time' => $faker->dateTime,
-		'guardianNearby' => $faker->boolean,
-	];
 });
 
 $factory->define(App\Category::class,function(Faker\Generator $faker){

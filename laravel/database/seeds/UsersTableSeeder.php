@@ -52,7 +52,6 @@ class UsersTableSeeder extends Seeder
 						//Attach one device to each kid
 						$kid->devices()->save(factory(App\Device::class)->create());
 						
-						
                     })
                 );
 				
