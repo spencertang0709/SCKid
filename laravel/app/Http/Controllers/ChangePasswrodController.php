@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 //use App\Http\Requests\Request;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ChangePasswrodController extends Controller
 {
@@ -38,20 +39,20 @@ class ChangePasswrodController extends Controller
             'password' => 'required|max:255',
             'password_confirmation' => 'required|max:255',
         ]);
-
         $user = $request->user();
-        echo $request['old_password'];
-        echo $request['password'];
+        
+        //make sure logged in account is user
+        Auth::login($user);
+
         //If password match then save new passowrd
-        if (Hash::check($request->get('old_password'), $user->password)) {
+        if (Hash::check($request['old_password'], $user->password)) {
             // The passwords match...
-            $user->password = bcrypt($request->get('password'));
-            $user->save();
-            echo $user->password;
+            $user->password = bcrypt($request['password']);
+            $user->update();
         }else{
-            echo 'no';
+            return redirect()->back();
         }
 
-        //  return view('settings');
+        return view('settings');
     }
 }
