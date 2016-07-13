@@ -13,6 +13,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
+        factory(App\User::class, 5)
+            ->create()
+            ->each(function($user) {
+                $user->beacons()->attach(factory(App\Beacon::class,3)->create());
+            });
+
         //Create admin user with 4 kids, each kid has 5 SMS messages
         factory(App\User::class, 'admin')
             ->create()
@@ -23,22 +29,22 @@ class UsersTableSeeder extends Seeder
                     ->each(function($kid){
                         //Attach five apps to each kid
 						$kid->apps()->saveMany(factory(App\App::class, 5)->create());
-						
+
 						//Attach one device to each kid
 						$kid->devices()->save(factory(App\Device::class)->create());
-						
-						
+
+
                     })
                 );
-				
+
 				//Create 5 devices for the admin that are not linked to any kid
 				$user->devices()->saveMany(factory(App\Device::class, 5)->create());
 
                 //Attaching admin role to user
                 $user->roles()->attach(1);
-				
+
             });
-			
+
 		factory(App\User::class, 'parent')
             ->create()
             ->each(function($user){
@@ -48,19 +54,19 @@ class UsersTableSeeder extends Seeder
                     ->each(function($kid){
                         //Attach five apps to each kid
 						$kid->apps()->saveMany(factory(App\App::class, 5)->create());
-						
+
 						//Attach one device to each kid
 						$kid->devices()->save(factory(App\Device::class)->create());
-						
+
                     })
                 );
-				
+
 				//Create 5 devices for the admin that are not linked to any kid
 				$user->devices()->saveMany(factory(App\Device::class, 5)->create());
 
                 //Attaching parent role to user
                 $user->roles()->attach(2);
-				
+
             });
 
         //Creating roles

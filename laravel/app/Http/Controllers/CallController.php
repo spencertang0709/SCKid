@@ -22,7 +22,7 @@ class CallController extends Controller
         $this->middleware('auth');
     }
 
-    
+
     /**
      * Display a list of all of the kids's calls
      *
@@ -31,15 +31,15 @@ class CallController extends Controller
     public function index(Request $request)
     {
     	$calls = NULL;
-		
+
         //Get our current kid and get the calls for that kid
 		$kidID = Session::get('current_kid');
-        $currentKid = Kid::find($kidID);		
+        $currentKid = Kid::find($kidID);
 		if ($currentKid != NULL) {
 			$calls = $currentKid->calls()->get();
-		} 
-		
+		}
+
 		return view('calls', ['calls' => $calls]);
-        
+
     }
 }

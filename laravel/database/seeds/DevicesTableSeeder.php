@@ -28,9 +28,11 @@ class DevicesTableSeeder extends Seeder
 				$kid = factory(App\Kid::class, 1)->create();
 				$device->kid()->associate($kid)->save();
 				
-				$contextPolicy = factory(App\ContextPolicy::class, 1)->make();
-				$contextPolicy->beacon()->associate(factory(App\Beacon::class, 1)->create());
-				$contextPolicy->kid()->associate($kid)->save();
+				for ($i = 1; $i <= 5; $i++) {
+					$contextPolicy = factory(App\ContextPolicy::class, 1)->make();
+					$contextPolicy->beacon()->associate(factory(App\Beacon::class, 1)->create());
+					$contextPolicy->kid()->associate($kid)->save();	
+				}
 			});
     }
 }
