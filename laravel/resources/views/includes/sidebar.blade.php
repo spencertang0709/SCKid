@@ -192,7 +192,20 @@
                         </li>
                     </ul>
                 </li>
-
+                <li>
+                    <a href="#">Facebook View<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/posts"><i class="fa fa-facebook-square fa-fw"></i>Posts</a>
+                        </li>
+                        <li>
+                            <a href="/image"><i class="fa fa-facebook-square fa-fw"></i>Images</a>
+                        </li>
+                        <li>
+                            <a href="/likes"><i class="fa fa-facebook-square fa-fw"></i>Liked Pages</a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a href="#">Help<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

@@ -26,7 +26,7 @@ class FacebookController extends Controller
     public function redirectToProvider()
     {
         //If current kid has facebook
-        
+
         return Socialite::driver('facebook')->redirect();
 
         //This is where we can add permissions for the app
@@ -40,6 +40,7 @@ class FacebookController extends Controller
      */
     public function handleProviderCallback()
     {
+
         $me = Socialite::driver('facebook')->user();
 
         //Retrieving Details
@@ -50,17 +51,19 @@ class FacebookController extends Controller
         $kidID = Session::get('current_kid');
         $fb_profile = Socialmedia::create([$kidID]);
 
+        // All Providers
+        $Id = $me->getId();
+        $Nickname = $me->getNickname();
+        $Name = $me->getName();
+        $Email = $me->getEmail();
+        $Avatar = $me->getAvatar();
+
         $currentKid = Kid::find($kidID);
         if ($currentKid != NULL) {
-            $currentKid->socialMedias()->save($fb_profile,['token' => $token]);
+            $currentKid->socialMedias()->save($fb_profile,['token' => $token, 'nickname' => $Nickname, 'name' => $Name, 'avatar' => $Avatar ]);
         }
 
-        // All Providers
-        $me->getId();
-        $me->getNickname();
-        $me->getName();
-        $me->getEmail();
-        $me->getAvatar();
+
         
         //Get timeline then send to view
         $fb = new Facebook();
@@ -68,6 +71,7 @@ class FacebookController extends Controller
         $user = $response->getGraphUser();
 
         return view('/facebook',['me' => $me]);
+
     }
 
     /**

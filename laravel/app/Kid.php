@@ -46,7 +46,7 @@ class Kid extends Model
 	
 	public function socialMedias()
 	{
-		return $this->belongsToMany(SocialMedia::class)->withPivot('is_blocked', 'is_monitored', 'token')->withTimestamps();
+		return $this->belongsToMany(SocialMedia::class)->withPivot('is_blocked', 'is_monitored', 'token','name','avatar')->withTimestamps();
 	}
 	
 	public function timeSlots()

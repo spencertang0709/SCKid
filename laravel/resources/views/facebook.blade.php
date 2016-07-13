@@ -123,18 +123,34 @@
                     <div class="box-body">
 
 
-                        @if(!empty($me['name']))
+                        @if(!empty($fb)|| !empty($me))
 
+                            @if(!empty($fb))
+                            <p>{{$fb->pivot->name}}</p>
+                            {{--<p>{{var_dump($me)}}</p>--}}
+                            <img src="{{$fb->pivot->avatar}}">
+                                <form action="/facebook/destroy" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Delete This Facebook Account</button>
+                                </form>
+                            @elseif(!empty($me))
                             <p>{{$me->name}}</p>
                             {{--<p>{{var_dump($me)}}</p>--}}
                             <img src="{{$me->avatar}}">
+                                <form action="/facebook/destroy" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Delete This Facebook Account</button>
+                            @endif
                         @else
                             <p>Please add an account</p>
+                            @if(!empty(Session::get('current_kid_name')))
+                                <form action="/auth/facebook/" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add Facebook Account</button>
+                                </form>
+                            @else
+                                <form action="/kids" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Please select a kid</button>
+                                </form>
+                            @endif
                         @endif
-
-                        <form action="/auth/facebook/" method="get">
-                            <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add Facebook Account</button>
-                        </form>
 
                     </div>
                 </div>
