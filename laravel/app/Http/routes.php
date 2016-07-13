@@ -116,6 +116,11 @@ Route::post('/password/change', [
 'as' => 'changePassword'
 ]);
 
+//policy
+Route::post('/policy',[
+    'uses' => 'PolicyController@store',
+    'as' => 'addPolicy'
+]);
 
 ////////////////////////////////////////////////////////
 

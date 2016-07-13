@@ -56,11 +56,7 @@ class BeaconSettingController extends Controller
 		$beacons = $user->beacons()->get();
 
 		//display policy according to kid and beacons
-		$kindID = Session::get('current_kid');
-
-
-
-
+		$kidID = Session::get('current_kid');
 		return view('beacons',['beacons'=>$beacons]);
 
     	// $beacons = NULL;
@@ -102,12 +98,16 @@ class BeaconSettingController extends Controller
             'minor' => 'integer|required'
         ]);
 
-        $kidID = Session::get('current_kid');
-        $currentKid = App\Kid::find($kidID);
-
-        $beacon = App\Beacon::create($request->all());
-
-        $currentKid->beacons()->attach($beacon->id);
+		$user = $request->user();
+		$beacon = App\Beacon::create($request->all());
+		$user->beacons()->attach($beacon->id);
+        return redirect('/beacons');
+        // $kidID = Session::get('current_kid');
+        // $currentKid = App\Kid::find($kidID);
+		//
+        // $beacon = App\Beacon::create($request->all());
+		//
+        // $currentKid->beacons()->attach($beacon->id);
 
         //Three different ways to create beacons
 //        Creating unlinked beacons
@@ -125,7 +125,6 @@ class BeaconSettingController extends Controller
         //mass assignment
         //$beacon1 = Beacon::create($request->all());
 
-        return redirect('/beacons');
     }
 
 	/**

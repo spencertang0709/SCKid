@@ -4,55 +4,65 @@
 <div id="wrapper">
 
     <!-- Navigation -->
-
-    <div id="addBeacon" class="modal fade" role="dialog">
-        <form action="" method="post">
-        	{{ csrf_field() }}
+<!--add policy-->
+    <div id="addPolicy" class="modal fade" role="dialog">
+        <form action="{{route('addPolicy')}}" method="post">
+            <input type="hidden" id='hiddenBeaconId' name="hiddenBeaconId" >
+            {{ csrf_field() }}
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add A Beacon</h4>
+                        <h4 class="modal-title">Add a policy</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group has-feedback{{ $errors->has('location') ? ' has-error' : '' }}">
-                            <label for="product">Beacon Location:</label>
-                            <input type="text" class="form-control" id="location" name="location" value="">
-                            @if ($errors->has('location'))
+                        <div class="form-group has-feedback{{ $errors->has('appList') ? ' has-error' : '' }}">
+                            <label for="product">App List:</label>
+                            <input type="text" class="form-control" id="appList" name="appList" value="">
+                            @if ($errors->has('appList'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('location')}}</strong>
+                                    <strong>{{ $errors->first('appList')}}</strong>
                                 </span>
                             @endif
                         </div>
-                        <div class="form-group has-feedback{{ $errors->has('major') ? ' has-error' : '' }}">
-                            <label for="price">Major Number:</label>
-                            <input type="text" class="form-control" id="major" name="major" value="">
-                            @if ($errors->has('major'))
+                        <div class="form-group has-feedback{{ $errors->has('screenTime') ? ' has-error' : '' }}">
+                            <label for="price">Screen Time:</label>
+                            <input type="text" class="form-control" id="screenTime" name="screenTime" value="">
+                            @if ($errors->has('screenTime'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('major')}}</strong>
+                                    <strong>{{ $errors->first('screenTime')}}</strong>
                                 </span>
                             @endif
                         </div>
-                        <div class="form-group has-feedback{{ $errors->has('minor') ? ' has-error' : '' }}">
-                            <label for="price">Minor Number:</label>
-                            <input type="text" class="form-control" id="minor" name="minor" value="">
-                            @if ($errors->has('minor'))
+                        <div class="form-group has-feedback{{ $errors->has('startTime') ? ' has-error' : '' }}">
+                            <label for="price">Start Time:</label>
+                            <input type="text" class="form-control" id="startTime" name="startTime" value="">
+                            @if ($errors->has('startTime'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('minor')}}</strong>
+                                    <strong>{{ $errors->first('startTime')}}</strong>
                                 </span>
                             @endif
                         </div>
-
+                        <div class="form-group has-feedback{{ $errors->has('endTime') ? ' has-error' : '' }}">
+                            <label for="price">End Time:</label>
+                            <input type="text" class="form-control" id="endTime" name="endTime" value="">
+                            @if ($errors->has('endTime'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('endTime')}}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <input name="AddBeacon" type="submit" id="AddBeacon" value="Add" class="btn btn-primary" />
+                        <input name="addPolicy" type="submit" id="addPolicy" value="Add" class="btn btn-primary" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    <!--end of add policy-->
 
     <!--Delete Modal -->
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -80,6 +90,56 @@
             </div>
         </div>
     </div>
+<!--  add beacon-->
+<div id="addBeacon" class="modal fade" role="dialog">
+    <form action="" method="post">
+        {{ csrf_field() }}
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add A Beacon</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group has-feedback{{ $errors->has('location') ? ' has-error' : '' }}">
+                        <label for="product">Beacon Location:</label>
+                        <input type="text" class="form-control" id="location" name="location" value="">
+                        @if ($errors->has('location'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('location')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group has-feedback{{ $errors->has('major') ? ' has-error' : '' }}">
+                        <label for="price">Major Number:</label>
+                        <input type="text" class="form-control" id="major" name="major" value="">
+                        @if ($errors->has('major'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('major')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group has-feedback{{ $errors->has('minor') ? ' has-error' : '' }}">
+                        <label for="price">Minor Number:</label>
+                        <input type="text" class="form-control" id="minor" name="minor" value="">
+                        @if ($errors->has('minor'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('minor')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input name="AddBeacon" type="submit" id="AddBeacon" value="Add" class="btn btn-primary" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 
     <!-- Page Content -->
     <div id="page-wrapper">
@@ -95,7 +155,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
+                            <table id="BeaConfig" class="table table-hover">
                                 <tr>
                                     <th>Beacon Location</th>
                                     <th>Major Number</th>
@@ -103,7 +163,7 @@
                                 </tr>
 								@if(count($beacons) > 0)
                 					@foreach($beacons as $beacon)
-                						<tr>
+                						<tr data-info="{{$beacon->id}}">
                 							<td>{{$beacon->location}}</td>
                 							<td>{{$beacon->major}}</td>
                 							<td>{{$beacon->minor}}</td>
@@ -130,7 +190,7 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button id="add beacon" data-toggle="modal" data-target="#addBeacon" class="btn btn-primary" style="float: right;" >Add new Beacon</button>
+                    <button id="addbeacon" data-toggle="modal" data-target="#addBeacon" class="btn btn-primary" style="float: right;" >Add new Beacon</button>
                 </div>
             </div>
 
@@ -164,26 +224,64 @@
 
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button id="add policy" data-toggle="modal" data-target="#addPolicy" class="btn btn-primary" style="float: right;" >Add A Policy</button>
+                    <button id="addpolicy" data-toggle="modal" data-target="#addPolicy" class="btn btn-primary" style="float: right;" >Add A Policy</button>
                 </div>
             </div>
-
         </div>
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
-
 </div>
 
 <script>
-    //select one beacon for policy
-    $('.table, .table-hover').children().children().click(
-        function(){
-        $(this).attr('class','btn-info');
+  //var beaconLocation=[-1];
+var selectedBeaconId = -1;
+$( "#BeaConfig" ).children().children().each(function() {
+    var $thisParagraph = $(this);
+    $thisParagraph.click(function() {
+        //
+        // if(beaconLocation.length<1) //not chosen
+        // {
+            //alert("not chosen");
+            //$( "#BeaConfig" ).children().find(beaconLocation[0]).removeClass("info");
+        // }
+
+        // $(this).toggleClass("info");
+
+        if($(this).hasClass("info")){
+            $(this).removeClass("info");
+        }else{
+            var inputBeaconId = $(this).attr("data-info");
+            $(this).addClass("info");
+            $('#hiddenBeaconId').val(inputBeaconId);
+            if(selectedBeaconId == -1){
+                selectedBeaconId = inputBeaconId;
+            }
+            else{
+                //$("#BeaConfig").children().find(selectedBeaconId).children().removeClass("info");
+                alert($("#BeaConfig").children().children().find(selectedBeaconId));
+                selectedBeaconId = inputBeaconId;
+            }
         }
-    );
 
 
+
+
+        // $(this).addClass("info");
+        // if($(this).hasClass("info")){
+        //     beaconLocation.push($(this).attr("data-info"));
+        //     $('#hiddenBeaconId').val(beaconLocation[0]);
+        // }
+        // else {
+        //     beaconLocation.pop();
+        // }
+        // $.each(beaconLocation,function(index,value){
+        //     alert(value);
+        // });
+    });
+});
+</script>
+<script>
     $('#addPolicy').modalSteps({
         completeCallback: function() {
             var stime = document.getElementById("time_start").value;
