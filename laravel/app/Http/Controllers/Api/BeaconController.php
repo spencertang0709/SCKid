@@ -14,8 +14,14 @@ class BeaconController extends Controller
 {
     public function index(Request $request)
     {
+    	$beacons = DB::table('beacons')
+    				->select('location as beaconLocation', 'major', 'minor')
+    				->get();
+		
         return Response::json(
-            'kappa123'
+        	array (
+        		'beaconsOnline' => $beacons
+			)
         );
     }
 }

@@ -79,6 +79,7 @@ class BeaconSettingController extends Controller
      */
     public function store(Request $request)
     {
+    	/*
         //Validate our parameters
         $this->validate($request, [
             'location' => 'required|max:255',
@@ -110,6 +111,7 @@ class BeaconSettingController extends Controller
         //$beacon1 = Beacon::create($request->all());
 
         return redirect('/beacons');
+		*/
     }
 
 	/**
