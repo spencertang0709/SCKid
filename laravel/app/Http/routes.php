@@ -228,6 +228,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Social Media
     Route::get('/facebook', 'FacebookController@index');
+    Route::get('/facebook/destroy', 'FacebookController@destroy');
     Route::get('/auth/facebook', 'Auth\FacebookController@redirectToProvider');
     Route::get('/auth/facebook/callback', 'Auth\FacebookController@handleProviderCallback');
 

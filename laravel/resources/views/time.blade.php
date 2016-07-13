@@ -218,6 +218,7 @@
 					var allTimeSlots = [];
 					for (var i = 0; i < selectedSlots.length; i++) {
 						allTimeSlots.push(selectedSlots[i].hourString + ":" + selectedSlots[i].minuteString);
+						alert(selectedSlots[i].hourString + ":" + selectedSlots[i].minuteString);
 					}
 					var dayData = "day=" + dayInWeek[dayIndex];
 					var slotsData = "slots=" + JSON.stringify(allTimeSlots);
@@ -231,7 +232,7 @@
 						type: "GET",
 						data: dataString,
 						success: function(responseText) {
-							alert(responseText);
+							//alert(responseText);
 						}
 					});
 

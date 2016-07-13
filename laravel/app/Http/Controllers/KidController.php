@@ -22,7 +22,6 @@ class KidController extends Controller
      */
     protected $kids;
 
-
     /**
      * Create a new controller instance.
      *

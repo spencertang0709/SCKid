@@ -16,11 +16,11 @@ class CreateKidSocialMediaTable extends Migration
 			$table->increments('id');
 			$table->boolean('is_blocked');
 			$table->boolean('is_monitored');
-            $table->string('token');
+            $table->string('token')->nullable();
 			$table->integer('account_id');
-			$table->string('nickname');
-			$table->string('name');
-			$table->string('avatar');
+			$table->string('nickname')->nullable();
+			$table->string('name')->nullable();
+			$table->string('avatar')->nullable();
 			
 			$table->integer('social_media_id')->unsigned();
 			$table->foreign('social_media_id')->references('id')->on('social_media');

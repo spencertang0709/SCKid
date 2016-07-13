@@ -12,14 +12,15 @@ class CreateLikedPagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('liked_pages', function (Blueprint $table) {
-         $table->increments('id');
-		 $table->string('name');
-         $table->timestamps();
+		Schema::create('liked_pages', function (Blueprint $table) {
+			 $table->increments('id');
+			 $table->string('name');
+			 $table->timestamps();
 
-		 $table->integer('social_media_id')->unsigned();
-         $table->foreign('social_media_id')->references('id')->on('social_media');
-         });
+			 $table->integer('social_media_id')->unsigned();
+			 $table->foreign('social_media_id')->references('id')->on('social_media');
+		 });
+
     }
 
     /**
