@@ -20,15 +20,15 @@ class Beacon extends Model
     /**
      * Get the user that owns the beacon.
      */
-    public function kids()
-    {
-        return $this->belongsToMany(Kid::class)->withTimestamps();
-    }
-	
+
 	public function contextPolicies()
 	{
 		return $this->hasMany(ContextPolicy::class);
 	}
-	
-	
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
 }

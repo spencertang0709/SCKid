@@ -53,7 +53,7 @@
             </div>
         </form>
     </div>
-    
+
     <!--Delete Modal -->
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
@@ -113,7 +113,7 @@
 	                                                    <i class="fa fa-square fa-stack-2x"></i>
 	                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-title="DELETE" data-id={{$beacon->id}} data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete"></i>
 	                                                </span>
-                                        		</a>	
+                                        		</a>
                 							</td>
                 						</tr>
 								 	@endforeach
@@ -176,6 +176,14 @@
 </div>
 
 <script>
+    //select one beacon for policy
+    $('.table, .table-hover').children().children().click(
+        function(){
+        $(this).attr('class','btn-info');
+        }
+    );
+
+
     $('#addPolicy').modalSteps({
         completeCallback: function() {
             var stime = document.getElementById("time_start").value;

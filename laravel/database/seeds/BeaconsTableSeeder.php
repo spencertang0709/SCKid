@@ -12,9 +12,10 @@ class BeaconsTableSeeder extends Seeder
     public function run()
     {
         //We can use model factories or standard db calls
-        factory(App\Beacon::class, 20)->create()
-        	->each(function($beacon) {
-        		$beacon->kids()->attach(App\Kid::all()->random(1));
-        	});		
+        factory(App\Beacon::class, 5)
+            ->create()
+            ->each(function($beacon) {
+		          $beacon->users()->attach(factory(App\User::class,3)->create());
+        	});
     }
 }
