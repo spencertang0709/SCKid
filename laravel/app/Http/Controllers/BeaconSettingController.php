@@ -91,7 +91,6 @@ class BeaconSettingController extends Controller
      */
     public function store(Request $request)
     {
-    	/*
         //Validate our parameters
         $this->validate($request, [
             'location' => 'required|max:255',
@@ -103,6 +102,7 @@ class BeaconSettingController extends Controller
 		$beacon = App\Beacon::create($request->all());
 		$user->beacons()->attach($beacon->id);
         return redirect('/beacons');
+		
         // $kidID = Session::get('current_kid');
         // $currentKid = App\Kid::find($kidID);
 		//
@@ -125,7 +125,7 @@ class BeaconSettingController extends Controller
 
         //mass assignment
         //$beacon1 = Beacon::create($request->all());
-    }
+     }
 
 	/**
 	 * Delete selected beacon setting

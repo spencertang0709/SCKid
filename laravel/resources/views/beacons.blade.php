@@ -234,34 +234,44 @@
 </div>
 
 <script>
-  //var beaconLocation=[-1];
 var selectedBeaconId = -1;
-$( "#BeaConfig" ).children().children().each(function() {
+$("#BeaConfig").children().children().each(function() {
     var $thisParagraph = $(this);
     $thisParagraph.click(function() {
-        //
-        // if(beaconLocation.length<1) //not chosen
-        // {
-            //alert("not chosen");
-            //$( "#BeaConfig" ).children().find(beaconLocation[0]).removeClass("info");
-        // }
-
-        // $(this).toggleClass("info");
-
-        if($(this).hasClass("info")){
+        if ($(this).hasClass("info")){
             $(this).removeClass("info");
-        }else{
+            
+            selectedBeaconId = -1;
+        } else{
             var inputBeaconId = $(this).attr("data-info");
-            $(this).addClass("info");
+            $(this).addClass('info');
             $('#hiddenBeaconId').val(inputBeaconId);
-            if(selectedBeaconId == -1){
+            
+            if (selectedBeaconId == -1){
                 selectedBeaconId = inputBeaconId;
             }
-            else{
-                //$("#BeaConfig").children().find(selectedBeaconId).children().removeClass("info");
-                alert($("#BeaConfig").children().children().find(selectedBeaconId));
+            else {
+                var currentElement = document.getElementById("BeaConfig");
+                var childArray = currentElement.childNodes;
+                for (var i = 0; i < childArray.length; i++) {
+                	if (childArray[i].tagName == "TBODY") {
+                		currentElement = childArray[i];
+                	}
+                }
+                
+                childArray = currentElement.childNodes;
+                for (var i = 0; i < childArray.length; i++) {
+                	if (childArray[i].tagName == "TR") {
+                		currentElement = childArray[i];
+                		if (currentElement.getAttribute("data-info") == selectedBeaconId) {
+                			currentElement.className = "";
+                		}
+                	}
+                } 
+
                 selectedBeaconId = inputBeaconId;
             }
+            
         }
 
 
