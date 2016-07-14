@@ -15,7 +15,8 @@ class BeaconsTableSeeder extends Seeder
         factory(App\Beacon::class, 5)
             ->create()
             ->each(function($beacon) {
-		          $beacon->users()->attach(factory(App\User::class,3)->create());
+		          $beacon->users()->attach(factory(App\User::class,3)
+                  ->create());
         	});
     }
 }

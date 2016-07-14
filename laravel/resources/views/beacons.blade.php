@@ -234,50 +234,22 @@
 </div>
 
 <script>
-  //var beaconLocation=[-1];
 var selectedBeaconId = -1;
 $( "#BeaConfig" ).children().children().each(function() {
-    var $thisParagraph = $(this);
-    $thisParagraph.click(function() {
-        //
-        // if(beaconLocation.length<1) //not chosen
-        // {
-            //alert("not chosen");
-            //$( "#BeaConfig" ).children().find(beaconLocation[0]).removeClass("info");
-        // }
-
-        // $(this).toggleClass("info");
-
+    $(this).click(function() {
         if($(this).hasClass("info")){
             $(this).removeClass("info");
+            selectedBeaconId=-1;
         }else{
             var inputBeaconId = $(this).attr("data-info");
             $(this).addClass("info");
             $('#hiddenBeaconId').val(inputBeaconId);
-            if(selectedBeaconId == -1){
-                selectedBeaconId = inputBeaconId;
-            }
-            else{
-                //$("#BeaConfig").children().find(selectedBeaconId).children().removeClass("info");
-                alert($("#BeaConfig").children().children().find(selectedBeaconId));
-                selectedBeaconId = inputBeaconId;
+            selectedBeaconId = inputBeaconId;
+
+            if(selectedBeaconId != -1){
+                $(this).siblings().removeClass("info");
             }
         }
-
-
-
-
-        // $(this).addClass("info");
-        // if($(this).hasClass("info")){
-        //     beaconLocation.push($(this).attr("data-info"));
-        //     $('#hiddenBeaconId').val(beaconLocation[0]);
-        // }
-        // else {
-        //     beaconLocation.pop();
-        // }
-        // $.each(beaconLocation,function(index,value){
-        //     alert(value);
-        // });
     });
 });
 </script>

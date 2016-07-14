@@ -49,7 +49,7 @@ class BeaconSettingController extends Controller
     public function index(Request $request)
     {
 		//display all the beacons to corresponding user
-		$beacons = null;
+		//$beacons = null;
 		//echo 'connect correctly';
 		$user = $request->user();
 		//echo $user;
@@ -91,7 +91,7 @@ class BeaconSettingController extends Controller
      */
     public function store(Request $request)
     {
-    	/*
+
         //Validate our parameters
         $this->validate($request, [
             'location' => 'required|max:255',
@@ -126,6 +126,7 @@ class BeaconSettingController extends Controller
         //mass assignment
         //$beacon1 = Beacon::create($request->all());
     }
+
 
 	/**
 	 * Delete selected beacon setting

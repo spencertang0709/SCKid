@@ -8,7 +8,7 @@ class ContextPolicy extends Model
 {
 	//Specify table names to avoid plural form
 	protected $table = 'context_policys';
-	
+
      /**
      * The attributes that are mass assignable.
      *
@@ -19,14 +19,14 @@ class ContextPolicy extends Model
     ];
 
     //Relationships
-    public function beacon() {
+    public function beacons() {
     	return $this->belongsTo(Beacon::class);
     }
-	
-	public function kid() {
+
+	public function kids() {
 		return $this->belongsTo(Kid::class);
 	}
-	
+
 	//Queries
-	
+
 }

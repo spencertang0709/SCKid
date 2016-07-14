@@ -16,7 +16,8 @@ class UsersTableSeeder extends Seeder
         factory(App\User::class, 5)
             ->create()
             ->each(function($user) {
-                $user->beacons()->attach(factory(App\Beacon::class,3)->create());
+                $user->beacons()->attach(factory(App\Beacon::class,3)
+                ->create());
             });
 
         //Create admin user with 4 kids, each kid has 5 SMS messages
