@@ -14,10 +14,11 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('album_id');
 			$table->string('name');
-			$table->string('comments');
-			$table->integer('count');
-			$table->string('privacy');
+			$table->string('comments')->nullable();
+			$table->integer('count')->nullable();
+			$table->string('privacy')->nullable();
             $table->timestamps();
 			
 			$table->integer('social_media_id')->unsigned();

@@ -14,14 +14,15 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('post_id');
 			$table->string('message');
-			$table->string('comments');
-			$table->integer('likes');
-			$table->dateTime('post_time');
-			$table->string('story');
-			$table->string('location');
-			$table->integer('latitude');
-			$table->integer('longitude');
+			$table->string('comments')->nullable();
+			$table->integer('likes')->nullable();
+			$table->dateTime('post_time')->nullable();
+			$table->string('story')->nullable();
+			$table->string('location')->nullable();
+			$table->integer('latitude')->nullable();
+			$table->integer('longitude')->nullable();
 			
 			$table->integer('social_media_id')->unsigned();
             $table->foreign('social_media_id')->references('id')->on('social_media');

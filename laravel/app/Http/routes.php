@@ -171,6 +171,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/posts', 'PostController@index');
 
+    Route::get('/image', 'ImageController@index');
+
 	Route::get('/likes', 'LikeController@index');
 
     Route::get('/devices', 'DeviceController@index');
@@ -200,9 +202,6 @@ Route::group(['middleware' => 'auth'], function () {
         return view('account');
     });
 
-    Route::get('/image', function () {
-        return view('image');
-    });
 
     Route::get('/mailbox', function () {
         return view('mailbox');

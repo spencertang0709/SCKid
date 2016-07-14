@@ -14,6 +14,7 @@ class CreateLikedPagesTable extends Migration
     {
 		Schema::create('liked_pages', function (Blueprint $table) {
 			 $table->increments('id');
+             $table->string('page_id');
 			 $table->string('name');
 			 $table->timestamps();
 

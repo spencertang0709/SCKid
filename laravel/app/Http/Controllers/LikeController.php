@@ -25,7 +25,9 @@ class LikeController extends Controller
         $currentKid = App\Kid::find($kidID);
         if ($currentKid != NULL) {
             $kid = $currentKid->socialMedias()->get()->first();
-            $likes = $kid -> likedPages()->get();
+            if($kid!=NULL) {
+                $likes = $kid->likedPages()->get();
+            }
         }
         return view('likes', ['likes' => $likes]);
     }
