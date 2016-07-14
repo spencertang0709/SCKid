@@ -17,9 +17,14 @@
                 <!-- /.row -->
 					  <ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#All">All Photos</a></li>
-
-
-						  {{--$album_output TODO--}}
+							@if(count($albums)>0)
+								@foreach($albums as $album)
+						 		 <li>
+									 <a data-toggle="tab" href="#{{$album->album_id}}">{{$album->name}}({{$album->privacy}})({{$album->count}})
+									 </a>
+								 </li>
+						  		@endforeach
+						    @endif
 
 					  </ul>
 

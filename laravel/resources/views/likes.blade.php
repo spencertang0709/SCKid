@@ -33,7 +33,7 @@
                                     @if(count($likes) > 0)
                                         @foreach($likes as $like)
 										<tr>
-											<td><a href="https://facebook.com/{{$like->id}}">{{$like->name}}</a></td>
+											<td><a href="https://facebook.com/{{$like->page_id}}">{{$like->name}}</a></td>
 										</tr>
                                         @endforeach
                                     @endif
