@@ -19,11 +19,11 @@ class ContextPolicy extends Model
     ];
 
     //Relationships
-    public function beacons() {
+    public function beacon() {
     	return $this->belongsTo(Beacon::class);
     }
 
-	public function kids() {
+	public function kid() {
 		return $this->belongsTo(Kid::class);
 	}
 

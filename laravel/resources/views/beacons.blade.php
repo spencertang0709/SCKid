@@ -235,59 +235,19 @@
 
 <script>
 var selectedBeaconId = -1;
-<<<<<<< HEAD
 $( "#BeaConfig" ).children().children().each(function() {
     $(this).click(function() {
         if($(this).hasClass("info")){
             $(this).removeClass("info");
             selectedBeaconId=-1;
         }else{
-=======
-$("#BeaConfig").children().children().each(function() {
-    var $thisParagraph = $(this);
-    $thisParagraph.click(function() {
-        if ($(this).hasClass("info")){
-            $(this).removeClass("info");
-            
-            selectedBeaconId = -1;
-        } else{
->>>>>>> 803ea0dfa8af532ab6a25aa80baae88f83aba2fe
             var inputBeaconId = $(this).attr("data-info");
-            $(this).addClass('info');
+            $(this).addClass("info");
             $('#hiddenBeaconId').val(inputBeaconId);
-<<<<<<< HEAD
             selectedBeaconId = inputBeaconId;
-
             if(selectedBeaconId != -1){
                 $(this).siblings().removeClass("info");
-=======
-            
-            if (selectedBeaconId == -1){
-                selectedBeaconId = inputBeaconId;
             }
-            else {
-                var currentElement = document.getElementById("BeaConfig");
-                var childArray = currentElement.childNodes;
-                for (var i = 0; i < childArray.length; i++) {
-                	if (childArray[i].tagName == "TBODY") {
-                		currentElement = childArray[i];
-                	}
-                }
-                
-                childArray = currentElement.childNodes;
-                for (var i = 0; i < childArray.length; i++) {
-                	if (childArray[i].tagName == "TR") {
-                		currentElement = childArray[i];
-                		if (currentElement.getAttribute("data-info") == selectedBeaconId) {
-                			currentElement.className = "";
-                		}
-                	}
-                } 
-
-                selectedBeaconId = inputBeaconId;
->>>>>>> 803ea0dfa8af532ab6a25aa80baae88f83aba2fe
-            }
-            
         }
     });
 });

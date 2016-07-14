@@ -39,8 +39,8 @@ class PolicyController extends Controller
         $policy->end_time=$request['endTime'];
 
         //set the foreign key on the child model
-        $policy->kids()->associate($currentKid);
-        $policy->beacons()->associate($beacon);
+        $policy->kid()->associate($currentKid);
+        $policy->beacon()->associate($beacon);
 
         $policy->save();
 
