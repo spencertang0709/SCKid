@@ -47,7 +47,7 @@ class PolicyController extends Controller
 		// $user = $request->user();
 		// $beacon = App\Beacon::create($request->all());
 		// $user->beacons()->attach($beacon->id);
-        //return redirect('/beacons');
+        return redirect('/beacons');
     }
 
 }

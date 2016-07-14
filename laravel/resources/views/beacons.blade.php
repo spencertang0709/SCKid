@@ -208,12 +208,37 @@
                                     <th>Beacon Location</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
-                                    <th>Parental Guardian</th>
+                                    <th>Kid Name</th>
                                     <th>Blocked APPs</th>
                                     <th></th>
                                 </tr>
+                                <!--existing policy  -->
+								@if(count($awarePolicies) > 0)
+                					@foreach($awarePolicies as $aware)
+                						<tr>
+                							{{-- <td>{{$kid->contextPolicies()->first()['app_list']}}</td>--}}
+                							{{--<td>{{$kid->name}}</td>--}}
+                							{{--<td>{{$kid->age}}</td>--}}
+                                            {{--<td>{{$kid->name}}</td>--}}
+                                            {{--<td>{{$kid->contextPolicies()->first()['app_list']}}</td>--}}
 
-                                {{--TODO policy output--}}
+                                            <td>{{$aware->location}}</td>
+                							<td>{{$aware->start_time}}</td>
+                							<td>{{$aware->end_time}}</td>
+                                            <td>{{$aware->name}}</td>
+                                            <td>{{$aware->app_list}}</td>
+                							<td>
+                								<a href="#" class="table-link">
+	                                                <span class="fa-stack">
+	                                                    <i class="fa fa-square fa-stack-2x"></i>
+	                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-title="DELETE"></i>
+	                                                </span>
+                                        		</a>
+                							</td>
+                						</tr>
+								 	@endforeach
+            					@endif
+                                <!--existing policy-->
                             </table>
                         </div>
                         <!-- /.box-body -->

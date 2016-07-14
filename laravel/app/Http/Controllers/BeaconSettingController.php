@@ -48,6 +48,9 @@ class BeaconSettingController extends Controller
      */
     public function index(Request $request)
     {
+		/**
+		*existing beacons for corresponding child
+		*/
 		//display all the beacons to corresponding user
 		//$beacons = null;
 		//echo 'connect correctly';
@@ -57,7 +60,27 @@ class BeaconSettingController extends Controller
 
 		//display policy according to kid and beacons
 		$kidID = Session::get('current_kid');
-		return view('beacons',['beacons'=>$beacons]);
+
+		/**
+		*location aware policy
+		*/
+	 	//$kids=$user->kids()->get();
+
+		//join users kids policies and beacons tables
+		$awarePolicies = DB::table('kid_user')->where('user_id',$user->id)
+            ->join('kids', 'kid_user.kid_id', '=', 'kids.id')
+            ->join('context_policys', 'kids.id', '=', 'context_policys.kid_id')
+			->join('beacons', 'context_policys.beacon_id', '=', 'beacons.id')
+            ->select('kids.*','context_policys.*','beacons.location')
+            ->get();
+
+
+
+		return view('beacons',[
+		'beacons' => $beacons,
+		//'kids' => $kids
+		'awarePolicies' =>$awarePolicies
+	]);
 
     	// $beacons = NULL;
 		//
