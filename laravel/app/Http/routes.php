@@ -122,6 +122,7 @@ Route::post('/policy',[
     'as' => 'addPolicy'
 ]);
 
+
 ////////////////////////////////////////////////////////
 
 Route::get('/email','UserController@sendEmail');
@@ -149,6 +150,11 @@ Route::auth();
 
 //Route group for the admin panel for logged in users
 Route::group(['middleware' => 'auth'], function () {
+    Route::delete('/policy/delete/{policy}',[
+        'uses' => 'PolicyController@destroy',
+        'as' => 'delete.policy'
+    ]);         
+
 
     //These are our action routes
     Route::get('/home', 'HomeController@index');

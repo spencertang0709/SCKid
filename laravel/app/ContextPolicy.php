@@ -18,6 +18,11 @@ class ContextPolicy extends Model
         'app_list', 'start_time', 'end_time', 'screen_time'
     ];
 
+	//cast creen time to boolean 
+	protected $casts = [
+           'screen_time' => 'boolean',
+       ];
+
     //Relationships
     public function beacon() {
     	return $this->belongsTo(Beacon::class);

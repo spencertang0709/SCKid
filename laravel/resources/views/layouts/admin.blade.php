@@ -22,20 +22,31 @@
 	   		var dir =  "/" + $(e.relatedTarget).data('dir') + action;
 	   		$('#delModal').attr('action', dir + id);
 	   	});
-	    
+
+		$('#deletePolicy').on('show.bs.modal', function(e) {
+	   		//var action = "/destroy/";
+	   		//var dir =  $(e.relatedTarget).data('dir');// + action;
+
+			var id =  $(e.relatedTarget).data('id');
+			var dir="/policy/delete/"+id;
+			$('#delPolicy').attr('action', dir);
+			// var dir =  $(e.relatedTarget).data('dir');
+			//  		$('#delPolicy').attr('action', dir);
+	   	});
+
 	</script>
-	
+
 	{{--THESE ARE FOR APPS--}}
 	<script>
 	    $(function () {
 	        $("#datatable").DataTable();
 	    });
-	
+
 	</script>
 	<script>
 	    $('.probeProbe').bootstrapSwitch();
 	</script>
-	
+
 	<script>
 	    $('.probeProbe').on('switchChange.bootstrapSwitch', function (event, state) {
 	        if (state == true){
@@ -60,7 +71,7 @@
 	        });
 	    });
 	</script>
-	
+
 	<script>
 		$('.select_button').on('click', function(e) {
 			var id = $(e.target).data('id');
@@ -72,19 +83,14 @@
 				type: "GET",
 				data: urlString,
 				success: function(responseText) {
-					$('#kid_text').html("Current Child is: " + responseText);  
+					$('#kid_text').html("Current Child is: " + responseText);
 				}
 			});
-			
+
 		});
 	</script>
-	
+
 	<!-- Custom Theme JavaScript -->
 	{{--<script src="/js/sb-admin-2.js"></script>--}}
 @append
 @include('includes.footer')
-
-
-
-
-
