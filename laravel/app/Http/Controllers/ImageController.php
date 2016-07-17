@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
+use App\Photo;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
@@ -21,6 +22,18 @@ class ImageController extends Controller
                 $albums = $kid->albums()->get();
             }
         }
-        return view('image',['albums' => $albums]);
+        //$photos_albums = Photo::all()->groupBy('album_id');
+        $allphotos = array();
+        foreach($albums as $album){
+            //echo $album;
+
+            $photos = $album -> Photos()->get()->toArray();
+
+            $allphotos = array_merge($allphotos,$photos);
+            //echo $photos;
+        }
+        //echo $photos_albums;
+        //echo $albums;
+        return view('image',['albums' => $albums,'photos_albums' => $allphotos]);
     }
 }
