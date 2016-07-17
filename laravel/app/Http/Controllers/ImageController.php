@@ -24,14 +24,17 @@ class ImageController extends Controller
         }
         //$photos_albums = Photo::all()->groupBy('album_id');
         $allphotos = array();
-        foreach($albums as $album){
-            //echo $album;
+        if(count($albums)>0){
+            foreach($albums as $album){
+                //echo $album;
 
-            $photos = $album -> Photos()->get()->toArray();
+                $photos = $album -> Photos()->get()->toArray();
 
-            $allphotos = array_merge($allphotos,$photos);
-            //echo $photos;
+                $allphotos = array_merge($allphotos,$photos);
+                //echo $photos;
+            }
         }
+
         //echo $photos_albums;
         //echo $albums;
         return view('image',['albums' => $albums,'photos_albums' => $allphotos]);
