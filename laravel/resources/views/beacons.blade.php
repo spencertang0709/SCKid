@@ -264,13 +264,13 @@ $( "#BeaConfig" ).children().children().each(function() {
     $(this).click(function() {
         if($(this).hasClass("info")){
             $(this).removeClass("info");
-            selectedBeaconId=-1;
+            selectedBeaconId = -1;
         }else{
             var inputBeaconId = $(this).attr("data-info");
             $(this).addClass("info");
             $('#hiddenBeaconId').val(inputBeaconId);
             selectedBeaconId = inputBeaconId;
-            if(selectedBeaconId != -1){
+            if (selectedBeaconId != -1){
                 $(this).siblings().removeClass("info");
             }
         }
