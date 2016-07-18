@@ -298,68 +298,85 @@
         </div>
 
 <script>
-var selectedBeaconId = -1;
-$( "#BeaConfig" ).children().children().each(function() {
-    $(this).click(function() {
-        if($(this).hasClass("info")){
-            $(this).removeClass("info");
-            selectedBeaconId = -1;
-        }else{
-            var inputBeaconId = $(this).attr("data-info");
-            $(this).addClass("info");
-            $('#hiddenBeaconId').val(inputBeaconId);
-            selectedBeaconId = inputBeaconId;
-            if (selectedBeaconId != -1){
-                $(this).siblings().removeClass("info");
-            }
-        }
-    });
-});
+//$("span i.fa-inverse").css( "border", "3px solid red" );
 </script>
-<script>
-    $('#addPolicy').modalSteps({
-        completeCallback: function() {
-            var stime = document.getElementById("time_start").value;
-            var etime = document.getElementById("time_end").value;
-            var e1 = document.getElementById("location");
-            var location = e1.options[e1.selectedIndex].value;
-            var e = document.getElementById("guardian");
-            var rs = e.options[e.selectedIndex].value;
-            var apps=$( "#ms" ).val();
-            console.log(apps.length);
-            //var apps = getSelectedOptions(document.getElementById("ms"));
-            var urlString = "context=Complete" +"&location="+location+ "&st=" + stime + "&et=" + etime + "&guardian=" + rs+"&apps="+apps;
-            var data = {
-                context : "Complete",
-                location : location,
-                st : stime,
-                et : etime,
-                guardian : rs,
-                apps : apps
-            };
-            $.ajax
-            ({
-                url: "context_setting.php",
-                type: "POST",
-                cache: false,
-                dataType:"json",
-                //data: urlString
-                data: {data: JSON.stringify(data)}
+
+        <script>
+        var selectedBeaconId = -1;
+        $( "#BeaConfig" ).children().children().each(function() {
+            $(this).click(function() {
+                if($(this).hasClass("info")){
+                    $(this).removeClass("info");
+                    selectedBeaconId=-1;
+                }else{
+                    var inputBeaconId = $(this).attr("data-info");
+                    $(this).addClass("info");
+                    $('#hiddenBeaconId').val(inputBeaconId);
+                    selectedBeaconId = inputBeaconId;
+                    if(selectedBeaconId != -1){
+                        $(this).siblings().removeClass("info");
+                    }
+                }
             });
-            window.location = "context_setting.php";
-        }
-    });
-</script>
-<script>
-    $('#delete').on('show.bs.modal', function(e) {
-        var policyid = $(e.relatedTarget).data('policyid');
-        $(e.currentTarget).find('input[name="policyid"]').val(policyid);
-    });
-</script>
-<script>
-    $('.clearfix .btn').on('click', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        var $collapse = $this.closest('.collapse-group').find('.collapse');
-        $collapse.collapse('toggle');
-    });
+        });
+        </script>
+        <script>
+        $('#addPolicy').modalSteps({
+            completeCallback: function() {
+                var stime = document.getElementById("time_start").value;
+                var etime = document.getElementById("time_end").value;
+                var e1 = document.getElementById("location");
+                var location = e1.options[e1.selectedIndex].value;
+                var e = document.getElementById("guardian");
+                var rs = e.options[e.selectedIndex].value;
+                var apps=$( "#ms" ).val();
+                console.log(apps.length);
+                //var apps = getSelectedOptions(document.getElementById("ms"));
+                var urlString = "context=Complete" +"&location="+location+ "&st=" + stime + "&et=" + etime + "&guardian=" + rs+"&apps="+apps;
+                var data = {
+                    context : "Complete",
+                    location : location,
+                    st : stime,
+                    et : etime,
+                    guardian : rs,
+                    apps : apps
+                };
+                $.ajax
+                ({
+                    url: "context_setting.php",
+                    type: "POST",
+                    cache: false,
+                    dataType:"json",
+                    //data: urlString
+                    data: {data: JSON.stringify(data)}
+                });
+                window.location = "context_setting.php";
+            }
+        });
+        </script>
+        <script>
+        $('#delete').on('show.bs.modal', function(e) {
+            var policyid = $(e.relatedTarget).data('policyid');
+            $(e.currentTarget).find('input[name="policyid"]').val(policyid);
+        });
+        </script>
+        <script>
+        $('.clearfix .btn').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var $collapse = $this.closest('.collapse-group').find('.collapse');
+            $collapse.collapse('toggle');
+        });
+        </script>
+
+        <script>
+        $(function() {
+            $('#ms').change(function() {
+                console.log($(this).val());
+            }).multipleSelect({
+                width: '100%'
+            });
+        });
+        </script>
+        <!-- bootstrap time picker -->
+        @endsection
