@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
  <div id="wrapper">
 
         <!-- Navigation -->
@@ -32,12 +35,44 @@
 						<div id=All class="tab-pane fade in active">
 								<div class='list-group gallery'>
 
-									{{--$all_photos_output TODO--}}
+									@if(count($photos_albums)>0)
+										@foreach($photos_albums as $photo)
+												<div class="col-sm-4">
+													<a class="thumbnail fancybox" rel="ligthbox" href="{{$photo["source"]}}" >
+														<img class="img-responsive" alt="" src="{{$photo["source"]}}" style="width:320px;height:200px;"/>
+														<div class="text-right">
+															<small class="text-muted">{{$photo["name"]}}</small>
+														</div> <!-- text-right / end -->
+													</a>
+												</div>
 
+										@endforeach
+									@endif
 
 								</div> <!-- list-group / end -->
 						</div>
-						  {{--$album_photo_output TODO--}}
+						  @if(count($albums)>0)
+							  @foreach($albums as $album)
+						  <div id="{{$album->album_id}}" class="tab-pane fade">
+							  <div class="list-group gallery">
+								  @if(count($photos_albums)>0)
+									  @foreach($photos_albums as $photo)
+										  @if($photo["album_id"]=$album->id)
+											  <div class="col-sm-4">
+												  <a class="thumbnail fancybox" rel="ligthbox" href="{{$photo["source"]}}" >
+													  <img class="img-responsive" alt="" src="{{$photo["source"]}}" style="width:320px;height:200px;"/>
+													  <div class="text-right">
+														  <small class="text-muted">{{$photo["name"]}}</small>
+													  </div> <!-- text-right / end -->
+												  </a>
+											  </div>
+										  @endif
+									  @endforeach
+								  @endif
+							  </div>
+						  </div>
+							  @endforeach
+						  @endif
 					  </div>
 					
             </div>
@@ -47,9 +82,6 @@
 
     </div>
     <!-- /#wrapper -->
-
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			//FANCYBOX
