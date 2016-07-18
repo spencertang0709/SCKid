@@ -60,6 +60,12 @@ class BeaconSettingController extends Controller
 
 		//display policy according to kid and beacons
 		$kidID = Session::get('current_kid');
+		$apps=null;
+		$currentKid = App\Kid::find($kidID);
+		if ($currentKid != NULL) {
+			//$beacons = $currentKid->beacons()->get();
+			$apps = $currentKid->apps()->get();
+		}
 
 		/**
 		*location aware policy
@@ -74,11 +80,10 @@ class BeaconSettingController extends Controller
             ->select('kids.name','context_policys.*','beacons.location')
             ->get();
 
-
-
 		return view('beacons',[
 		'beacons' => $beacons,
-		//'kids' => $kids
+		//'kids' => $kids,
+		'apps' => $apps,
 		'awarePolicies' =>$awarePolicies
 	]);
 
@@ -119,7 +124,7 @@ class BeaconSettingController extends Controller
             'location' => 'required|max:255',
             'major' => 'integer|required',
             'minor' => 'integer|required'
-        ]);
+        ]);	
 
 		$user = $request->user();
 		$beacon = App\Beacon::create($request->all());

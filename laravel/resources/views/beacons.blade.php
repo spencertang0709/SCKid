@@ -97,7 +97,17 @@
                     <div class="modal-body">
                         <div class="form-group has-feedback{{ $errors->has('appList') ? ' has-error' : '' }}">
                             <label for="product">App List:</label>
-                            <input type="text" class="form-control" id="appList" name="appList" value="">
+                            {{--<input type="text" class="form-control" id="appList" name="appList" value="">--}}
+
+                            {{--show app list--}}
+                            <select class="form-control" name="appList" id="appList">
+                                @if(count($apps) > 0)
+                                    @foreach($apps as $app)
+                                        <option>{{$app->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
                             @if ($errors->has('appList'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('appList')}}</strong>
@@ -175,6 +185,39 @@
         </div>
     </div>
 
+    @if(count($errors) > 0)
+    @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
+    <script>
+    var error=new showError();
+    function showError(){
+        $('#addBeacon').attr('class','modal fade in');
+        $('#addBeacon').attr('style','display: block;');
+        $('body').attr('class','modal-open');
+    }
+
+    $('button:contains("Close")').on('click',function(){
+        $('#addBeacon').attr('class','modal fade');
+        $('body').attr('class','');
+        $('#addBeacon').attr('style','display: none;');
+    });
+    </script>
+    @else
+    <script>
+    var error=new showError();
+    function showError(){
+        $('#addPolicy').attr('class','modal fade in');
+        $('#addPolicy').attr('style','display: block;');
+        $('body').attr('class','modal-open');
+    }
+
+    $('button:contains("Close")').on('click',function(){
+        $('#addPolicy').attr('class','modal fade');
+        $('body').attr('class','');
+        $('#addPolicy').attr('style','display: none;');
+    });
+    </script>
+    @endif
+    @endif
 
     <!-- Page Content -->
     <div id="page-wrapper">

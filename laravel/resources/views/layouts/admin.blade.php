@@ -24,14 +24,9 @@
 	   	});
 
 		$('#deletePolicy').on('show.bs.modal', function(e) {
-	   		//var action = "/destroy/";
-	   		//var dir =  $(e.relatedTarget).data('dir');// + action;
-
 			var id =  $(e.relatedTarget).data('id');
 			var dir="/policy/delete/"+id;
 			$('#delPolicy').attr('action', dir);
-			// var dir =  $(e.relatedTarget).data('dir');
-			//  		$('#delPolicy').attr('action', dir);
 	   	});
 
 	</script>
