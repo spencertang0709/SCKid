@@ -71,7 +71,7 @@ class BeaconSettingController extends Controller
             ->join('kids', 'kid_user.kid_id', '=', 'kids.id')
             ->join('context_policys', 'kids.id', '=', 'context_policys.kid_id')
 			->join('beacons', 'context_policys.beacon_id', '=', 'beacons.id')
-            ->select('kids.*','context_policys.*','beacons.location')
+            ->select('kids.name','context_policys.*','beacons.location')
             ->get();
 
 
@@ -158,16 +158,13 @@ class BeaconSettingController extends Controller
 	 * 		  Beacon $beacon_setting
 	 * @return Response
 	 */
-	 public function destroy(Request $request, Beacon $beacon_setting)
+	 public function destroy(Request $request, App\Beacon $beacon_setting)
      {
         //This is our authorise request for to check policies
-        //TODO
-         //// $this->authorize('destroy', $beacon_setting);
-
-
-
-        $beacon_setting->delete();
-        return redirect('/beacons');
+        //TODO not sure how to authorize
+     	//$this->authorize('destroy', $beacon);
+		//echo $beacon_setting->id;
+		$beacon_setting->delete();
+        return redirect('/beacons')->with(['message' => 'Successfully deleted!']);
      }
-
 }
