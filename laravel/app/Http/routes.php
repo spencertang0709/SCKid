@@ -238,6 +238,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth/facebook/callback', 'Auth\FacebookController@handleProviderCallback');
 
     Route::get('/twitter', 'TwitterController@index');
+    Route::get('/twitter/destroy', 'TwitterController@destroy');
     Route::get('/auth/twitter', 'Auth\TwitterController@redirectToProvider');
     Route::get('/auth/twitter/callback', 'Auth\TwitterController@handleProviderCallback');
 

@@ -116,13 +116,35 @@
                     <div class="box-header">
                     </div>
                     <div class="box-body">
+                        @if(!empty($tw)|| !empty($me))
 
-                        <p>{{$me->name or 'Empty'}}</p>
-                        <img src="{{$me->avatar or 'No profile'}}">
+                            @if(!empty($tw))
+                                <p>{{$tw->pivot->name}}</p>
+                                {{--<p>{{var_dump($me)}}</p>--}}
+                                <img src="{{$tw->pivot->avatar}}">
+                                <form action="/twitter/destroy" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Delete This Twitter Account</button>
+                                </form>
+                            @elseif(!empty($me))
+                                <p>{{$me->name}}</p>
+                                <img src="{{$me->avatar}}">
+                                <form action="/twitter/destroy" method="get">
+                                    <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Delete This Twitter Account</button>
+                                    </form>
+                                    @endif
+                                    @else
+                                        <p>Please add a twitter account</p>
+                                        @if(!empty(Session::get('current_kid_name')))
+                                            <form action="/auth/twitter/" method="get">
+                                                <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add Twitter Account</button>
+                                            </form>
+                                        @else
+                                            <form action="/kids" method="get">
+                                                <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Please select a kid</button>
+                                            </form>
+                                        @endif
+                                    @endif
 
-                        <form action="/auth/twitter/" method="get">
-                            <button id="add kid"  data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add Twitter Account</button>
-                        </form>
                     </div>
                 </div>
                 <!-- /.box-body -->

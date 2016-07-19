@@ -26,17 +26,22 @@ class TwitterController extends Controller
     public function handleProviderCallback()
     {
         $me = Socialite::driver('twitter')->user();
+        //var_dump($me);
+        $xx = $me->user;
+        //var_dump($me);
         $token = $me->token;
-        $name = $me->getName();
+        $name = $me->name;
+        $nickname = $me->nickname;
+        $avatar = $me->avatar;
 
 
         //Saving Token here
         $kidID = Session::get('current_kid');
-        $profile = Socialmedia::create([$kidID]);
+        $tw_profile = Socialmedia::create([$kidID]);
 
         $currentKid = Kid::find($kidID);
         if ($currentKid != NULL) {
-            $currentKid->socialMedias()->save($profile,['token' => $token]);
+            $currentKid->socialMedias()->save($tw_profile,['token' => $token,'nickname' => $nickname, 'name' => $name,'avatar' => $avatar,'social_media_type'=> "2" ]);
         }
 
         return view('/twitter',['me' => $me]);

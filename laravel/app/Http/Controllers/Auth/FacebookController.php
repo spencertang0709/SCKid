@@ -27,10 +27,10 @@ class FacebookController extends Controller
     {
         //If current kid has facebook
 
-        return Socialite::driver('facebook')->redirect();
+        //return Socialite::driver('facebook')->redirect();
 
         //This is where we can add permissions for the app
-        //return Socialite::driver('facebook')->scopes(['scope1','scope2'])->redirect();
+        return Socialite::driver('facebook')->scopes(['user_posts','user_likes'])->redirect();
     }
 
     /**
@@ -60,8 +60,9 @@ class FacebookController extends Controller
 
         $currentKid = Kid::find($kidID);
         if ($currentKid != NULL) {
-            $currentKid->socialMedias()->save($fb_profile,['token' => $token, 'nickname' => $Nickname, 'name' => $Name, 'avatar' => $Avatar ]);
+            $currentKid->socialMedias()->save($fb_profile,['token' => $token, 'nickname' => $Nickname, 'name' => $Name, 'avatar' => $Avatar,'social_media_type'=> "1" ]);
         }
+        //social_media_type 1 stands for facebook
 
 
         
