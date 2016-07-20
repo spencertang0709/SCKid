@@ -18,6 +18,7 @@ class CreateKidSocialMediaTable extends Migration
 			$table->boolean('is_monitored');
             $table->string('token')->nullable();
 			$table->integer('account_id');
+            $table->integer('social_media_type');
 			$table->string('nickname')->nullable();
 			$table->string('name')->nullable();
 			$table->string('avatar')->nullable();

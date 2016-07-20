@@ -17,7 +17,7 @@ class FacebookController extends Controller
         $kidID = Session::get('current_kid');
         $currentKid = App\Kid::find($kidID);
         if ($currentKid != NULL) {
-            $fb = $currentKid->socialMedias()->get()->first();
+            $fb = $currentKid->socialMedias()->where('social_media_type', '1')->first();
 
         }
         //return view('facebook',['me'=> $request->all()]);
@@ -32,8 +32,8 @@ class FacebookController extends Controller
         $kidID = Session::get('current_kid');
         $currentKid = App\Kid::find($kidID);
         if ($currentKid != NULL) {
-            $currentKid->socialMedias()->detach();
-            $currentKid->socialMedias()->delete();
+            $currentKid->socialMedias()->wherePivot('social_media_type', '1')->detach();
+            $currentKid->socialMedias()->wherePivot('social_media_type', '1')->delete();
         }
         //return view('facebook',['me'=> $request->all()]);
         return view('facebook',['fb'=> $fb]);

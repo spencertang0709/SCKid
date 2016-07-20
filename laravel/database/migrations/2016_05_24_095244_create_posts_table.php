@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
 			$table->string('location')->nullable();
 			$table->integer('latitude')->nullable();
 			$table->integer('longitude')->nullable();
+            $table->integer('sensitive')->nullable();
 			
 			$table->integer('social_media_id')->unsigned();
             $table->foreign('social_media_id')->references('id')->on('social_media');

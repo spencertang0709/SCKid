@@ -73,8 +73,8 @@
                     <div class="modal-footer ">
                         {!! method_field('DELETE') !!}
                         <input type="hidden" name="beaconID" value=""/>
-                        <button type="submit" name="removeBeacon" value="remove" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="submit" name="removeBeacon" value="remove" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                     </div>
                 </form>
             </div>
@@ -177,48 +177,38 @@
                     <div class="modal-footer ">
                         {!! method_field('DELETE') !!}
                         <input type="hidden" name="policyID" value=""/>
-                        <button type="submit" name="removePolicy" value="remove" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="submit" name="removePolicy" value="remove" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-	
+    <script>
+    function showError(selectedItem){
+        $(selectedItem).attr('class','modal fade in');
+        $(selectedItem).attr('style','display: block;');
+        $('body').attr('class','modal-open');
+
+        $('button:contains("Close"),button[class="close"]').on('click',function(){
+            $(selectedItem).attr('class','modal fade');
+            $('body').attr('class','');
+            $(selectedItem).attr('style','display: none;');
+        });
+    }
+    </script>
     @if(count($errors) > 0)
-    @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
-    <script>
-    var error=new showError();
-    function showError(){
-        $('#addBeacon').attr('class','modal fade in');
-        $('#addBeacon').attr('style','display: block;');
-        $('body').attr('class','modal-open');
-    }
-
-    $('button:contains("Close")').on('click',function(){
-        $('#addBeacon').attr('class','modal fade');
-        $('body').attr('class','');
-        $('#addBeacon').attr('style','display: none;');
-    });
-    </script>
-    @else
-    <script>
-    var error=new showError();
-    function showError(){
-        $('#addPolicy').attr('class','modal fade in');
-        $('#addPolicy').attr('style','display: block;');
-        $('body').attr('class','modal-open');
-    }
-
-    $('button:contains("Close")').on('click',function(){
-        $('#addPolicy').attr('class','modal fade');
-        $('body').attr('class','');
-        $('#addPolicy').attr('style','display: none;');
-    });
-    </script>
+        @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
+            <script>
+            showError('#addBeacon');
+            </script>
+            @else
+            <script>
+            showError('#addPolicy');
+            </script>
+        @endif
     @endif
-    @endif
-	
+
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -226,6 +216,14 @@
             <div class="alert alert-danger fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Oooops!</strong> Please make sure you added right information!
+                <br/>
+                @if($errors->has('appList'))
+                    make sure you have chosen your child as well as the child assigned with a phone.
+                @endif
+
+                @if($errors->has('hiddenBeaconId'))
+                    make sure you have chosen one beacon location.
+                @endif
             </div>
             @endif
             <div class="row">
@@ -340,10 +338,19 @@
             <!-- /#page-wrapper -->
         </div>
 
-<script>
-//$("span i.fa-inverse").css( "border", "3px solid red" );
-</script>
-		
+        <script>
+        function showError(selectedItem){
+            $(selectedItem).attr('class','modal fade in');
+            $(selectedItem).attr('style','display: block;');
+            $('body').attr('class','modal-open');
+
+            $('button:contains("Close")').on('click',function(){
+                $(selectedItem).attr('class','modal fade');
+                $('body').attr('class','');
+                $(selectedItem).attr('style','display: none;');
+            });
+        }
+        </script>
         <script>
         var selectedBeaconId = -1;
         $( "#BeaConfig" ).children().children().each(function() {
@@ -422,5 +429,5 @@
         });
         </script>
         <!-- bootstrap time picker -->
-        
 @endsection
+
