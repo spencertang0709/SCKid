@@ -184,7 +184,7 @@
             </div>
         </div>
     </div>
-
+	
     @if(count($errors) > 0)
     @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
     <script>
@@ -218,7 +218,7 @@
     </script>
     @endif
     @endif
-
+	
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -343,7 +343,7 @@
 <script>
 //$("span i.fa-inverse").css( "border", "3px solid red" );
 </script>
-
+		
         <script>
         var selectedBeaconId = -1;
         $( "#BeaConfig" ).children().children().each(function() {
@@ -417,9 +417,10 @@
             $('#ms').change(function() {
                 console.log($(this).val());
             }).multipleSelect({
-                width: '100%'
+                width: '100%';
             });
         });
         </script>
         <!-- bootstrap time picker -->
-        @endsection
+        
+@endsection

@@ -17,12 +17,13 @@
         </form>
 
         <div class="row">
-            <div class="6u 12u(narrower)">
+            <div class="12u 12u(narrower)">
 
-                <section class="box special">
-                    <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
-                    <h3>Learn the basics</h3>
+                <section class="box special" style="text-align:left">
+                	<h3>Learn the basics</h3>
                     <p>Internet 101 Protecting yourself and your child online.</p>
+                    <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
+                    
                     <ul class="actions">
                         <li><a href="/knowledge/categories/basics" class="button alt">Learn More</a></li>
                     </ul>
