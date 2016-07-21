@@ -10,7 +10,6 @@ use App\Title;
 use App\Article;
 class SearchController extends Controller
 {
-
     public function knowledgeSearch(Request $request)
     {
         //Gets string from our form submission
@@ -29,30 +28,30 @@ class SearchController extends Controller
       $this->validate($request, [
           'keyword' => 'required',
       ]);
-	  
+
       $keyword = $request['keyword'];
       $categories = Category::where('name', $keyword)->get();
-      echo "Category:";
-      echo "<br>";
-      foreach($categories as $c){
-	      echo $c->id.": ";
-	      echo $c->name.",";
-      }
-	  
-      echo "Title:";
-      echo "<br>";
+    //   echo "Category:";
+    //   echo "<br>";
+    //   foreach($categories as $c){
+	//       echo $c->id.": ";
+	//       echo $c->name.",";
+    //   }
+
+    //   echo "Title:";
+    //   echo "<br>";
       $titles = Title::where('name', $keyword)->get();
-      foreach($titles as $c) {
-          echo $c->name.",";	
-      }
-      
-      echo "Article";
-      echo "<br>";
+    //   foreach($titles as $c) {
+    //       echo $c->name.",";
+    //   }
+
+    //   echo "Article";
+    //   echo "<br>";
       $articles = Article::where('subheading', $keyword)->get();
-      foreach($articles as $c){
-	      echo $c->id.": ";
-	      echo $c->subheading.",";
-      }
+    //   foreach($articles as $c){
+	//       echo $c->id.": ";
+	//       echo $c->subheading.",";
+    //   }
 
       return view('knowledge.showSearchResult', [
           'categories' => $categories,

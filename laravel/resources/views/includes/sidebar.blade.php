@@ -207,6 +207,14 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#">Knowledge base<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/knowledge/showCategory">Knowledge base</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#">Help<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -214,9 +222,6 @@
                         </li>
                         <li>
                             <a href="/knowledge/categories"><i class="fa fa-question fa-fw"></i>Learn About Privacy</a>
-                        </li>
-                        <li>
-                            <a href="/knowledge/showCategory">Knowledge base</a>
                         </li>
                     </ul>
                 </li>

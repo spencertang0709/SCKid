@@ -7,6 +7,7 @@
     <!--other CSS-->
     <link href="/css/AdminLTE.css" rel="stylesheet">
     <link href="/css/AdminLTE.min.css" rel="stylesheet">
+
 @append
 @include('includes.header')
 
@@ -81,7 +82,6 @@
 					$('#kid_text').html("Current Child is: " + responseText);
 				}
 			});
-
 		});
 	</script>
 

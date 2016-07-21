@@ -5,6 +5,13 @@
         <ul>
             <li> | </li>
             <li>
+                <a href="#" class="icon fa-angle-down">Go</a>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="#">empty</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="/knowledge/categories/basics" class="icon fa-angle-down">Basics</a>
                 <ul>
                     <li><a href="#">10 Tips</a></li>
