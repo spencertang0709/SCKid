@@ -63,7 +63,7 @@ Route::get('/knowledge/showArticle/{title_id}', [
     'as' => 'showArticle.knowledge',
 ]);
 
-Route::post('/knowledge/searchKeyWord',[
+Route::post('/knowledge/showSearchResult',[
 	'uses' => 'SearchController@articleSearch',
 	'as' => 'searchKeyWord.knowledge',
 ]);
@@ -73,6 +73,8 @@ Route::get('/knowledge/search', 'SearchController@knowledgeSearch');
 Route::get('/knowledge/categories', function () {
     return view('knowledge.categories');
 });
+
+// Route::get('/knowledge/categories','KnowledgeAddArticleController@showCategory');
 
 Route::get('/knowledge/article', function () {
     return view('knowledge.article');
@@ -153,7 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/policy/delete/{policy}',[
         'uses' => 'PolicyController@destroy',
         'as' => 'delete.policy'
-    ]);         
+    ]);
 
 
     //These are our action routes

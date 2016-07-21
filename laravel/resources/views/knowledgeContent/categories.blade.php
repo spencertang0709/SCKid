@@ -4,11 +4,10 @@
     @include('includes.learn_header')
 
     <!-- Main -->
-    <section id="main" class="container">
+    <section id="main" class="container">        
         <header>
             <h2>Learn about Privacy & Security</h2>
             <p>Select an article below or search for a term</p>
-
         </header>
 
         <form>

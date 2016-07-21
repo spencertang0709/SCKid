@@ -1,11 +1,16 @@
 @section('title')
-	Knowledgebase - Article
+	Knowledgebase - Categories
 @append
 @section('customStyle')
-    <link rel="stylesheet" href="/css/welcome/main.css" />
-    <!--[if lte IE 8]><link rel="stylesheet" href="/css/welcome/ie8.css" /><![endif]-->
+
 @append
 @include('includes.header')
+
+<video autoplay loop poster="#" id="bgvid">
+  <source src="\video\screen_cast_app.mp4" type="video/mp4">
+  <source src="\video\screen_cast_app.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
 
 {{--TODO fetch url of content from DB--}}
 @include('knowledgeContent.categories')
