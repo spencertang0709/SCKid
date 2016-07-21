@@ -13,7 +13,7 @@ class Panic extends Model
      * @var array
      */
     protected $fillable = [
-        'latitude', 'longitude', 'message', 'time','imageURL'
+        'latitude', 'longitude', 'message', 'time', 'imageURL'
     ];
 
 

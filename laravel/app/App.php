@@ -13,7 +13,7 @@ class App extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'package', 'is_installed'
+        'name', 'package'//, 'is_installed'
     ];
 
 	//Relationships

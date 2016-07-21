@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContextPolicy extends Model
 {
-	//Specify table names to avoid plural form
-	protected $table = 'context_policys';
-
      /**
      * The attributes that are mass assignable.
      *
