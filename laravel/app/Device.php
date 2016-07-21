@@ -13,7 +13,7 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'model','unique_id'
+        'name', 'model', 'unique_id'
     ];
 
 	//Relationships
