@@ -30,7 +30,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
-	
+
 	public function kids()
 	{
 		return $this->belongsToMany(Kid::class)->withTimestamps();
@@ -40,21 +40,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
-    
-	public function devices() 
+
+	public function devices()
 	{
 		return $this->belongsToMany(Device::class)->withTimestamps();
 	}
-	
+
 	public function beacons()
 	{
 		return $this->belongsToMany(Beacon::class)->withTimestamps();
 	}
 
+    public function verificationCodes()
+	{
+		return $this->hasMany(VerificationCode::class);
+	}
+
 //    public function beacons(){
 //        return $this->hasManyThrough(Kid, )
 //    }
-	
+
 	/*
 	//Many-One relationship
    	public function jobs()

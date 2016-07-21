@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         //These are all associated with the user
         $this->call(CategoriesTableSeeder::class);
         $this->call(TitlesTableSeeder::class);
+        $this->call(VerificationCode::class);
     }
 }

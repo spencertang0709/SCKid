@@ -217,6 +217,13 @@ $factory->define(App\Article::class,function(Faker\Generator $faker){
 ];
 });
 
+$factory->define(App\VerificationCode::class,function(Faker\Generator $faker){
+  return[
+    'value' => $faker->realText(10),
+    'created_time' => $faker->dateTime
+];
+});
+
 /*
 $factory->define(App\TimeSlot::class, function (Faker\Generator $faker) {
 	return [
