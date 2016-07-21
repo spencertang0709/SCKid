@@ -14,16 +14,16 @@ class CreateSmsTable extends Migration
     {
         Schema::create('sms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number');
-            $table->string('contact')->nullable();
-            $table->string('content');
-            $table->string('direction');
-            $table->string('time');
-
-            $table->integer('kid_id')->unsigned();
-            $table->foreign('kid_id')->references('id')->on('kids')->onDelete('cascade');
-            
+            $table->string('title');
+            $table->string('contact');
+            $table->boolean('direction');
+            $table->boolean('read');
+            $table->string('message');
+            $table->DateTime('time');
             $table->timestamps();
+
+            $table->integer('kid_id')->unsigned()->nullable();
+            $table->foreign('kid_id')->references('id')->on('kids')->onDelete('cascade');
         });
     }
 

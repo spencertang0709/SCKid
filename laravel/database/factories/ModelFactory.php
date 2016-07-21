@@ -117,21 +117,14 @@ $factory->define(App\Panic::class, function (Faker\Generator $faker) {
 	];
 });
 
-$factory->define(App\Message::class, function (Faker\Generator $faker) {
-    return [
-        'read' => $faker->boolean(50),
-        'title' => $faker->realText(10),
-        'from' => $faker->firstName,
-        'message' => $faker->realText(90),
-    ];
-});
 
 $factory->define(App\Sms::class, function (Faker\Generator $faker) {
     return [
-        'number' => $faker->phoneNumber,
+        'title' => $faker->realText(10),
         'contact' => $faker->firstName,
-        'content' => $faker->realText(90),
         'direction' => $faker->boolean,
+        'read' => $faker->boolean,
+        'message' =>$faker->realText(20),
         'time' => $faker->dateTime,
     ];
 });
@@ -155,7 +148,7 @@ $factory->define(App\SocialMedia::class, function (Faker\Generator $faker) {
 			'name' => $faker->realText(6),
 		];
 	});
-	
+
 	$factory->define(App\Post::class, function (Faker\Generator $faker) {
 		return [
 			'message' => $faker->realText(20),
@@ -168,7 +161,7 @@ $factory->define(App\SocialMedia::class, function (Faker\Generator $faker) {
         	'minor' => $faker->numberBetween(1000,99999),
 		];
 	});
-	
+
 	$factory->define(App\Album::class, function (Faker\Generator $faker) {
 		return [
 			'name' => $faker->name,
@@ -177,14 +170,14 @@ $factory->define(App\SocialMedia::class, function (Faker\Generator $faker) {
 			'privacy' => $faker->realText(5),
 		];
 	});
-	
+
 	$factory->define(App\Photo::class, function (Faker\Generator $faker) {
 		return [
 			'name' => $faker->realText(8),
 			'source' => $faker->domainName,
 		];
 	});
-	
+
 $factory->define(App\Website::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->domainWord,

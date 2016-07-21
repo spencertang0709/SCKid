@@ -17,11 +17,12 @@ class CreateCallsTable extends Migration
             $table->string('number');
             $table->string('contact');
             $table->string('direction');
-            $table->dateTime('time');
-
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            
             $table->integer('kid_id')->unsigned();
             $table->foreign('kid_id')->references('id')->on('kids')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }
