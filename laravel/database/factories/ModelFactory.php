@@ -66,7 +66,8 @@ $factory->define(App\Call::class, function (Faker\Generator $faker) {
         'number' => $faker->phoneNumber,
         'contact' => $faker->firstName,
         'direction' => $faker->boolean(50),
-        'time' => $faker->dateTime,
+        'start_time' => $faker->dateTime,
+        'end_time' =>$faker->dateTime,
     ];
 });
 

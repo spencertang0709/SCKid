@@ -32,8 +32,6 @@ class DatabaseSeeder extends Seeder
 		$this->call(ContextPolicysTableSeeder::class);
 
         //These are all associated with the user
-        $this->call(MessagesTableSeeder::class);
-
         $this->call(CategoriesTableSeeder::class);
         $this->call(TitlesTableSeeder::class);
     }
