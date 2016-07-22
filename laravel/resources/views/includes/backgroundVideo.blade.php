@@ -16,7 +16,9 @@ video#bgvid {
     background-size: cover;
 
     transition: 1s opacity;
-    opacity: .6;
+
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
 video { display: block; }

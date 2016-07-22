@@ -42,19 +42,33 @@ Knowledgebase - Categories
             <a href="/home">Click here go Home</a>
             </div>
             @endif
+
             <div class="row">
                 @if(count($categories) > 0)
                     @foreach($categories as $category)
                     <div class="6u 12u(narrower)">
                         <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
                             <section class="box special">
-                                <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
+                                <span class="image featured"><img src="/img/mobile.jpeg" alt="" /></span>
                                 <h3>{{$category->name}}</h3>
                             </section>
                         </a>
                     </div>
                     @endforeach
                 @endif
+
+                <!-- @if(count($categories) > 0)
+                    @foreach($categories as $category)
+                    <div class="6u 12u(narrower)">
+                        <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
+                            <section class="box special" style="background-image: url('/img/lock.jpg');">
+                                <span class="image featured"></span>
+                                <h3>{{$category->name}}</h3>
+                            </section>
+                        </a>
+                    </div>
+                    @endforeach
+                @endif -->
             </div>
         </div>
         {{--original--}}

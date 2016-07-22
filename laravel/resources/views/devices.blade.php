@@ -120,9 +120,11 @@
 
                 <div class="row">
                     <div class="col-md-12 text-right">
+                        <button id="verifyDevice" data-toggle="modal" data-target="#" class="btn btn-primary" style="float: right;" >Verify A Device</button>
                         <button id="add device" data-toggle="modal" data-target="#addWeb" class="btn btn-primary" style="float: right;" >Add A Device</button>
                     </div>
                 </div>
+
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->

@@ -75,9 +75,9 @@ class BeaconSettingController extends Controller
 		//join users kids policies and beacons tables
 		$awarePolicies = DB::table('kid_user')->where('user_id',$user->id)
             ->join('kids', 'kid_user.kid_id', '=', 'kids.id')
-            ->join('context_policys', 'kids.id', '=', 'context_policys.kid_id')
-			->join('beacons', 'context_policys.beacon_id', '=', 'beacons.id')
-            ->select('kids.name','context_policys.*','beacons.location')
+            ->join('context_policies', 'kids.id', '=', 'context_policies.kid_id')
+			->join('beacons', 'context_policies.beacon_id', '=', 'beacons.id')
+            ->select('kids.name','context_policies.*','beacons.location')
             ->get();
 
 		return view('beacons',[
@@ -124,7 +124,7 @@ class BeaconSettingController extends Controller
             'location' => 'required|max:255',
             'major' => 'integer|required',
             'minor' => 'integer|required'
-        ]);	
+        ]);
 
 		$user = $request->user();
 		$beacon = App\Beacon::create($request->all());
