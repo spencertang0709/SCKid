@@ -49,8 +49,14 @@ Knowledgebase - Categories
                     <div class="6u 12u(narrower)">
                         <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
                             <section class="box special">
-                                <span class="image featured"><img src="/img/mobile.jpeg" alt="" /></span>
-                                <h3>{{$category->name}}</h3>
+                            	<div style="position:relative;">
+                            		<img src="/img/mobile.jpeg" alt="" style="height:100%; width:90%;"/>
+                            		<div style="position:absolute; display:block; top:40%; width:100%;height:30%; background:blue;">
+                            			<span style="float:left;">
+                            				{{$category->name}}kappakappa
+                            			</span>
+                            		</div>
+                            	</div>
                             </section>
                         </a>
                     </div>
