@@ -30,6 +30,15 @@
 			$('#delPolicy').attr('action', dir);
 	   	});
 
+		$('#verifyDevice').on('show.bs.modal', function(e) {
+			$.ajax({
+				method: 'GET',
+				url: '{{route("verfiy.devices")}}',
+			})
+			.done(function( msg ) {
+				$('#lbVerification').text('Your Verification Code is: '+msg);
+			});
+		});
 	</script>
 
 	{{--THESE ARE FOR APPS--}}

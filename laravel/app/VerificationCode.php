@@ -12,6 +12,6 @@ class VerificationCode extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 }

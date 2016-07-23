@@ -22,28 +22,37 @@ class DeviceController extends Controller
 
 		//Get all the devices that a user owns
         $devices = $request->user()->devices()->get();
-		
+
 		//Get the device that is linked to the current kid
 		$kidID = Session::get('current_kid');
 		$currentKid = App\Kid::find($kidID);
-		
+
         //Kids will be accessible in our home view
         if ($currentKid == NULL) {
         	return view('devices', [
         		'devices' => $devices
         	]);
         } else {
-        	$currentDevice = $currentKid->devices()->get();			
+        	$currentDevice = $currentKid->devices()->get();
         	return view('devices', [
         		'devices' => $devices,
         		//'currentDevice' => $currentDevice
         	]);
         }
-		
+
 		/*
 		foreach($currentDevice as $device) {//convert collection:$currentDevice to a model
-			$devices->push($device);	
+			$devices->push($device);
 		}
-		*/		
+		*/
+    }
+
+    public function verifyCode(Request $request)
+    {
+        $user=$request->user();
+        //generate verification code
+        //$code=App\VerificationCode::where('id',$user->id)->first();
+        //save code to database
+        echo $code->value;
     }
 }

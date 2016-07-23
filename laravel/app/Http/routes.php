@@ -185,6 +185,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/devices', 'DeviceController@index');
 
+    Route::get('/devices/verify', [
+        'uses' => 'DeviceController@verifyCode',
+        'as' => 'verfiy.devices'
+    ]);
+
     Route::get('/settings', 'SettingController@index');
 
     Route::get('/time', 'TimeController@index');
@@ -284,6 +289,10 @@ Route::group(array('prefix' => 'api/v1'), function() {
     Route::resource('messages', 'Api\MessageController');
 	Route::resource('policies', 'Api\PolicyController');
     Route::get('user','Api\AuthApiController@getAuthenticatedUser');
+
+    Route::resource('verificationCode','Api\VerificationCodeController');
+
+
 
     //Sync routes
     Route::resource('sync','Api\SyncController');

@@ -58,6 +58,31 @@
             </form>
         </div>
 
+        <!-- verification -->
+        <div id="wrapper">
+            <div id="verifyDevice" class="modal fade" role="dialog">
+                <form action="" method="post">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Verification</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label id="lbVerification"></label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        <!-- verification -->
+
         <!-- Navigation -->
 
         <!-- Page Content -->
@@ -120,7 +145,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button id="verifyDevice" data-toggle="modal" data-target="#" class="btn btn-primary" style="float: right;" >Verify A Device</button>
+                        <button id="verifyDevice" data-toggle="modal" data-target="#verifyDevice" class="btn btn-success" style="float: right;" >Verification</button>
                         <button id="add device" data-toggle="modal" data-target="#addWeb" class="btn btn-primary" style="float: right;" >Add A Device</button>
                     </div>
                 </div>
