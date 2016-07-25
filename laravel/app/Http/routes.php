@@ -169,7 +169,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/apps', 'AppController@update');
     Route::post('/apps', 'AppController@store');
 
-	Route::get('/beacons', 'BeaconSettingController@index');
+	Route::get('/beacons', [
+        'uses' => 'BeaconSettingController@index',
+        'as' => 'beacons'
+]);
 	Route::post('/beacons', 'BeaconSettingController@store');
 	Route::delete('/beacons/destroy/{beacon_setting}', 'BeaconSettingController@destroy');
 

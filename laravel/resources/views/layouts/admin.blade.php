@@ -89,6 +89,9 @@
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
+					 if('{{URL::previous()}}'==='{{route('beacons')}}'){	
+						window.location="{{route('beacons')}}";
+					  }
 				}
 			});
 		});

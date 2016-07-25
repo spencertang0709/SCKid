@@ -19,13 +19,11 @@ class VerificationCodeController extends Controller
      */
     public function index(Request $request)
     {
-		//TODO authorisations
-        
         //Check if code matches
         //$inputCode = $request->input('verificationCode');
         $inputCode = 92717;
         $resultCode = VerificationCode::where('value', $inputCode)->first();
-		
+
         if ($resultCode != null)
        	{
        		//Check if the code has expired
@@ -36,7 +34,7 @@ class VerificationCodeController extends Controller
 				$user = $resultCode->user()->get();
 	            echo "verified and register device";
 				//TODO register device
-				
+
 			} else {
 				return Response::json (
 					array(
@@ -97,7 +95,7 @@ class VerificationCodeController extends Controller
 
      public function show(Request $request)
      {
-        
+
      }
 
     /**

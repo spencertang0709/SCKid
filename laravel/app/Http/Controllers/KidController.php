@@ -58,7 +58,6 @@ class KidController extends Controller
         return view('kids', [
             'kids' => $this->kids->forUser($request->user()),
         ]);
-
     }
 
     /**

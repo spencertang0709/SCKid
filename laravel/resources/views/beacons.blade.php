@@ -99,6 +99,24 @@
     </div>
     {{--alert--}}
 
+    {{--choose kid--}}
+    <div class="modal fade" id="chooseKidAlert" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align">Choose Kid</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-warning-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;Please add one of you kids.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--choose kid--}}
+
 
     <!--add policy-->
     <div id="addPolicy" class="modal fade" role="dialog">
@@ -203,7 +221,7 @@
         </div>
     </div>
     <script>
-    function showError(selectedItem){
+    function showModalBox(selectedItem){
         $(selectedItem).attr('class','modal fade in');
         $(selectedItem).attr('style','display: block;');
         $('body').attr('class','modal-open');
@@ -211,18 +229,18 @@
         $('button:contains("Close"),button[class="close"]').on('click',function(){
             $(selectedItem).attr('class','modal fade');
             $('body').attr('class','');
-            $(selectedItem).attr('style','display: none;');
+            $(selectedItem).attr('style','display: none;');            
         });
     }
     </script>
     @if(count($errors) > 0)
         @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
             <script>
-            showError('#addBeacon');
+            showModalBox('#addBeacon');
             </script>
             @else
             <script>
-            showError('#addPolicy');
+            showModalBox('#addPolicy');
             </script>
         @endif
     @endif
@@ -356,12 +374,6 @@
             <!-- /#page-wrapper -->
         </div>
 
-        <div class="alert alert-danger fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Oooops!</strong> Please choose your kid!
-        </div>
-
-
 <script>
 var kid_name="";
 kid_name="{{Session::get('current_kid_name')}}";
@@ -370,14 +382,17 @@ kid_name="{{Session::get('current_kid_name')}}";
 // pass modal element
 function checkKid(v,modalName){
     if(v=""){
-        showError(modalName);
+        showModalBox(modalName);
+    }
+    else{
+        //alert('test');
     }
 }
 var check =checkKid(kid_name,'#nonKidAlert');
 </script>
 
 <script>
-function showError(selectedItem){
+function showModalBox(selectedItem){
     $(selectedItem).attr('class','modal fade in');
     $(selectedItem).attr('style','display: block;');
     $('body').attr('class','modal-open');
