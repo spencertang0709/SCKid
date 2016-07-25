@@ -61,7 +61,7 @@
         <!-- verification -->
         <div id="wrapper">
             <div id="verifyDevice" class="modal fade" role="dialog">
-                <form action="" method="post">
+                <form action="/devices/verify" method="get">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">

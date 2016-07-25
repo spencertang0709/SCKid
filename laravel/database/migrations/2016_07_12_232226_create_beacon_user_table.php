@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BeaconUserTable extends Migration
+class CreateBeaconUserTable extends Migration
 {
     /**
      * Run the migrations.

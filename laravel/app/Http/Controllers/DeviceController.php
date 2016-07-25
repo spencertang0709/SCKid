@@ -49,10 +49,17 @@ class DeviceController extends Controller
 
     public function verifyCode(Request $request)
     {
-        $user=$request->user();
-        //generate verification code
-        //$code=App\VerificationCode::where('id',$user->id)->first();
-        //save code to database
-        echo $code->value;
+        //Generate verification code
+        $code = rand(1, 1000000);//TODO better algorithm for encryption and avoid same value
+        
+        //Get current user associated with the current code and save it
+        $user = $request->user();
+		
+        App\VerificationCode::create(array(
+        	'value' => $code,
+        	'user_id'=> $user->id
+        ));
+		
+		echo $code;
     }
 }
