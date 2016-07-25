@@ -15,7 +15,7 @@
 		border: 0;
 		font-size: 100%;
 		font: inherit;
-		vertical-align: baseline;
+		/* vertical-align: baseline; */
 	}
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -1946,7 +1946,7 @@
 /* Section/Article */
 
 	section.special, article.special {
-		text-align: center;
+		/* text-align: center; */
 	}
 
 	header p {

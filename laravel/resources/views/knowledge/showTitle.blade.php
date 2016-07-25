@@ -31,7 +31,8 @@ Knowledgebase - Titles
           <a href="/home">Click here go Home</a>
           </div>
           @endif
-        <div class="row">
+
+        <!-- <div class="row">
           @if(count($titles) > 0)
             @foreach($titles as $title)
             <div class="6u 12u(narrower)">
@@ -44,7 +45,21 @@ Knowledgebase - Titles
             </div>
             @endforeach
           @endif
+        </div> -->
+
+        <div class="list-group">
+            @if(count($titles) > 0)
+                @foreach($titles as $title)
+                    <a href="{{ route('showArticle.knowledge', ['title_id' => $title->id]) }}">
+                        <section class="box special">
+                            <h3>{{$title->name}}</h3>
+                        </section>
+                    </a>
+                @endforeach
+            @endif
         </div>
+
+        {{--end of row--}}
       </div>
       {{--original--}}
   </section>

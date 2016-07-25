@@ -81,6 +81,24 @@
         </div>
     </div>
 
+    {{--alert--}}
+    <div class="modal fade" id="nonKidAlert" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align">Choose Kid</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-warning-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;Please add one of you kids.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--alert--}}
+
 
     <!--add policy-->
     <div id="addPolicy" class="modal fade" role="dialog">
@@ -211,7 +229,7 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">            
+        <div class="container-fluid">
             @if(count($errors) > 0)
             <div class="alert alert-danger fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -338,96 +356,115 @@
             <!-- /#page-wrapper -->
         </div>
 
-        <script>
-        function showError(selectedItem){
-            $(selectedItem).attr('class','modal fade in');
-            $(selectedItem).attr('style','display: block;');
-            $('body').attr('class','modal-open');
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Oooops!</strong> Please choose your kid!
+        </div>
 
-            $('button:contains("Close")').on('click',function(){
-                $(selectedItem).attr('class','modal fade');
-                $('body').attr('class','');
-                $(selectedItem).attr('style','display: none;');
-            });
-        }
-        </script>
-        <script>
-        var selectedBeaconId = -1;
-        $( "#BeaConfig" ).children().children().each(function() {
-            $(this).click(function() {
-                if($(this).hasClass("info")){
-                    $(this).removeClass("info");
-                    selectedBeaconId=-1;
-                }else{
-                    var inputBeaconId = $(this).attr("data-info");
-                    $(this).addClass("info");
-                    $('#hiddenBeaconId').val(inputBeaconId);
-                    selectedBeaconId = inputBeaconId;
-                    if(selectedBeaconId != -1){
-                        $(this).siblings().removeClass("info");
-                    }
-                }
-            });
-        });
-        </script>
-        <script>
-        $('#addPolicy').modalSteps({
-            completeCallback: function() {
-                var stime = document.getElementById("time_start").value;
-                var etime = document.getElementById("time_end").value;
-                var e1 = document.getElementById("location");
-                var location = e1.options[e1.selectedIndex].value;
-                var e = document.getElementById("guardian");
-                var rs = e.options[e.selectedIndex].value;
-                var apps=$( "#ms" ).val();
-                console.log(apps.length);
-                //var apps = getSelectedOptions(document.getElementById("ms"));
-                var urlString = "context=Complete" +"&location="+location+ "&st=" + stime + "&et=" + etime + "&guardian=" + rs+"&apps="+apps;
-                var data = {
-                    context : "Complete",
-                    location : location,
-                    st : stime,
-                    et : etime,
-                    guardian : rs,
-                    apps : apps
-                };
-                $.ajax
-                ({
-                    url: "context_setting.php",
-                    type: "POST",
-                    cache: false,
-                    dataType:"json",
-                    //data: urlString
-                    data: {data: JSON.stringify(data)}
-                });
-                window.location = "context_setting.php";
+
+<script>
+var kid_name="";
+kid_name="{{Session::get('current_kid_name')}}";
+// check something if it is exist, especially for kid;
+// pass v as parameter to be checked
+// pass modal element
+function checkKid(v,modalName){
+    if(v=""){
+        showError(modalName);
+    }
+}
+var check =checkKid(kid_name,'#nonKidAlert');
+</script>
+
+<script>
+function showError(selectedItem){
+    $(selectedItem).attr('class','modal fade in');
+    $(selectedItem).attr('style','display: block;');
+    $('body').attr('class','modal-open');
+
+    $('button:contains("Close")').on('click',function(){
+        $(selectedItem).attr('class','modal fade');
+        $('body').attr('class','');
+        $(selectedItem).attr('style','display: none;');
+    });
+}
+</script>
+<script>
+var selectedBeaconId = -1;
+$( "#BeaConfig" ).children().children().each(function() {
+    $(this).click(function() {
+        if($(this).hasClass("info")){
+            $(this).removeClass("info");
+            selectedBeaconId=-1;
+        }else{
+            var inputBeaconId = $(this).attr("data-info");
+            $(this).addClass("info");
+            $('#hiddenBeaconId').val(inputBeaconId);
+            selectedBeaconId = inputBeaconId;
+            if(selectedBeaconId != -1){
+                $(this).siblings().removeClass("info");
             }
+        }
+    });
+});
+</script>
+<script>
+$('#addPolicy').modalSteps({
+    completeCallback: function() {
+        var stime = document.getElementById("time_start").value;
+        var etime = document.getElementById("time_end").value;
+        var e1 = document.getElementById("location");
+        var location = e1.options[e1.selectedIndex].value;
+        var e = document.getElementById("guardian");
+        var rs = e.options[e.selectedIndex].value;
+        var apps=$( "#ms" ).val();
+        console.log(apps.length);
+        //var apps = getSelectedOptions(document.getElementById("ms"));
+        var urlString = "context=Complete" +"&location="+location+ "&st=" + stime + "&et=" + etime + "&guardian=" + rs+"&apps="+apps;
+        var data = {
+            context : "Complete",
+            location : location,
+            st : stime,
+            et : etime,
+            guardian : rs,
+            apps : apps
+        };
+        $.ajax
+        ({
+            url: "context_setting.php",
+            type: "POST",
+            cache: false,
+            dataType:"json",
+            //data: urlString
+            data: {data: JSON.stringify(data)}
         });
-        </script>
-        <script>
-        $('#delete').on('show.bs.modal', function(e) {
-            var policyid = $(e.relatedTarget).data('policyid');
-            $(e.currentTarget).find('input[name="policyid"]').val(policyid);
-        });
-        </script>
-        <script>
-        $('.clearfix .btn').on('click', function(e) {
-            e.preventDefault();
-            var $this = $(this);
-            var $collapse = $this.closest('.collapse-group').find('.collapse');
-            $collapse.collapse('toggle');
-        });
-        </script>
+        window.location = "context_setting.php";
+    }
+});
+</script>
+<script>
+$('#delete').on('show.bs.modal', function(e) {
+    var policyid = $(e.relatedTarget).data('policyid');
+    $(e.currentTarget).find('input[name="policyid"]').val(policyid);
+});
+</script>
+<script>
+$('.clearfix .btn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $collapse = $this.closest('.collapse-group').find('.collapse');
+    $collapse.collapse('toggle');
+});
+</script>
 
-        <script>
-        $(function() {
-            $('#ms').change(function() {
-                console.log($(this).val());
-            }).multipleSelect({
-                width: '100%';
-            });
-        });
-        </script>
+<script>
+$(function() {
+    $('#ms').change(function() {
+        console.log($(this).val());
+    }).multipleSelect({
+        width: '100%';
+    });
+});
+</script>
         <!-- bootstrap time picker -->
 @endsection
-

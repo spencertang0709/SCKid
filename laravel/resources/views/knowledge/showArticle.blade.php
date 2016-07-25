@@ -30,7 +30,7 @@ Knowledgebase - Articles
         <a href="/home">Click here go Home</a>
         </div>
         @endif
-        <div class="row">
+        <!-- <div class="row">
           @if(count($articles) > 0)
             @foreach($articles as $article)
              <div class="6u 12u(narrower)">
@@ -42,6 +42,16 @@ Knowledgebase - Articles
              </div>
             @endforeach
           @endif
+        </div> -->
+        <div class="list-group">
+            @if(count($articles) > 0)
+              @foreach($articles as $article)
+                <section class="box special">
+                    <h3>{{$article->subheading}}</h3>
+                    <p>{{$article->content}}</p>
+                </section>
+            @endforeach
+            @endif
         </div>
       </div>
       {{--original--}}

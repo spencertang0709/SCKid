@@ -49,10 +49,10 @@ Knowledgebase - Categories
                     <div class="6u 12u(narrower)">
                         <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
                             <section class="box special">
-                            	<div style="position:relative;">
+                            	<div style="position:relative; overflow:hidden;">
                             		<img src="/img/mobile.jpeg" alt="" style="height:100%; width:90%;"/>
                             		<div style="position:absolute; display:block; top:40%; width:100%;height:30%; background:blue;">
-                            			<span style="float:left;">
+                            			<span>
                             				{{$category->name}}kappakappa
                             			</span>
                             		</div>
