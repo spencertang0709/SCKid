@@ -187,7 +187,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/devices/verify', [
         'uses' => 'DeviceController@verifyCode',
-        'as' => 'verfiy.devices'
+        'as' => 'verify.devices'
     ]);
 
     Route::get('/settings', 'SettingController@index');
@@ -290,7 +290,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::resource('policies', 'Api\PolicyController');
     Route::get('user','Api\AuthApiController@getAuthenticatedUser');
 
-    Route::resource('verificationCode','Api\VerificationCodeController');
+    Route::resource('registerDevices','Api\VerificationCodeController');
 
 
 

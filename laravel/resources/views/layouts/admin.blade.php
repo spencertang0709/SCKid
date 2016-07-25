@@ -33,10 +33,10 @@
 		$('#verifyDevice').on('show.bs.modal', function(e) {
 			$.ajax({
 				method: 'GET',
-				url: '{{route("verfiy.devices")}}',
+				url: '{{route("verify.devices")}}',
 			})
-			.done(function( msg ) {
-				$('#lbVerification').text('Your Verification Code is: '+msg);
+			.done(function(responseText) {
+				$('#lbVerification').text('Your Verification Code is: ' + responseText);
 			});
 		});
 	</script>

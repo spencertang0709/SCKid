@@ -19,7 +19,36 @@ class VerificationCodeController extends Controller
      */
     public function index(Request $request)
     {
-
+		//TODO authorisations
+        
+        //Check if code matches
+        //$inputCode = $request->input('verificationCode');
+        $inputCode = 92717;
+        $resultCode = VerificationCode::where('value', $inputCode)->first();
+		
+        if ($resultCode != null)
+       	{
+       		//Check if the code has expired
+       		$timeLimit = 60;
+       		$initialTime = $resultCode->created_at;
+			$secsElapsed = strtotime(date("Y-m-d h:i:sa")) - strtotime($initialTime->toDateTimeString());
+       		if ($secsElapsed <= $timeLimit) {
+				$user = $resultCode->user()->get();
+	            echo "verified and register device";
+				//TODO register device
+				
+			} else {
+				return Response::json (
+					array(
+						'error' => 'expired '.$timeLimit.' secs'
+					));
+			}
+         } else{
+              return Response::json(
+                  array(
+                      'error' => true,
+                  ));
+         }
     }
 
     /**
@@ -38,7 +67,7 @@ class VerificationCodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -49,11 +78,11 @@ class VerificationCodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //  public function show($userId, $verifCode)
+    //  public function show($userId, $inputCode)
     //  {
     //      //TODO authorisations
-    //      $code = VerificationCode::find($verifCode);
-    //      $user = $code->user()->get();
+    //      $resultCode = VerificationCode::find($inputCode);
+    //      $user = $resultCode->user()->get();
     //      if($user->id==$userId)
     //      {
     //          return Response::json(
@@ -61,37 +90,15 @@ class VerificationCodeController extends Controller
     //              'error' => false,
     //              'status' => '200',
     //              'user' => $user,
-    //              'code' => $code)
+    //              'code' => $resultCode)
     //          );
     //      }
     //  }
 
-     public function show($verifCode)
+     public function show(Request $request)
      {
-         //TODO authorisations
-        $code = VerificationCode::where('value',$verifCode)->first();
-
-        if($code!=null)
-          {
-            $user = $code->user()->get();
-            return Response::json(
-                array(
-                    'error' => false,
-                    'status' => '200',
-                    'say' => 'howddy',
-                    'code' => $code,
-                    'user' =>$user
-                ));
-         }
-         else{
-              return Response::json(
-                  array(
-                      'error' => true,
-                      'status' => '400'
-                  ));
-         }
+        
      }
-
 
     /**
      * Show the form for editing the specified resource.
