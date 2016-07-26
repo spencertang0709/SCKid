@@ -89,8 +89,10 @@
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
-					 if('{{URL::previous()}}'==='{{route('beacons')}}'){	
-						window.location="{{route('beacons')}}";
+					 if('{{URL::previous()}}'==='{{route("beacons")}}'||'{{URL::previous()}}'==='{{route("deviecs")}}'
+					 ||'{{URL::previous()}}'==='{{route("calls")}}'||'{{URL::previous()}}'==='{{route("sms")}}'
+			 		 ||'{{URL::previous()}}'==='{{route("location")}}'||'{{URL::previous()}}'==='{{ url("/panics") }}'){
+						window.location="{{URL::previous()}}";
 					  }
 				}
 			});

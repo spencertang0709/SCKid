@@ -186,7 +186,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/likes', 'LikeController@index');
 
-    Route::get('/devices', 'DeviceController@index');
+    Route::get('/devices', [
+        'uses' => 'DeviceController@index',
+        'as' => 'deviecs']
+    );
 
     Route::get('/devices/verify', [
         'uses' => 'DeviceController@verifyCode',
@@ -198,11 +201,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/time', 'TimeController@index');
     Route::post('/time', 'TimeController@store');
 
-    Route::get('/sms', 'SmsController@index');
+    Route::get('/sms', [
+        'uses' => 'SmsController@index',
+        'as' => 'sms'
+    ]);
 
-    Route::get('/calls', 'CallController@index');
+    Route::get('/calls', [
+        'uses' =>'CallController@index',
+        'as' => 'calls'
+    ]);
 
-    Route::get('/locations', 'LocationController@index');
+    Route::get('/locations', [
+        'uses' => 'LocationController@index',
+        'as' => 'location'
+    ]);
 
     Route::get('/messages', 'MessageController@index');
 
