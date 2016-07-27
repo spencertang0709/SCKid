@@ -22,6 +22,9 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
 @hasSection('customFunction')
 @yield('customFunction')
 @endif

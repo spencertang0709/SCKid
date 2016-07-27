@@ -153,5 +153,9 @@
 			$("#datatable_out").DataTable();
 		});
 	</script>
-
+	{{--check current kid if they exist--}}
+	<script>
+	kid_name="{{Session::get('current_kid_name')}}";
+	var check =checkKid(kid_name,'#nonKidAlert');
+	</script>
 @endsection

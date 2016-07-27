@@ -120,7 +120,7 @@
                                                 <td>{{$device->model}}</td>
                                                 <td>{{$device->unique_id}}</td>
                                                 <td>Kid Name</td>
-                                                {{--<td>{{$device->kid()->name}}</td>--}}
+                                                {{--<td>{{$device->kid()->name}}</td> --}}
                                                 <td>
                                                     {{--TODO edit--}}
                                                     <button class="btn btn-primary btn-xs"  data-title="Edit" data-id={{$device->id}} data-toggle="modal" data-target="#edit" >
@@ -159,4 +159,9 @@
     <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
+    {{--check current kid if they exist--}}
+    <script>
+    kid_name="{{Session::get('current_kid_name')}}";
+    var check =checkKid(kid_name,'#nonKidAlert');
+    </script>
 @endsection

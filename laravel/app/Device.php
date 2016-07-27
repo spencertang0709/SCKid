@@ -24,4 +24,9 @@ class Device extends Model
     {
         return $this->belongsTo(Kid::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
 }

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use App\Kid;
+use App\Device;
 use App\VerificationCode;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
+use Session;
 
 
 class VerificationCodeController extends Controller
@@ -20,20 +23,36 @@ class VerificationCodeController extends Controller
     public function index(Request $request)
     {
         //Check if code matches
-        //$inputCode = $request->input('verificationCode');
-        $inputCode = 92717;
+        $inputCode = $request->input('verificationCode');
         $resultCode = VerificationCode::where('value', $inputCode)->first();
 
         if ($resultCode != null)
        	{
        		//Check if the code has expired
-       		$timeLimit = 60;
+       		$timeLimit = 600;
        		$initialTime = $resultCode->created_at;
 			$secsElapsed = strtotime(date("Y-m-d h:i:sa")) - strtotime($initialTime->toDateTimeString());
        		if ($secsElapsed <= $timeLimit) {
-				$user = $resultCode->user()->get();
+				$user = $resultCode->user()->first();
 	            echo "verified and register device";
 				//TODO register device
+
+                 $kidID = Session::get('current_kid');  //this is get id
+                 $currentKid = Kid::find($kidID);
+
+                $device = new Device();
+                $device->name = $request['name'];
+                $device->model = $request['model'];
+                $device->unique_id = $request['IMEI'];
+
+                $device->save();
+                //TODO something wrong with this part, database doesn't get the kid id
+
+                $device->users()->attach($user->id);
+                //$device->kid()->associate($currentKid);
+                $currentKid->devices()->save($device);
+
+                echo 'Successfully added device, user, kid';
 
 			} else {
 				return Response::json (
