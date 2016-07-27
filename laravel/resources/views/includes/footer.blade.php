@@ -24,6 +24,7 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
+<script src="/js/jquery.datetimepicker.full.min.js"></script>
 
 @hasSection('customFunction')
 @yield('customFunction')

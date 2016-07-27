@@ -9,6 +9,7 @@
     <link href="/css/AdminLTE.min.css" rel="stylesheet">
 
 	<!-- timepicker -->
+	<link href="/css/jquery.datetimepicker.css" rel="stylesheet">
 @append
 @include('includes.header')
 
