@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Kid;
 
 class HomeController extends Controller
 {
@@ -64,10 +65,23 @@ class HomeController extends Controller
 	            ->take(5)
 	            ->get();
 
+			//get current kid id
+			$currentKidId = Session::get('current_kid', $request->id);
+			$apps = Kid::find($currentKidId)->apps()->get();
+
+			$topApp = DB::table('app_kid')->where('kid_id',$currentKidId)
+			->join('apps','app_kid.app_id','=','apps.id')
+			->select('package', DB::raw('COUNT(*) as count'))
+			->groupby('package')
+			->get();
+			
 	        return view('home',[
 	        	'locations' => $locations,
 	        	'sms'=>$sms,
-				'kids' => $this->kids->forUser($request->user())
+				'kids' => $this->kids->forUser($request->user()),
+				'currentKidId' => $currentKidId,
+				'apps' => $apps,
+				'topApp' => $topApp,
 			]);
 		}
     }
