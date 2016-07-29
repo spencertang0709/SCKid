@@ -4,7 +4,7 @@ Knowledgebase - Categories
 @section('customStyle')
     <link rel="stylesheet" href="/css/welcome/main.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="/css/welcome/ie8.css" /><![endif]-->
-    <link rel="stylesheet" href="/css/knowledgebase.css" />
+
     @include('includes.backgroundVideo')
 @append
 @include('includes.header')
@@ -18,27 +18,19 @@ Knowledgebase - Categories
     @include('includes.learn_header')
     <section id="main" class="container">
         <header>
-            <h2 style="color:white;">All The Results</h2>
-        </header>
+      <h1>
+        All The Results
+      </h1>
+  </header>
       <div class="form-group">
-          @if(count($categories) == 0 && count($titles) == 0 && count($articles) == 0)
-          <div class="alert alert-info">
-          <strong>Oooops!</strong> I have got nothing here.
-          <a href="/home">Click here go Home</a>
-          </div>
-          @endif
         <div class="row">
           @if(count($categories) > 0)
             @foreach($categories as $category)
             <div class="6u 12u(narrower)">
               <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
-                <section class="box special sectionImg">
-                  <span class="image featured" style="margin-top: 180px;">
-                      <div class="opBackground">
-                      <h3>
-                          {{$category->name}}</h3>
-                      </div>
-                  </span>
+                <section class="box special">
+                  <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
+                  <h3>{{$category->name}}</h3>
                 </section>
               </a>
             </div>
@@ -49,13 +41,9 @@ Knowledgebase - Categories
             @foreach($titles as $title)
             <div class="6u 12u(narrower)">
               <a href="{{ route('showArticle.knowledge', ['title_id' => $title->id]) }}">
-                <section class="box special sectionImg">
-                  <span class="image featured" style="margin-top: 180px;">
-                      <div class="opBackground">
-                      <h3>
-                          {{$title->name}}</h3>
-                      </div>
-                  </span>
+                <section class="box special">
+                  <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
+                  <h3>{{$title->name}}</h3>
                 </section>
               </a>
             </div>
@@ -65,13 +53,10 @@ Knowledgebase - Categories
           @if(count($articles) > 0)
             @foreach($articles as $article)
             <div class="6u 12u(narrower)">
-                <section class="box special sectionImg">
-                  <span class="image featured" style="margin-top: 180px;">
-                      <div class="opBackground">
-                          <h3>{{$article->subheading}}</h3>
-                          <p>{{$article->content}}</p>
-                      </div>
-                  </span>
+                <section class="box special">
+                  <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
+                  <h3>{{$article->subheading}}</h3>
+                  <p>{{$article->content}}</p>
                 </section>
             </div>
             @endforeach

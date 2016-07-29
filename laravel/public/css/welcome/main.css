@@ -47,11 +47,11 @@
 	body {
 		-webkit-text-size-adjust: none;
 	}
-
+	
 	p {
 		display: inline-block;
 	}
-
+	
 
 /* Box Model */
 
@@ -2192,9 +2192,9 @@
 /* Box */
 
 	.box {
-	 	background: #fff;
+		background: #fff;
 		border-radius: 6px;
-	 	box-shadow: 0 2px 0 0 #e5e5e5; 
+		box-shadow: 0 2px 0 0 #e5e5e5;
 		margin: 0 0 2em 0;
 		padding: 3em;
 	}
@@ -3359,7 +3359,7 @@
 			#page-wrapper {
 				padding-top: 0;
 			}
-
+			
 			#header {
 				display: none;
 			}

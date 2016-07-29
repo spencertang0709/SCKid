@@ -88,7 +88,7 @@
 	<script>
 	var arr=['{{route("beacons")}}','{{route("deviecs")}}','{{route("calls")}}','{{route("sms")}}',
 	'{{route("location")}}','{{ url("/panics") }}'];	//add all route here
-		$('.select_button').on('click', function(e) {			
+		$('.select_button').on('click', function(e) {
 			var id = $(e.target).data('id');
 			var name = $(e.target).data('kidname');
 			var urlString = "id=" + id + "&name=" + name;
@@ -111,6 +111,5 @@
 
 	<!-- Custom Theme JavaScript -->
 	{{--<script src="/js/sb-admin-2.js"></script>--}}
-
 @append
 @include('includes.footer')

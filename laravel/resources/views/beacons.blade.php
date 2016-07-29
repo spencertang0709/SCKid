@@ -433,4 +433,5 @@ $(function() {
     });
 });
 </script>
+        <!-- bootstrap time picker -->
 @endsection
