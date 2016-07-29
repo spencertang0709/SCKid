@@ -24,7 +24,7 @@
 		                <button id="add kid" data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add new Child</button>
 		            </div>
 					--}}
-                    <div class="alert alert-info">
+                    <!-- <div class="alert alert-info">
                         current kid id is: {{$currentKidId}}
                         <br>
                         apps are :
@@ -34,7 +34,7 @@
                         @foreach($apps as $app)
                         {{$app->package}}
                         @endforeach
-                    </div>
+                    </div> -->
 		            {{--Interesting stuff we can do with blade--}}
 		            {{--@each('view.name', $jobs, 'job', 'view.empty')--}}
 
@@ -110,7 +110,7 @@
 
     </div>
     <!-- /#wrapper -->
-
+<!--
 <script>
 var appArray=[['Apps', 'times']]; //instaniate app list
 </script>
@@ -139,7 +139,7 @@ var appArray=[['Apps', 'times']]; //instaniate app list
             chart.draw(data, options);
           }
         </script>
-
+-->
 <script>
 
 google.charts.setOnLoadCallback(drawBackgroundColor);

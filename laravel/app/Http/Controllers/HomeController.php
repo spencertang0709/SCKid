@@ -67,19 +67,24 @@ class HomeController extends Controller
 
 			//get current kid id
 			$currentKidId = Session::get('current_kid', $request->id);
+			$apps=[];
+			$topApp=[];
+if($currentKidId!=null)
+{
 			$apps = Kid::find($currentKidId)->apps()->get();
-
 			$topApp = DB::table('app_kid')->where('kid_id',$currentKidId)
+}
+
 			->join('apps','app_kid.app_id','=','apps.id')
 			->select('package', DB::raw('COUNT(*) as count'))
 			->groupby('package')
 			->get();
-			
+
 	        return view('home',[
 	        	'locations' => $locations,
 	        	'sms'=>$sms,
 				'kids' => $this->kids->forUser($request->user()),
-				'currentKidId' => $currentKidId,
+				// 'currentKidId' => $currentKidId,
 				'apps' => $apps,
 				'topApp' => $topApp,
 			]);
