@@ -29,6 +29,8 @@ class PolicyController extends Controller
 		$contextPolicies = $currentKid->contextPolicies()
 							->select('id', 'start_time as startTime', 'end_time as endTime', 'app_list as appList', 'screen_time as screenTime')
 							->get();
+							
+		//Process and prepare output
 		foreach ($contextPolicies as $contextPolicy) {
 			//Cast to array to fetch the data needed
 			$policyObjectArray = (array)$contextPolicy;
