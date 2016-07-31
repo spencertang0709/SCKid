@@ -1,0 +1,19 @@
+#menuPanel {
+	padding-left:2%;
+}
+
+#contentPanel {
+	padding:1%;
+	border:1px solid black;
+	border-radius:1%;
+	text-align:center;
+}
+
+#referencesPanel {
+	padding-right:5%;
+}
+
+ul {
+	border:1px dashed blue;
+	border-radius:1%;
+}
