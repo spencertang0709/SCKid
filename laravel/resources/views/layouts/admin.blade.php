@@ -8,13 +8,20 @@
     <link href="/css/AdminLTE.css" rel="stylesheet">
     <link href="/css/AdminLTE.min.css" rel="stylesheet">
 
+	<!-- timepicker -->
+	<link href="/css/jquery.datetimepicker.css" rel="stylesheet">
 @append
 @include('includes.header')
 
 @include('includes.sidebar')
+@include('includes.popupModal')
+
 @yield('content')
 
 @section('customFunction')
+<script>
+   jQuery('#datetimepicker').datetimepicker();
+</script>
 	{{--This is our script for deleting and should be in here not in our home view--}}
 	<script>
 	   	$('#delete').on('show.bs.modal', function(e) {
@@ -77,7 +84,10 @@
 	    });
 	</script>
 
+{{--THESE ARE FOR CHECKING IF THE ROUTE NEEDS TO REDIRECT BACK--}}
 	<script>
+	var arr=['{{route("beacons")}}','{{route("deviecs")}}','{{route("calls")}}','{{route("sms")}}',
+	'{{route("location")}}','{{ url("/panics") }}'];	//add all route here
 		$('.select_button').on('click', function(e) {
 			var id = $(e.target).data('id');
 			var name = $(e.target).data('kidname');
@@ -89,9 +99,11 @@
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
-					 if('{{URL::previous()}}'==='{{route('beacons')}}'){	
-						window.location="{{route('beacons')}}";
-					  }
+					for(var index in arr){
+						if('{{URL::previous()}}'===arr[index]){
+						   window.location="{{URL::previous()}}";
+						 }
+				 	}
 				}
 			});
 		});

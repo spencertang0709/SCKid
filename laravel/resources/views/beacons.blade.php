@@ -81,24 +81,6 @@
         </div>
     </div>
 
-    {{--alert--}}
-    <div class="modal fade" id="nonKidAlert" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align">Choose Kid</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-danger">
-                        <span class="glyphicon glyphicon-warning-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;Please add one of you kids.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{--alert--}}
-
     {{--choose kid--}}
     <div class="modal fade" id="chooseKidAlert" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
@@ -220,30 +202,6 @@
             </div>
         </div>
     </div>
-    <script>
-    function showModalBox(selectedItem){
-        $(selectedItem).attr('class','modal fade in');
-        $(selectedItem).attr('style','display: block;');
-        $('body').attr('class','modal-open');
-
-        $('button:contains("Close"),button[class="close"]').on('click',function(){
-            $(selectedItem).attr('class','modal fade');
-            $('body').attr('class','');
-            $(selectedItem).attr('style','display: none;');            
-        });
-    }
-    </script>
-    @if(count($errors) > 0)
-        @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
-            <script>
-            showModalBox('#addBeacon');
-            </script>
-            @else
-            <script>
-            showModalBox('#addPolicy');
-            </script>
-        @endif
-    @endif
 
     <!-- Page Content -->
     <div id="page-wrapper">
@@ -368,42 +326,36 @@
                             <button id="addpolicy" data-toggle="modal" data-target="#addPolicy" class="btn btn-primary" style="float: right;" >Add A Policy</button>
                         </div>
                     </div>
+                    {{--time picker--}}
+                    <input id="datetimepicker" type="text" >
+
+                    {{--time picker--}}
                 </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- /#page-wrapper -->
         </div>
 
+        @if(count($errors) > 0)
+            @if ($errors->has('location')||$errors->has('major')||$errors->has('minor'))
+                <script>
+                showModalBox('#addBeacon');
+                </script>
+                @else
+                <script>
+                showModalBox('#addPolicy');
+                </script>
+            @endif
+        @endif
+
+
+
+{{--check current kid if they exist--}}
 <script>
-var kid_name="";
 kid_name="{{Session::get('current_kid_name')}}";
-// check something if it is exist, especially for kid;
-// pass v as parameter to be checked
-// pass modal element
-function checkKid(v,modalName){
-    if(v=""){
-        showModalBox(modalName);
-    }
-    else{
-        //alert('test');
-    }
-}
 var check =checkKid(kid_name,'#nonKidAlert');
 </script>
 
-<script>
-function showModalBox(selectedItem){
-    $(selectedItem).attr('class','modal fade in');
-    $(selectedItem).attr('style','display: block;');
-    $('body').attr('class','modal-open');
-
-    $('button:contains("Close")').on('click',function(){
-        $(selectedItem).attr('class','modal fade');
-        $('body').attr('class','');
-        $(selectedItem).attr('style','display: none;');
-    });
-}
-</script>
 <script>
 var selectedBeaconId = -1;
 $( "#BeaConfig" ).children().children().each(function() {
