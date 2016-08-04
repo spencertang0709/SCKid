@@ -10,6 +10,9 @@
 
 	<!-- timepicker -->
 	<link href="/css/jquery.datetimepicker.css" rel="stylesheet">
+	<style>
+
+	</style>
 @append
 @include('includes.header')
 

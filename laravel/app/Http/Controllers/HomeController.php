@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Kid;
+use DateTime;
 
 class HomeController extends Controller
 {
@@ -64,11 +66,64 @@ class HomeController extends Controller
 	            ->take(5)
 	            ->get();
 
-	        return view('home',[
-	        	'locations' => $locations,
-	        	'sms'=>$sms,
-				'kids' => $this->kids->forUser($request->user())
-			]);
+			//get current kid id
+			$currentKidId = Session::get('current_kid', $request->id);
+			$topApp=[];
+			$calls=[];
+			$smss=[];
+			$smsDateTime = [];
+			if($currentKidId!=null){
+				// $apps=Kid::find($currentKidId)->apps()->get();
+				$topApp = DB::table('app_kid')->where('kid_id',$currentKidId)
+				->join('apps','app_kid.app_id','=','apps.id')
+				->select('package', DB::raw('COUNT(*) as count'))
+				->groupby('package')
+				->get();
+				//get all the calls corresponding to current kid
+				//$calls = Kid::find($currentKidId)->calls()->get();
+				$calls = DB::table('kids')->where('kids.id',$currentKidId)
+				->join('calls','kids.id','=','calls.kid_id')
+				->orderBy('start_time')
+				->get();
+				//get all the sms corresponding to current kid
+				$smss = Kid::find($currentKidId)->smss()->orderBy('time')->get();
+				$i = 0;
+				if($smss != null)
+				{
+				 foreach($smss as $s)
+				 {
+					 $smsDateTime[$i] = date_create($s->time)->format('Y-m-d');
+					 $i++;
+					 //  array_push($smsDateTime,date_create($s->time)->format('m-d'));
+					 // $smsdt=date_create($s->time)->format('m-d');
+					 // $smsDateTime
+				 }
+			 	}
+
+		        return view('home',[
+		        	'locations' => $locations,
+		        	'sms'=>$sms,
+					'kids' => $this->kids->forUser($request->user()),
+			 		'currentKidId' => $currentKidId,
+					'topApp' => $topApp,
+					'calls' => $calls,
+					'smss' => $smss,
+					'time' => $smsDateTime,
+					// 'apps' => $apps,
+				]);
+			}else {
+				return view('home',[
+		        	'locations' => $locations,
+		        	'sms'=>$sms,
+					'kids' => $this->kids->forUser($request->user()),
+					'currentKidId' => $currentKidId,
+					'topApp' => $topApp,
+					'calls' => $calls,
+					'smss' => $smss,
+					'time' => $smsDateTime,
+					// 'apps' => $apps,
+				]);
+			}
 		}
     }
 

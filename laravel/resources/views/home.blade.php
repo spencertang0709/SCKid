@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
                 </div>
-		
+
 		        <div class="row">
 		        	{{--
 		            <div class="col-lg-12">
@@ -24,7 +24,41 @@
 		                <button id="add kid" data-toggle="modal" data-target="#addKid" class="btn btn-primary" style="float: right;" >Add new Child</button>
 		            </div>
 					--}}
-		
+
+                    {{--<div class="alert alert-info">--}}
+                        {{--current kid id is: {{$currentKidId}}--}}
+                        {{--<br>--}}
+                        {{--apps' packages:--}}
+                        {{--{{$apps}} --}}
+                        {{--<br>--}}
+                        {{--@foreach($apps as $app)--}}
+                        {{--{{$app->package}}--}}
+                        {{--@endforeach--}}
+
+
+                        {{--calls' packages:
+                        {{$calls}}--}}
+                        <br>
+                        {{--
+                        @foreach($calls as $call)
+                        time gap: {{strtotime($call->end_time)-strtotime($call->start_time)}}
+                        {{$call->start_time}}==>
+                        {{$call->end_time}}
+                        @endforeach
+                        <br>
+                        <br>
+                        message:
+                        @foreach($smss as $s)
+                            <br>
+                        {{$s->time}}
+                        @endforeach
+                        <br>
+                        number of messages:
+                        {{count($smss)}}
+                        {{var_dump($time)}}
+                        --}}
+                    {{--</div>--}}
+
 		            {{--Interesting stuff we can do with blade--}}
 		            {{--@each('view.name', $jobs, 'job', 'view.empty')--}}
 
@@ -44,7 +78,7 @@
 		                @endforeach
 		            @endif
 		        </div>
-	
+
 	                <div class="col-md-6">
 	                    <!-- APP USAGE -->
 	                    <div class="box box-primary">
@@ -52,30 +86,45 @@
 	                            <h3 class="box-title">Top Apps</h3>
 	                        </div>
 	                        <div class="box-body">
-	                            <div class="chart">
-	                                <div id="donut-example" style="height: 250px;"></div>
-	                            </div>
+	                            <div id="piechart_3d"></div>
 	                        </div>
 	                        <!-- /.box-body -->
 	                    </div>
 	                    <!-- /.box -->
 	                </div>
-	                
+
 	                <div class="col-md-6">
 	                    <!-- SMS rank -->
 	                    <div class="box box-info">
 	                        <div class="box-header with-border">
-	                            <h3 class="box-title">Top SMS & Calls</h3>
+	                            <h3 class="box-title" id="smsCall">Top SMS & Calls</h3>
 	                        </div>
-	                        <div class="box-body">
-	                            <div class="chart">
-	                                <div id="bar-example" style="height: 250px;"></div>
-	                            </div>
-	                        </div>
+	                        <div id="yi" class="box-body">
+	                            <div id="chart_call"></div>
+                                <div id="chart_sms"></div>
+                           </div>
 	                        <!-- /.box-body -->
 	                    </div>
 	                    <!-- /.box -->
 	                </div>
+                    <script>
+                    var tog=0;
+                    $('#chart_call').fadeOut();
+
+
+                    $('#smsCall').click(function(){
+                        if(tog===0){
+                	$('#chart_call').fadeIn();
+                    $('#chart_sms').fadeOut();
+                    tog++;
+                    }
+                    else{
+                        $('#chart_call').fadeOut();
+                        $('#chart_sms').fadeIn();tog--;
+                    }
+                	});
+
+                	</script>
 
                 <!-- /.col-lg-12 -->
                 <div class="col-md-12">
@@ -100,13 +149,165 @@
                 </div>
 
             </div>
-
-
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- delare app list -->
+    <script>
+    var appArray=[['Apps', 'times']]; //instaniate app list
+    var smsArray=[];
+    var callsArray=[];
+    var timegap;
+    var start_datetime;
+
+    function containsArr(arr, obj) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i][0] == obj.toString()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    </script>
+
+    <!-- get all top apps -->
+    @if(count($topApp)>0){
+        @if(count($topApp)<8){
+            @foreach($topApp as $app)
+                <script>
+                appArray.push(['{{$app->package}}', {{$app->count}}]);
+                </script>
+            @endforeach
+        }
+        @else{
+            @for($x=0;$x<8;$x++){
+                <script>
+                appArray.push(['{{$topApp[$x]->package}}', {{$topApp[$x]->count}}]);
+                </script>
+            }
+            @endfor
+        }
+        @endif
+    }
+    @endif
+
+    <!-- draw 3d pie chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+              google.charts.load('current', {packages: ['corechart', 'line']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable(appArray);
+
+                var webOptions = {
+                  title: 'Top apps/webs',
+                  is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, webOptions);
+              }
+    </script>
+
+    <!-- retrieve date  -->
+    @foreach($calls as $call)
+    <script>
+    var timegap={{strtotime($call->end_time)-strtotime($call->start_time)}};
+    start_datetime='{{$call->start_time}}';
+    var datetime=start_datetime.split(' ');
+    callsArray.push([new Date(datetime[0]), timegap/60]);
+    </script>
+    @endforeach
+
+<!-- sms -->
+    <script>
+      google.charts.setOnLoadCallback(drawSmsChart);
+      function drawSmsChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'msgs');
+
+        data.addRows(smsArray);
+
+
+        var options = {
+          title: 'sms logs',
+          hAxis: {
+            format: 'M/d/yy',
+            gridlines: {count: 15}
+          },
+          vAxis: {
+            gridlines: {color: '#ecf9ec'},
+            minValue: 0
+          }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_sms'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+    <!-- call logs -->
+    <script>
+    google.charts.setOnLoadCallback(drawCallChart);
+
+      function drawCallChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Minutes');
+
+        data.addRows(callsArray);
+
+
+        var callOptions = {
+          title: 'call logs',
+          hAxis: {
+            format: 'M/d/yy',
+            gridlines: {count: 15}
+          },
+          vAxis: {
+            gridlines: {color: '#ecf9ec'},
+            minValue: 0
+          }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_call'));
+
+        chart.draw(data, callOptions);
+      }
+    </script>
+
+    @if(count($time)>0)
+        @foreach($time as $t)
+            <script>
+            var newDate = new Date('{{$t}}');
+                if(!containsArr(smsArray,newDate)){
+                    smsArray.push([new Date('{{$t}}'), 1]);
+                }else {
+                    //find object then add number
+                    for(index in smsArray){
+                        if(smsArray[index][0] == newDate.toString()){
+                            smsArray[index][1] += 1;
+                        }
+                    }
+                }
+
+            </script>
+        @endforeach
+    @endif
+    <!-- <script>
+    for(index in smsArray){
+        alert(smsArray[index]);
+    }
+    </script> -->
+
 
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?language=en"></script>
@@ -183,4 +384,5 @@
             });
         });
     </script>
+
 @endsection
