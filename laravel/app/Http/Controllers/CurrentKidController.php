@@ -15,6 +15,8 @@ class CurrentKidController extends Controller
     	Session::put('current_kid', $request->id);
 		Session::put('current_kid_name', $request->name);
 		Session::put('kid_text', 'Current Child is:');
+		Session::put('startPickTime', $request->startPickTime);
+        Session::put('endPickTime', $request->endPickTime);
 		echo $request->name;
     }
 }

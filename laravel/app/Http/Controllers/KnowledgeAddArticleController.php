@@ -29,7 +29,7 @@ class KnowledgeAddArticleController extends Controller
 
     public function index(Request $request)
     {
-      $categories = DB::table('categories')->get();
+      $categories = DB::table('categories')->distinct()->get(['name']);
       return view('knowledge.addArticle',['categories' => $categories]);
     }
 

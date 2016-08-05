@@ -17,12 +17,15 @@
                     <div class="col-lg-2">
                         <h1 class="page-header">Statistic</h1>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-4">
                     </div>
-                    <div class="col-lg-3">
-                        <span class="label label-default">Pick your time: </span>
+                    <div class="col-lg-6">
+                        <span class="label label-default">Pick your Date: </span>
                         {{--time picker--}}
-                        <input style="margin-top:10px;" id="datetimepicker" type="text" >
+                        <label>start:</label>
+                        <input style="margin-top:10px;" id="date_timepicker_start" type="text" >
+                        <label>end:</label>
+                        <input style="margin-top:10px;" id="date_timepicker_end" type="text" >
                         {{--time picker--}}
                     </div>
                 </div>
@@ -77,7 +80,7 @@
                                 {{--Well is for colouring--}}
                                 <div class="box box-primary">
                                     <div class="box-body box-profile @if($kid->id == Session::get('current_kid')) well @endif">
-                                        <img class="profile-user-img img-responsive img-circle select_button" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
+                                        <img class="profile-user-img img-responsive img-circle select_button stats_select" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
                                              data-id={{$kid->id}} data-kidname={{$kid->name}}>
                                         <h3 class="profile-username text-center">{{$kid->name}}</h3>
                                         <p class="text-muted text-center"></p>
@@ -122,7 +125,7 @@
 
                     $('#smsCall').click(function(){
                         if(tog===0){
-                        	$('#chart_call').fadeIn();
+                            $('#chart_call').fadeIn();
                             $('#chart_sms').fadeOut();
                             tog++;
                         }
@@ -131,9 +134,8 @@
                             $('#chart_sms').fadeIn();
                             tog--;
                         }
-                	});
-
-                	</script>
+                    });
+                    </script>
 
                 <!-- /.col-lg-12 -->
                 <div class="col-md-12">

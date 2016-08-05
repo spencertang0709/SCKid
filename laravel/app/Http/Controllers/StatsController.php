@@ -39,6 +39,8 @@ class StatsController extends Controller
 
     public function index(Request $request)
     {
+        $startPickTime = Session::get('startPickTime');
+        $endPickTime = Session::get('endPickTime');
         $locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
 
         //$sms = DB::table('sms')->orderBy('updated_at', 'desc')->first();
@@ -56,6 +58,7 @@ class StatsController extends Controller
         $calls=[];
         $smss=[];
         $smsDateTime = [];
+
         if($currentKidId!=null){
             // $apps=Kid::find($currentKidId)->apps()->get();
             $topApp = DB::table('app_kid')->where('kid_id',$currentKidId)
@@ -65,12 +68,24 @@ class StatsController extends Controller
             ->get();
             //get all the calls corresponding to current kid
             //$calls = Kid::find($currentKidId)->calls()->get();
-            $calls = DB::table('kids')->where('kids.id',$currentKidId)
-            ->join('calls','kids.id','=','calls.kid_id')
-            ->orderBy('start_time')
-            ->get();
+            //
+            // where(function ($query) {
+            //     $query->where('kids.id', '=', $currentKidId)
+            //           ->where('title', '<>', 'Admin');
+            // })
+            //
+            // $calls = DB::table('kids')->where(function ($query) {
+            //     $query->where('kids.id', '=', $currentKidId);
+            // })
+
+            // $calls = DB::table('kids')->where('kids.id', $currentKidId)
+            // ->join('calls','kids.id','=','calls.kid_id')
+            // ->orderBy('start_time')
+            // ->get();
+
+            $calls = Kid::find($currentKidId)->calls()->whereBetween('start_time',[$startPickTime,$endPickTime])->orderBy('start_time')->get();
             //get all the sms corresponding to current kid
-            $smss = Kid::find($currentKidId)->smss()->orderBy('time')->get();
+            $smss = Kid::find($currentKidId)->smss()->whereBetween('time',[$startPickTime,$endPickTime])->orderBy('time')->get();
             $i = 0;
             if($smss != null)
             {
@@ -80,7 +95,6 @@ class StatsController extends Controller
                     $i++;
                 }
             }
-$user = $request->user()->get();
             return view('stats',[
                 'locations' => $locations,
                 'sms'=>$sms,

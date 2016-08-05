@@ -23,7 +23,26 @@
 
 @section('customFunction')
 <script>
-   jQuery('#datetimepicker').datetimepicker();
+jQuery(function(){
+	jQuery('#date_timepicker_start').datetimepicker({
+		format:'Y/m/d',
+		onShow:function( ct ){
+			this.setOptions({
+				maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+			})
+		},
+		timepicker:false
+	});
+	jQuery('#date_timepicker_end').datetimepicker({
+		format:'Y/m/d',
+		onShow:function( ct ){
+			this.setOptions({
+				minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
+			})
+		},
+		timepicker:false
+	});
+});
 </script>
 	{{--This is our script for deleting and should be in here not in our home view--}}
 	<script>
@@ -102,15 +121,29 @@
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
-					if('{{URL::previous()}}' !== '{{route("stats")}}'){
-						for(var index in arr){
-							if('{{URL::previous()}}'===arr[index]){
-							   window.location="{{URL::previous()}}";
-							 }
-					 	}
-					}else {
+					for(index in arr){
+						if('{{URL::previous()}}' === arr[index] && '{{URL::current()}}' !== '{{route("stats")}}'){
+						   window.location="{{URL::previous()}}";
+						 }
+				 	}
+				}
+			});
+		});
 
-					}
+		$('.stats_select').on('click', function(e) {
+			var id = $(e.target).data('id');
+			var name = $(e.target).data('kidname');
+			var start_timepick=$('#date_timepicker_start').val();
+			var end_timepick=$('#date_timepicker_end').val();
+			var urlString = "id=" + id + "&name=" + name + "&startPickTime=" + start_timepick + "&endPickTime=" + end_timepick;
+			$.ajax
+			({
+				url: "selectKid",
+				type: "GET",
+				data: urlString,
+				success: function(responseText) {
+					$('#kid_text').html("Current Child is: " + responseText);
+					 window.location="{{URL::current()}}";
 				}
 			});
 		});
