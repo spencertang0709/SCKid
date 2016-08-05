@@ -235,9 +235,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('mailbox');
     });
 
-    Route::get('/stats', function () {
-        return view('stats');
-    });
+    Route::get('/stats', [
+        'uses' => 'StatsController@index',
+        'as' => 'stats']);
 
     Route::get('/social', function () {
         return view('social');

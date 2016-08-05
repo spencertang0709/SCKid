@@ -102,11 +102,15 @@
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
-					for(var index in arr){
-						if('{{URL::previous()}}'===arr[index]){
-						   window.location="{{URL::previous()}}";
-						 }
-				 	}
+					if('{{URL::previous()}}' !== '{{route("stats")}}'){
+						for(var index in arr){
+							if('{{URL::previous()}}'===arr[index]){
+							   window.location="{{URL::previous()}}";
+							 }
+					 	}
+					}else {
+
+					}
 				}
 			});
 		});

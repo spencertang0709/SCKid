@@ -325,11 +325,7 @@
                         <div class="col-md-12 text-right">
                             <button id="addpolicy" data-toggle="modal" data-target="#addPolicy" class="btn btn-primary" style="float: right;" >Add A Policy</button>
                         </div>
-                    </div>
-                    {{--time picker--}}
-                    <input id="datetimepicker" type="text" >
-
-                    {{--time picker--}}
+                    </div>                    
                 </div>
                 <!-- /.container-fluid -->
             </div>

@@ -111,17 +111,17 @@
                     var tog=0;
                     $('#chart_call').fadeOut();
 
-
                     $('#smsCall').click(function(){
                         if(tog===0){
-                	$('#chart_call').fadeIn();
-                    $('#chart_sms').fadeOut();
-                    tog++;
-                    }
-                    else{
-                        $('#chart_call').fadeOut();
-                        $('#chart_sms').fadeIn();tog--;
-                    }
+                        	$('#chart_call').fadeIn();
+                            $('#chart_sms').fadeOut();
+                            tog++;
+                        }
+                        else{
+                            $('#chart_call').fadeOut();
+                            $('#chart_sms').fadeIn();
+                            tog--;
+                        }
                 	});
 
                 	</script>
