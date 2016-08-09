@@ -20,13 +20,14 @@
                     <div class="col-lg-4">
                     </div>
                     <div class="col-lg-6">
-                        <span class="label label-default">Pick your Date: </span>
+                        <span class="label label-default">Pick your Date:
                         {{--time picker--}}
                         <label>start:</label>
-                        <input style="margin-top:10px;" id="date_timepicker_start" type="text" >
+                        <input style="margin-top:10px;" id="date_timepicker_start" type="text" @if('undefined' != Session::get('startPickTime')) value="{{Session::get('startPickTime')}}" @endif>
                         <label>end:</label>
-                        <input style="margin-top:10px;" id="date_timepicker_end" type="text" >
+                        <input style="margin-top:10px;" id="date_timepicker_end" type="text" @if('undefined' != Session::get('endPickTime')) value="{{Session::get('endPickTime')}}" @endif>
                         {{--time picker--}}
+                        </span>
                     </div>
                 </div>
 		        <div class="row">
@@ -80,7 +81,7 @@
                                 {{--Well is for colouring--}}
                                 <div class="box box-primary">
                                     <div class="box-body box-profile @if($kid->id == Session::get('current_kid')) well @endif">
-                                        <img class="profile-user-img img-responsive img-circle select_button stats_select" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
+                                        <img class="profile-user-img img-responsive img-circle stats_select" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
                                              data-id={{$kid->id}} data-kidname={{$kid->name}}>
                                         <h3 class="profile-username text-center">{{$kid->name}}</h3>
                                         <p class="text-muted text-center"></p>
@@ -88,7 +89,7 @@
                                 </div>
 		                    </div>
 		                @endforeach
-		            @endif
+                    @endif
 		        </div>
 
 	                <div class="col-md-6">
@@ -121,7 +122,6 @@
 	                </div>
                     <script>
                     var tog=0;
-                    $('#chart_call').fadeOut();
 
                     $('#smsCall').click(function(){
                         if(tog===0){
@@ -134,6 +134,13 @@
                             $('#chart_sms').fadeIn();
                             tog--;
                         }
+                    });
+
+                    $(window).load(function(){
+                         $('#chart_call').fadeOut();
+                         $('#chart_sms').fadeIn();
+                         $('#chart_call').fadeOut();
+                         $('#chart_sms').fadeIn();
                     });
                     </script>
 
@@ -174,6 +181,9 @@
     var timegap;
     var start_datetime;
 
+    //if the object exists
+    //arr is an array
+    //obj is the object that needs to be compared
     function containsArr(arr, obj) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i][0] == obj.toString()) {
@@ -185,7 +195,7 @@
     </script>
 
     <!-- get all top apps -->
-    @if(count($topApp)>0){
+    <!-- @if(count($topApp)>0){
         @if(count($topApp)<8){
             @foreach($topApp as $app)
                 <script>
@@ -203,35 +213,43 @@
         }
         @endif
     }
+    @endif -->
+
+    @if(count($topApp)>0){
+        @foreach($topApp as $app)
+            <script>
+            appArray.push(['{{$app->package}}', {{$app->count}}]);
+            </script>
+        @endforeach
     @endif
 
     <!-- draw 3d pie chart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-              google.charts.load('current', {packages: ['corechart', 'line']});
-              google.charts.setOnLoadCallback(drawChart);
+    <script type="text/javascript">
+          google.charts.load('current', {packages: ['corechart', 'line']});
+          google.charts.setOnLoadCallback(drawChart);
 
-              function drawChart() {
-                var data = google.visualization.arrayToDataTable(appArray);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable(appArray);
 
-                var webOptions = {
-                  title: 'Top apps/webs',
-                  is3D: true,
-                };
+            var webOptions = {
+              title: 'Top apps/webs',
+              is3D: true,
+            };
 
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                chart.draw(data, webOptions);
-              }
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, webOptions);
+          }
     </script>
 
     <!-- retrieve date  -->
     @foreach($calls as $call)
-    <script>
-    var timegap={{strtotime($call->end_time)-strtotime($call->start_time)}};
-    start_datetime='{{$call->start_time}}';
-    var datetime=start_datetime.split(' ');
-    callsArray.push([new Date(datetime[0]), timegap/60]);
-    </script>
+        <script>
+            var timegap={{strtotime($call->end_time)-strtotime($call->start_time)}};
+            start_datetime='{{$call->start_time}}';
+            var datetime=start_datetime.split(' ');
+            callsArray.push([new Date(datetime[0]), timegap/60]);
+        </script>
     @endforeach
 
 <!-- sms -->
@@ -295,6 +313,7 @@
       }
     </script>
 
+{{--count the number of smss on daily basises--}}
     @if(count($time)>0)
         @foreach($time as $t)
             <script>
@@ -357,43 +376,43 @@
 
     </script>
     <script>
-        //Morris charts snippet - js
-
-        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
-            $.getScript('https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
-
-                Morris.Donut({
-                    element: 'donut-example',
-                    data: [
-                        {label: "Facebook", value: 60},
-                        {label: "Twitter", value: 30},
-                        {label: "Other", value: 10}
-                    ]
-                });
-
-
-                Morris.Bar({
-
-                    element: 'bar-example',
-                    data: [
-
-                            @if(count($sms)>0)
-                                {y:'{{$sms[0]->contact}}' , a: '{{$sms[0]->count}}'},
-                                {y:'{{$sms[1]->contact}}' , a: '{{$sms[1]->count}}'},
-                                {y:'{{$sms[2]->contact}}' , a: '{{$sms[2]->count}}'},
-                                {y:'{{$sms[3]->contact}}' , a: '{{$sms[3]->count}}'},
-                                {y:'{{$sms[4]->contact}}' , a: '{{$sms[4]->count}}'}
-                            @endif
-
-
-                    ],
-                    xkey: 'y',
-                    ykeys: 'a',
-                    labels: ['Contact Times']
-                });
-
-            });
-        });
+        // //Morris charts snippet - js
+        //
+        // $.getScript('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+        //     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
+        //
+        //         Morris.Donut({
+        //             element: 'donut-example',
+        //             data: [
+        //                 {label: "Facebook", value: 60},
+        //                 {label: "Twitter", value: 30},
+        //                 {label: "Other", value: 10}
+        //             ]
+        //         });
+        //
+        //
+        //         Morris.Bar({
+        //
+        //             element: 'bar-example',
+        //             data: [
+        //
+        //                     @if(count($sms)>0)
+        //                         {y:'{{$sms[0]->contact}}' , a: '{{$sms[0]->count}}'},
+        //                         {y:'{{$sms[1]->contact}}' , a: '{{$sms[1]->count}}'},
+        //                         {y:'{{$sms[2]->contact}}' , a: '{{$sms[2]->count}}'},
+        //                         {y:'{{$sms[3]->contact}}' , a: '{{$sms[3]->count}}'},
+        //                         {y:'{{$sms[4]->contact}}' , a: '{{$sms[4]->count}}'}
+        //                     @endif
+        //
+        //
+        //             ],
+        //             xkey: 'y',
+        //             ykeys: 'a',
+        //             labels: ['Contact Times']
+        //         });
+        //
+        //     });
+        // });
     </script>
 
 @endsection

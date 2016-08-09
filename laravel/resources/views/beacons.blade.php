@@ -18,7 +18,7 @@
                     <div class="modal-body">
                         <div class="form-group has-feedback{{ $errors->has('location') ? ' has-error' : '' }}">
                             <label for="product">Beacon Location:</label>
-                            <input type="text" class="form-control" id="location" name="location" value="">
+                            <input type="text" class="form-control" id="location" name="location" value="{{Request::old('location')}}">
                             @if ($errors->has('location'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('location')}}</strong>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group has-feedback{{ $errors->has('major') ? ' has-error' : '' }}">
                             <label for="price">Major Number:</label>
-                            <input type="text" class="form-control" id="major" name="major" value="">
+                            <input type="text" class="form-control" id="major" name="major" value="{{Request::old('major')}}">
                             @if ($errors->has('major'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('major')}}</strong>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group has-feedback{{ $errors->has('minor') ? ' has-error' : '' }}">
                             <label for="price">Minor Number:</label>
-                            <input type="text" class="form-control" id="minor" name="minor" value="">
+                            <input type="text" class="form-control" id="minor" name="minor" value="{{Request::old('minor')}}">
                             @if ($errors->has('minor'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('minor')}}</strong>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="form-group has-feedback{{ $errors->has('startTime') ? ' has-error' : '' }}">
                             <label for="price">Start Time:</label>
-                            <input type="text" class="form-control" id="startTime" name="startTime" placeholder="YYYY-MM-DD hh:mm:ss" value="">
+                            <input type="text" class="form-control" id="startTime" name="startTime" placeholder="YYYY-MM-DD hh:mm:ss" value="{{Request::old('startTime')}}">
                             @if ($errors->has('startTime'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('startTime')}}</strong>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="form-group has-feedback{{ $errors->has('endTime') ? ' has-error' : '' }}">
                             <label for="price">End Time:</label>
-                            <input type="text" class="form-control" id="endTime" name="endTime" placeholder="YYYY-MM-DD hh:mm:ss" value="">
+                            <input type="text" class="form-control" id="endTime" name="endTime" placeholder="YYYY-MM-DD hh:mm:ss" value="{{Request::old('endTime')}}">
                             @if ($errors->has('endTime'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('endTime')}}</strong>
@@ -171,7 +171,6 @@
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
     <!--end of add policy-->
@@ -325,7 +324,7 @@
                         <div class="col-md-12 text-right">
                             <button id="addpolicy" data-toggle="modal" data-target="#addPolicy" class="btn btn-primary" style="float: right;" >Add A Policy</button>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -353,18 +352,18 @@ var check =checkKid(kid_name,'#nonKidAlert');
 </script>
 
 <script>
-var selectedBeaconId = -1;
+var inputBeaconId = -1;
 $( "#BeaConfig" ).children().children().each(function() {
     $(this).click(function() {
         if($(this).hasClass("info")){
             $(this).removeClass("info");
             selectedBeaconId=-1;
         }else{
-            var inputBeaconId = $(this).attr("data-info");
+            // var inputBeaconId = $(this).attr("data-info");
+            var inputBeaconId = $(this).data("info");
             $(this).addClass("info");
             $('#hiddenBeaconId').val(inputBeaconId);
-            selectedBeaconId = inputBeaconId;
-            if(selectedBeaconId != -1){
+            if(inputBeaconId != -1){
                 $(this).siblings().removeClass("info");
             }
         }

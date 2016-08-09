@@ -53,7 +53,7 @@ Knowledgebase - Categories
                             		<img src="/img/mobile.jpeg" alt="" style="height:100%; width:90%;"/>
                             		<div style="position:absolute; display:block; top:40%; width:100%;height:30%; background:blue;">
                             			<span>
-                            				{{$category->name}}kappakappa
+                            				{{$category->name}}
                             			</span>
                             		</div>
                             	</div>

@@ -33,20 +33,20 @@ class KnowledgeAddArticleController extends Controller
       return view('knowledge.addArticle',['categories' => $categories]);
     }
 
-//save title, article and category
+    //save title, article and category
     public function saveArticle(Request $request)
     {
       $this->validate($request, [
         'title' => 'required',
-        'article' => 'required'
+        'article' => 'required',
+        'content' => 'required|min:5',
       ]);
 
-      // echo $request['category'];
-      // echo "this is test";
+    //   $category = new Category();
+    //   $category->name = $request['category'];
+    //   $category->save();
 
-      $category = new Category();
-      $category->name = $request['category'];
-      $category->save();
+      $category = Category::where('name',$request['category'])->first();
 
       $title = new Title();
       $title->name = $request['title'];
@@ -71,7 +71,7 @@ class KnowledgeAddArticleController extends Controller
     }
 
     public function showTitle($category_id){
-    	$category = Category::where('id', $category_id)->first();
+    	$category = Category::where('id', $category_id)->with('titles')->first();
     	$title = $category->titles()->get();
     	return view('knowledge.showTitle', [
     		'titles' => $title
@@ -79,7 +79,7 @@ class KnowledgeAddArticleController extends Controller
     }
 
     public function showArticle($title_id){
-    	$title = Title::where('id', $title_id)->first();
+    	$title = Title::where('id', $title_id)->with('articles')->first();
     	$article = $title->articles()->get();
     	return view('knowledge.showArticle', [
     		'articles' => $article

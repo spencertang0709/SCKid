@@ -12,17 +12,32 @@
                   @endforeach
               </select>
           </div>
-          <div class="form-group">
+          <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
               <label class="inline" for="title">Title:</label>
               <input class="form-control" type="text" name="title" id="title" value="{{ Request::old('title') }}">
+              @if ($errors->has('title'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('title')}}</strong>
+              </span>
+              @endif
           </div>
-          <div class="form-group">
+          <div class="form-group has-feedback{{ $errors->has('article') ? ' has-error' : '' }}">
               <label class="inline" for="article">Article:</label>
               <input class="form-control" type="text" name="article" id="article" value="{{ Request::old('article') }}">
-          </div>    
-          <div class="form-group">
+              @if ($errors->has('article'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('article')}}</strong>
+              </span>
+              @endif
+          </div>
+          <div class="form-group has-feedback{{ $errors->has('content') ? ' has-error' : '' }}">
             <label for="content">Content:</label>
             <textarea class="form-control" rows="5" name="content" id="content" value="{{ Request::old('content') }}"></textarea>
+            @if ($errors->has('content'))
+             <span class="help-block">
+                 <strong>{{ $errors->first('content')}}</strong>
+             </span>
+             @endif
           </div>
 
           <button type="submit" class="btn btn-primary">Submit</button>

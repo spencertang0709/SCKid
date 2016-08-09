@@ -122,7 +122,7 @@ jQuery(function(){
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
 					for(index in arr){
-						if('{{URL::previous()}}' === arr[index] && '{{URL::current()}}' !== '{{route("stats")}}'){
+						if('{{URL::previous()}}' === arr[index]){
 						   window.location="{{URL::previous()}}";
 						 }
 				 	}
@@ -143,7 +143,7 @@ jQuery(function(){
 				data: urlString,
 				success: function(responseText) {
 					$('#kid_text').html("Current Child is: " + responseText);
-					 window.location="{{URL::current()}}";
+					window.location="{{URL::current()}}";
 				}
 			});
 		});

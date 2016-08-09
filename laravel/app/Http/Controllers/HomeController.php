@@ -78,15 +78,14 @@ class HomeController extends Controller
 				->join('apps','app_kid.app_id','=','apps.id')
 				->select('package', DB::raw('COUNT(*) as count'))
 				->groupby('package')
+				->take(8)
 				->get();
 				//get all the calls corresponding to current kid
-				//$calls = Kid::find($currentKidId)->calls()->get();
-				$calls = DB::table('kids')->where('kids.id',$currentKidId)
-				->join('calls','kids.id','=','calls.kid_id')
-				->orderBy('start_time')
-				->get();
+								
+				$calls = Kid::find($currentKidId)->calls()->orderBy('start_time')->get();
 				//get all the sms corresponding to current kid
-				$smss = Kid::find($currentKidId)->smss()->orderBy('time')->get();
+			 	$smss = Kid::find($currentKidId)->smss()->orderBy('time')->get();
+				//  $smss = Kid::find(101)->smss()->orderBy('time')->get();
 				$i = 0;
 				if($smss != null)
 				{

@@ -168,7 +168,6 @@
                         <li>
                             <a href="/settings"><i class="fa fa-gear fa-fw"></i>Settings</a>
                         </li>
-
                     </ul>
                 </li>
 

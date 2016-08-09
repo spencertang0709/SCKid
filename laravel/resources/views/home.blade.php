@@ -68,7 +68,7 @@
                                 {{--Well is for colouring--}}
                                 <div class="box box-primary">
                                     <div class="box-body box-profile @if($kid->id == Session::get('current_kid')) well @endif">
-                                        <img class="profile-user-img img-responsive img-circle select_button" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
+                                        <img class="stats_select profile-user-img img-responsive img-circle" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
                                              data-id={{$kid->id}} data-kidname={{$kid->name}}>
                                         <h3 class="profile-username text-center">{{$kid->name}}</h3>
                                         <p class="text-muted text-center"></p>
@@ -174,7 +174,7 @@
     </script>
 
     <!-- get all top apps -->
-    @if(count($topApp)>0){
+    <!-- @if(count($topApp)>0){
         @if(count($topApp)<8){
             @foreach($topApp as $app)
                 <script>
@@ -192,6 +192,14 @@
         }
         @endif
     }
+    @endif -->
+
+    @if(count($topApp)>0){
+        @foreach($topApp as $app)
+            <script>
+            appArray.push(['{{$app->package}}', {{$app->count}}]);
+            </script>
+        @endforeach
     @endif
 
     <!-- draw 3d pie chart -->
@@ -346,43 +354,43 @@
 
     </script>
     <script>
-        //Morris charts snippet - js
-
-        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
-            $.getScript('https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
-
-                Morris.Donut({
-                    element: 'donut-example',
-                    data: [
-                        {label: "Facebook", value: 60},
-                        {label: "Twitter", value: 30},
-                        {label: "Other", value: 10}
-                    ]
-                });
-
-
-                Morris.Bar({
-
-                    element: 'bar-example',
-                    data: [
-
-                            @if(count($sms)>0)
-                                {y:'{{$sms[0]->contact}}' , a: '{{$sms[0]->count}}'},
-                                {y:'{{$sms[1]->contact}}' , a: '{{$sms[1]->count}}'},
-                                {y:'{{$sms[2]->contact}}' , a: '{{$sms[2]->count}}'},
-                                {y:'{{$sms[3]->contact}}' , a: '{{$sms[3]->count}}'},
-                                {y:'{{$sms[4]->contact}}' , a: '{{$sms[4]->count}}'}
-                            @endif
-
-
-                    ],
-                    xkey: 'y',
-                    ykeys: 'a',
-                    labels: ['Contact Times']
-                });
-
-            });
-        });
+        // //Morris charts snippet - js
+        //
+        // $.getScript('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+        //     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
+        //
+        //         Morris.Donut({
+        //             element: 'donut-example',
+        //             data: [
+        //                 {label: "Facebook", value: 60},
+        //                 {label: "Twitter", value: 30},
+        //                 {label: "Other", value: 10}
+        //             ]
+        //         });
+        //
+        //
+        //         Morris.Bar({
+        //
+        //             element: 'bar-example',
+        //             data: [
+        //
+        //                     @if(count($sms)>0)
+        //                         {y:'{{$sms[0]->contact}}' , a: '{{$sms[0]->count}}'},
+        //                         {y:'{{$sms[1]->contact}}' , a: '{{$sms[1]->count}}'},
+        //                         {y:'{{$sms[2]->contact}}' , a: '{{$sms[2]->count}}'},
+        //                         {y:'{{$sms[3]->contact}}' , a: '{{$sms[3]->count}}'},
+        //                         {y:'{{$sms[4]->contact}}' , a: '{{$sms[4]->count}}'}
+        //                     @endif
+        //
+        //
+        //             ],
+        //             xkey: 'y',
+        //             ykeys: 'a',
+        //             labels: ['Contact Times']
+        //         });
+        //
+        //     });
+        // });
     </script>
 
 @endsection

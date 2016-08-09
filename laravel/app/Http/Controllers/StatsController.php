@@ -65,23 +65,9 @@ class StatsController extends Controller
             ->join('apps','app_kid.app_id','=','apps.id')
             ->select('package', DB::raw('COUNT(*) as count'))
             ->groupby('package')
+            ->orderBy('count','desc')
+            ->take(8)
             ->get();
-            //get all the calls corresponding to current kid
-            //$calls = Kid::find($currentKidId)->calls()->get();
-            //
-            // where(function ($query) {
-            //     $query->where('kids.id', '=', $currentKidId)
-            //           ->where('title', '<>', 'Admin');
-            // })
-            //
-            // $calls = DB::table('kids')->where(function ($query) {
-            //     $query->where('kids.id', '=', $currentKidId);
-            // })
-
-            // $calls = DB::table('kids')->where('kids.id', $currentKidId)
-            // ->join('calls','kids.id','=','calls.kid_id')
-            // ->orderBy('start_time')
-            // ->get();
 
             $calls = Kid::find($currentKidId)->calls()->whereBetween('start_time',[$startPickTime,$endPickTime])->orderBy('start_time')->get();
             //get all the sms corresponding to current kid
