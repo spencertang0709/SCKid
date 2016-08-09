@@ -124,6 +124,12 @@
                         }
                 	});
 
+                    $(window).load(function(){
+                         $('#chart_call').fadeOut();
+                         $('#chart_sms').fadeIn();
+                         $('#chart_call').fadeOut();
+                         $('#chart_sms').fadeIn();
+                    });
                 	</script>
 
                 <!-- /.col-lg-12 -->
