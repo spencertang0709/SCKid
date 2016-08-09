@@ -109,11 +109,10 @@
 	                </div>
                     <script>
                     var tog=0;
-                    $('#chart_call').fadeOut();
 
                     $('#smsCall').click(function(){
                         if(tog===0){
-                        	$('#chart_call').fadeIn();
+                            $('#chart_call').fadeIn();
                             $('#chart_sms').fadeOut();
                             tog++;
                         }
@@ -122,7 +121,7 @@
                             $('#chart_sms').fadeIn();
                             tog--;
                         }
-                	});
+                    });
 
                     $(window).load(function(){
                          $('#chart_call').fadeOut();
@@ -253,7 +252,7 @@
           title: 'sms logs',
           hAxis: {
             format: 'M/d/yy',
-            gridlines: {count: 15}
+            gridlines: {count: 10}
           },
           vAxis: {
             gridlines: {color: '#ecf9ec'},
@@ -284,7 +283,7 @@
           title: 'call logs',
           hAxis: {
             format: 'M/d/yy',
-            gridlines: {count: 15}
+            gridlines: {count: 10}
           },
           vAxis: {
             gridlines: {color: '#ecf9ec'},

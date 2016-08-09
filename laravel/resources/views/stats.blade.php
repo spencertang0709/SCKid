@@ -268,7 +268,7 @@
           title: 'sms logs',
           hAxis: {
             format: 'M/d/yy',
-            gridlines: {count: 15}
+            gridlines: {count: 10}
           },
           vAxis: {
             gridlines: {color: '#ecf9ec'},
@@ -299,7 +299,7 @@
           title: 'call logs',
           hAxis: {
             format: 'M/d/yy',
-            gridlines: {count: 15}
+            gridlines: {count: 10}
           },
           vAxis: {
             gridlines: {color: '#ecf9ec'},
