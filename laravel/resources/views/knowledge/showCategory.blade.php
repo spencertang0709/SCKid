@@ -4,6 +4,7 @@ Knowledgebase - Categories
 @section('customStyle')
     <link rel="stylesheet" href="/css/welcome/main.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="/css/welcome/ie8.css" /><![endif]-->
+    <link rel="stylesheet" href="/css/knowledgebase.css" />
     @include('includes.backgroundVideo')
 
 @append
@@ -48,15 +49,13 @@ Knowledgebase - Categories
                     @foreach($categories as $category)
                     <div class="6u 12u(narrower)">
                         <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
-                            <section class="box special">
-                            	<div style="position:relative; overflow:hidden;">
-                            		<img src="/img/mobile.jpeg" alt="" style="height:100%; width:90%;"/>
-                            		<div style="position:absolute; display:block; top:40%; width:100%;height:30%; background:blue;">
-                            			<span>
-                            				{{$category->name}}
-                            			</span>
-                            		</div>
-                            	</div>
+                            <section class="box special sectionImg">
+                              <span class="image featured" style="margin-top: 180px;">
+                                  <div class="opBackground">
+                                  <h3>
+                                      {{$category->name}}</h3>
+                                  </div>
+                              </span>
                             </section>
                         </a>
                     </div>
