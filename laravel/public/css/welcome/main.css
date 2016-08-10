@@ -47,11 +47,11 @@
 	body {
 		-webkit-text-size-adjust: none;
 	}
-	
+
 	p {
 		display: inline-block;
 	}
-	
+
 
 /* Box Model */
 
@@ -2804,7 +2804,7 @@
 	}
 
 	#header {
-		background: #444;
+		background: #2b6698;
 		color: #bbb;
 		cursor: default;
 		height: 3.25em;
@@ -3359,7 +3359,7 @@
 			#page-wrapper {
 				padding-top: 0;
 			}
-			
+
 			#header {
 				display: none;
 			}

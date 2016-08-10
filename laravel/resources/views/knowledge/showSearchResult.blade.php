@@ -62,7 +62,7 @@ Knowledgebase - Categories
             @endforeach
           @endif
 
-          @if(count($articles) > 0)
+        {{-- @if(count($articles) > 0)
             @foreach($articles as $article)
             <div class="6u 12u(narrower)">
                 <section class="box special sectionImg">
@@ -75,7 +75,7 @@ Knowledgebase - Categories
                 </section>
             </div>
             @endforeach
-          @endif
+          @endif --}} 
         </div>
       </div>
       {{--original--}}
