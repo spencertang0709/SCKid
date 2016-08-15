@@ -9,6 +9,10 @@
     {{--</div>--}}
 
     <div id="wrapper">
+	<!--loading image-->
+		<!--<div id="loading">-->
+		<!--<img id="loading-image" src="/img/ajax-loader.gif" alt="Loading..." />-->
+		<!--</div>-->
 
         <!-- Navigation -->
         <div id="page-wrapper">
@@ -87,7 +91,7 @@
 	                        </div>
 	                        <div class="box-body">
 	                            <div id="piechart_3d"></div>
-	                        </div>
+	                        </div>                        
 	                        <!-- /.box-body -->
 	                    </div>
 	                    <!-- /.box -->
@@ -108,27 +112,35 @@
 	                    <!-- /.box -->
 	                </div>
                     <script>
-                    var tog=0;
-
-                    $('#smsCall').click(function(){
-                        if(tog===0){
-                            $('#chart_call').fadeIn();
-                            $('#chart_sms').fadeOut();
-                            tog++;
-                        }
-                        else{
-                            $('#chart_call').fadeOut();
-                            $('#chart_sms').fadeIn();
-                            tog--;
-                        }
-                    });
-
+                    //var tog=0;
+                    //
+                    //$('#smsCall').click(function(){
+                    //    if(tog===0){
+                    //        $('#chart_call').fadeIn();
+                    //        $('#chart_sms').fadeOut();
+                    //        tog++;
+                    //    }
+                    //    else{
+                    //        $('#chart_call').fadeOut();
+                    //        $('#chart_sms').fadeIn();
+                    //        tog--;
+                    //    }
+                    //});
+                    //
                     $(window).load(function(){
                          $('#chart_call').fadeOut();
                          $('#chart_sms').fadeIn();
                          $('#chart_call').fadeOut();
                          $('#chart_sms').fadeIn();
                     });
+
+					var flip_call=0;
+					var flip_sms=0;
+					$('#smsCall').click(function(){
+						$('#chart_call').toggle(flip_call++ % 2 === 1).toggle(1000);
+						$('#chart_sms').toggle(flip_sms++ % 2 === 0).toggle(1000);
+					});
+
                 	</script>
 
                 <!-- /.col-lg-12 -->
@@ -160,6 +172,11 @@
     </div>
     <!-- /#wrapper -->
 
+	<!--<script language="javascript" type="text/javascript">-->
+	<!--	 $(window).load(function() {-->
+	<!--	 $('#loading').hide();-->
+	<!--  });-->
+	<!--</script>-->
     <!-- delare app list -->
     <script>
     var appArray=[['Apps', 'times']]; //instaniate app list

@@ -23,7 +23,7 @@
                         <span class="label label-default">Pick your Date:
                         {{--time picker--}}
                         <label>start:</label>
-                        <input style="margin-top:10px;" id="date_timepicker_start" type="text" @if('undefined' != Session::get('startPickTime')) value="{{Session::get('startPickTime')}}" @endif>
+                        <input style="margin-top:10px;" id="date_timepicker_start" type="text"	@if('undefined' != Session::get('startPickTime')) value="{{Session::get('startPickTime')}}" @endif>
                         <label>end:</label>
                         <input style="margin-top:10px;" id="date_timepicker_end" type="text" @if('undefined' != Session::get('endPickTime')) value="{{Session::get('endPickTime')}}" @endif>
                         {{--time picker--}}
@@ -121,27 +121,19 @@
 	                    <!-- /.box -->
 	                </div>
                     <script>
-                    var tog=0;
-
-                    $('#smsCall').click(function(){
-                        if(tog===0){
-                            $('#chart_call').fadeIn();
-                            $('#chart_sms').fadeOut();
-                            tog++;
-                        }
-                        else{
-                            $('#chart_call').fadeOut();
-                            $('#chart_sms').fadeIn();
-                            tog--;
-                        }
-                    });
-
                     $(window).load(function(){
                          $('#chart_call').fadeOut();
                          $('#chart_sms').fadeIn();
                          $('#chart_call').fadeOut();
                          $('#chart_sms').fadeIn();
                     });
+
+					var flip_call=0;
+					var flip_sms=0;
+					$('#smsCall').click(function(){
+						$('#chart_call').toggle(flip_call++ % 2 === 1).toggle(1000);
+						$('#chart_sms').toggle(flip_sms++ % 2 === 0).toggle(1000);
+					});
                     </script>
 
                 <!-- /.col-lg-12 -->
@@ -174,7 +166,23 @@
     <!-- /#wrapper -->
 
     <!-- delare app list -->
+	<script>
+		if (typeof(Storage) !== "undefined") {
+			if($('#date_timepicker_start').val()===""){
+                if(localStorage.getItem("localStartTime")!="undefined"){
+	                $('#date_timepicker_start').val(localStorage.getItem("localStartTime"));
+                }
+			}
+
+			if($('#date_timepicker_end').val()===""){
+                if(localStorage.getItem("localEndTime")!="undefined"){         
+	                $('#date_timepicker_end').val(localStorage.getItem("localEndTime"));
+                }
+			}
+		}
+	</script>
     <script>
+
     var appArray=[['Apps', 'times']]; //instaniate app list
     var smsArray=[];
     var callsArray=[];

@@ -11,7 +11,24 @@
 	<!-- timepicker -->
 	<link href="/css/jquery.datetimepicker.css" rel="stylesheet">
 	<style>
-
+	/*#loading {*/
+	/*   width: 100%;*/
+	/*   height: 100%;*/
+	/*   top: 0;*/
+	/*   left: 0;*/
+	/*   position: fixed;*/
+	/*   display: block;*/
+	/*   opacity: 0.7;*/
+	/*   background-color: #fff;*/
+	/*   z-index: 99;*/
+	/*   text-align: center;*/
+	/*}*/
+	/*#loading-image {*/
+	/*  position: absolute;*/
+	/*  top: 100px;*/
+	/*  left: 240px;*/
+	/*  z-index: 100;*/
+	/*}*/
 	</style>
 @append
 @include('includes.header')
@@ -136,6 +153,17 @@ jQuery(function(){
 			var start_timepick=$('#date_timepicker_start').val();
 			var end_timepick=$('#date_timepicker_end').val();
 			var urlString = "id=" + id + "&name=" + name + "&startPickTime=" + start_timepick + "&endPickTime=" + end_timepick;
+
+			if (typeof(Storage) !== "undefined") {
+				if($('#date_timepicker_start').val()!==""){
+				localStorage.setItem("localStartTime", $('#date_timepicker_start').val());
+				}
+
+				if($('#date_timepicker_end').val()!==""){
+				localStorage.setItem("localEndTime", $('#date_timepicker_end').val());
+				}
+			}
+			
 			$.ajax
 			({
 				url: "selectKid",
