@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/GCMServiceWorker', function () {
+	return view('GCM');
+});
+
+Route::get('/GCMSend', 'GCMController@index');
 
 //These are public pages the user can access basic routes
 /////////////////////////////////////////////////////////
