@@ -12,7 +12,7 @@ class SmssTableSeeder extends Seeder
     public function run()
     {
         //Make 20 messages then associate these with kids
-        factory(App\Sms::class, 20)->make()
+        factory(App\Sms::class, 400)->make()
                 ->each(function($sms){
 
                     //Associate an sms with a single random kid picked from the kid table

@@ -14,7 +14,13 @@ class CategoriesTableSeeder extends Seeder
         factory(App\Category::class,6)
         ->create()
         ->each(function($category){
-        $category->titles()->saveMany(factory(App\Title::class,3)->create());
-      });
+            $category->titles()->saveMany(factory(App\Title::class,3)
+            ->create()
+            ->each(function($title){
+                $title->articles()->saveMany(factory(App\Article::class,3)
+                ->create());
+            })
+            );
+        });
     }
 }
