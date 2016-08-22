@@ -8,6 +8,7 @@ use App\Classes\NonRecipientException;
 use App\Classes\TooManyRecipientsException;
 use Nette\Object;
 use Nette\Utils\Json;
+use Jaxl;
 
 class GCMManager extends Object {
 
@@ -52,7 +53,8 @@ class GCMManager extends Object {
             'strict' => false,
             'ssl' => true,
             'force_tls' => true,
-            'log_level' => JAXL_DEBUG
+            'log_level' => JAXL_DEBUG,
+            'log_path' => 'GCMManagerLog.txt'
         ));
 
         $this->client->add_cb('on_auth_success', function () {
@@ -67,7 +69,8 @@ class GCMManager extends Object {
         });
 
         $this->client->add_cb('on_disconnect', function () {
-            $this->onDisconnect($this);
+            var_dump($this->client);
+            //$this->onDisconnect($this);
         });
 
         $this->client->add_cb("on_normal_message", function ($stanza) {
