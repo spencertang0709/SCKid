@@ -11,9 +11,7 @@ class KidsTableSeeder extends Seeder
      */
     public function run()
     {
-
         //We can use model factories or standard db calls
-        factory(App\Kid::class, 20)->create();
-        
+        factory(App\Kid::class, 20)->create();    
     }
 }
