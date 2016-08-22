@@ -12,9 +12,9 @@ class GCMController extends Controller
     public function index(Request $request)
     {
 		// API access key from Google API's Console
-		define('API_ACCESS_KEY', 'AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE');
+		define('API_ACCESS_KEY', 'AIzaSyD8hGzuCCaWcHmGdzlI2G4Hdo84iQWgB_o');//'AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE');
 		
-		$registrationIds = "cYLIzTmJ598:APA91bFyjjsr5TuGCmBP6CZ6bb2fYhwm21joPsvxmN50873Csjaqc36EB3qSgk63OKcbe3X-QRbf6j_zCpjHk79nuNwwE8B8mblUUTl3CxNBFaKgjK9nWig7PhVmFpYpLVcwFyxd8YoD";
+		$registrationIds = "e2G0JEsUxnU:APA91bGC5PgoSMKznTtdutQkiTUDNg7vjsEHELgMGoi07asFIHWMJ7ONpXnY3465o7gY6sZPzEwIrLmvHGS3CNoYy1wKq6xA7yB-XvOZ7OawnAUWMW9eWWxYrsWzuf5Gtm3n2EknUazR";
 		
 		//prep the bundle
 		$msg = array

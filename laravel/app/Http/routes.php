@@ -312,8 +312,8 @@ Route::group(array('prefix' => 'api/v1'), function() {
     Route::get('user','Api\AuthApiController@getAuthenticatedUser');
 
     Route::resource('registerDevices','Api\VerificationCodeController');
-
-
+	
+	Route::resource('updateGCMKey', 'Api\GCMKeyController');
 
     //Sync routes
     Route::resource('sync','Api\SyncController');

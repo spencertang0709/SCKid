@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "23dd9e9c63cd43419435a3fd6a00e787",
-    "content-hash": "2c140df09b080cc529370a0ed2799b71",
+    "hash": "1e9b940c47b39fa8d7681458c63f2e4c",
+    "content-hash": "388b3bda006a19cc53563de73f38c196",
     "packages": [
+        {
+            "name": "abhinavsingh/jaxl",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaxl/JAXL.git",
+                "reference": "7e1f1d8841e6214f73492a5693f97fb7424ad9f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaxl/JAXL/zipball/7e1f1d8841e6214f73492a5693f97fb7424ad9f6",
+                "reference": "7e1f1d8841e6214f73492a5693f97fb7424ad9f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "jaxl.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abhinavsingh",
+                    "homepage": "https://github.com/abhinavsingh"
+                }
+            ],
+            "description": "jaxl - Jabber XMPP Client Library in PHP.",
+            "homepage": "http://jaxl.readthedocs.org/en/latest/index.html",
+            "keywords": [
+                "abhinavsingh",
+                "jabber",
+                "jaxl",
+                "xmpp"
+            ],
+            "time": "2012-11-15 18:29:58"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -308,6 +351,7 @@
                 "rest",
                 "web service"
             ],
+            "abandoned": "guzzlehttp/guzzle",
             "time": "2014-01-28 22:29:15"
         },
         {
@@ -1218,6 +1262,67 @@
                 "time"
             ],
             "time": "2015-11-04 20:07:17"
+        },
+        {
+            "name": "nette/utils",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/utils.git",
+                "reference": "c455ade9f24a1f99aa81772516764045296b8ca0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/utils/zipball/c455ade9f24a1f99aa81772516764045296b8ca0",
+                "reference": "c455ade9f24a1f99aa81772516764045296b8ca0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "conflict": {
+                "nette/nette": "<2.2"
+            },
+            "require-dev": {
+                "nette/tester": "~2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "suggest": {
+                "ext-gd": "to use Image",
+                "ext-iconv": "to use Strings::webalize() and toAscii()",
+                "ext-intl": "for script transliteration in Strings::webalize() and toAscii()",
+                "ext-mbstring": "to use Strings::lower() etc..."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette Utility Classes",
+            "homepage": "https://nette.org",
+            "time": "2016-06-17 13:15:10"
         },
         {
             "name": "nikic/php-parser",
