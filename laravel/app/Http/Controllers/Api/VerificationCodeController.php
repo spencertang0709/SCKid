@@ -37,8 +37,8 @@ class VerificationCodeController extends Controller
 	            echo "verified and register device";
 				//TODO register device
 
-                 $kidID = Session::get('current_kid');  //this is get id
-                 $currentKid = Kid::find($kidID);
+                $kidID = Session::get('current_kid');  //this is get id
+                $currentKid = Kid::find($kidID);
 
                 $device = new Device();
                 $device->name = $request['name'];

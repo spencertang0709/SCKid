@@ -29,4 +29,8 @@ class Device extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function gcmkey() {
+        return $this->belongsTo(GcmKey::class);
+    }
 }
