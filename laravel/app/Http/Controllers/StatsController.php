@@ -41,7 +41,11 @@ class StatsController extends Controller
     {
         $startPickTime = Session::get('startPickTime');
         $endPickTime = Session::get('endPickTime');
-        $locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
+
+        //get current kid id
+        $currentKidId = Session::get('current_kid', $request->id);
+
+        $locations="";
 
         //$sms = DB::table('sms')->orderBy('updated_at', 'desc')->first();
         $sms = DB::table('sms')
@@ -51,8 +55,6 @@ class StatsController extends Controller
         ->take(5)
         ->get();
 
-        //get current kid id
-        $currentKidId = Session::get('current_kid', $request->id);
 
         $topApp=[];
         $calls=[];
@@ -60,6 +62,9 @@ class StatsController extends Controller
         $smsDateTime = [];
 
         if($currentKidId!=null){
+            $locations = Kid::find($currentKidId)->locations()
+            ->whereBetween('time',[$startPickTime,$endPickTime])
+            ->orderBy('updated_at', 'desc')->get();
             // $apps=Kid::find($currentKidId)->apps()->get();
             $topApp = DB::table('app_kid')->where('kid_id',$currentKidId)
             ->join('apps','app_kid.app_id','=','apps.id')

@@ -4,6 +4,15 @@
 <div id="wrapper">
   <div id="page-wrapper">
     <div class="container-fluid">
+
+        @if(Session::has('msg'))
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Oooops!</strong> {{Session::get('msg')}}
+            <br/>
+        </div>
+        @endif
+
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Account</h1>
@@ -11,6 +20,9 @@
       </div>
 
       <div class="row">
+          @if ($errors->has('msg'))
+          <script>alert('ss');</script>
+          @endif
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
