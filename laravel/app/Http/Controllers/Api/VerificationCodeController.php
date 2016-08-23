@@ -35,7 +35,6 @@ class VerificationCodeController extends Controller
             if ($secsElapsed <= $timeLimit) {
                 $user = $resultCode->user()->first();
                 echo "verified and register device";
-                //TODO register device
 
                 $kidID = Session::get('current_kid');  //this is get id
                 $currentKid = Kid::find($kidID);
@@ -45,7 +44,7 @@ class VerificationCodeController extends Controller
                 $device->model = $request['model'];
                 $device->unique_id = $request['IMEI'];
 
-                $device->save();                
+                $device->save();
 
                 $device->users()->attach($user->id);
                 //$device->kid()->associate($currentKid);
