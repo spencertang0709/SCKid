@@ -30,6 +30,7 @@
         $('#message_update').html(usersList);
         $('#message_list').html(messageList);
     });
+
 </script>
 
 
@@ -88,7 +89,7 @@
                 <li><a href="/account"><i class="fa fa-user fa-fw"></i> Account</a></li>
                 <li><a href="/settings"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a id="logoutBt" href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -229,4 +230,17 @@
         <!-- /.sidebar-collapse -->
     </div>
     <!-- /.navbar-static-side -->
+    <script>
+    $('#logoutBt').click(function(){
+        $.ajax({
+            method: 'GET',
+            url: '{{route("logout.session")}}',
+            async: false, //blocks window close
+        })
+        // .done(function(responseText) {
+        //     //$('#kid_text').html("logout");
+        //     //alert('cleared session');
+        // });
+    });
+    </script>
 </nav>

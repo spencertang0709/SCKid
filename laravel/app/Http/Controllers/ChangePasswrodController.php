@@ -17,20 +17,20 @@ class ChangePasswrodController extends Controller
     //use ResetsPasswords;
 
     /**
-     * Create a new password controller instance.
-     *
-     * @return void
-     */
+    * Create a new password controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //$this->middleware('guest');
     }
 
     /**
-     * Reset password for a user
-     *
-     * @return void
-     */
+    * Reset password for a user
+    *
+    * @return void
+    */
     public function change(Request $request)
     {
         //Validate our parameters
@@ -40,19 +40,22 @@ class ChangePasswrodController extends Controller
             'password_confirmation' => 'required|max:255',
         ]);
         $user = $request->user();
-        
+
         //make sure logged in account is user
         Auth::login($user);
-
-        //If password match then save new passowrd
-        if (Hash::check($request['old_password'], $user->password)) {
-            // The passwords match...
-            $user->password = bcrypt($request['password']);
-            $user->update();
+        //if new password matches confirmed password
+        if($request['password'] === $request['password_confirmation']){
+            //If password match then save new passowrd
+            if (Hash::check($request['old_password'], $user->password)) {
+                // The passwords match...
+                $user->password = bcrypt($request['password']);
+                $user->update();
+            }else{
+                return redirect()->back()->with('msg','Please check your current password!');
+            }
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('msg','Please confirm your password! ');
         }
-
         return view('settings');
     }
 }

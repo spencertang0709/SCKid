@@ -42,6 +42,11 @@ Route::get('/arrangeTimeSlots', 'ArrangeTimeSlotsController@arrange');
 
 Route::get('/selectKid', 'CurrentKidController@Select');
 
+Route::get('/sessionLogout',[
+	'uses' => 'LogOut@index',
+	'as' => 'logout.session'
+]);
+
 //use this way to avid routes appending itself
 Route::get('/knowledge/addArticle',[
 	'uses'=>'KnowledgeAddArticleController@index',
@@ -191,6 +196,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/likes', 'LikeController@index');
 
+    Route::delete('/devices/destroy/{device_id}', 'DeviceController@destroy');
+
     Route::get('/devices', [
         'uses' => 'DeviceController@index',
         'as' => 'deviecs']
@@ -312,7 +319,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
     Route::get('user','Api\AuthApiController@getAuthenticatedUser');
 
     Route::resource('registerDevices','Api\VerificationCodeController');
-	
+
 	Route::resource('updateGCMKey', 'Api\GCMKeyController');
 
     //Sync routes

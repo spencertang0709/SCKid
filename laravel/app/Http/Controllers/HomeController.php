@@ -56,8 +56,13 @@ class HomeController extends Controller
 
 			return view('home2');
 		} else {
-			$locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
-
+			//get current kid id
+			$currentKidId = Session::get('current_kid', $request->id);
+			$locations="";			
+			//$locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
+			if($currentKidId!=null){
+				$locations = Kid::find($currentKidId)->locations()->orderBy('updated_at', 'desc')->take(10)->get();
+			}
 	        //$sms = DB::table('sms')->orderBy('updated_at', 'desc')->first();
 	        $sms = DB::table('sms')
 	            ->select('contact', DB::raw('COUNT(contact) as count'))
@@ -66,8 +71,7 @@ class HomeController extends Controller
 	            ->take(5)
 	            ->get();
 
-			//get current kid id
-			$currentKidId = Session::get('current_kid', $request->id);
+
 			$topApp=[];
 			$calls=[];
 			$smss=[];
@@ -81,7 +85,7 @@ class HomeController extends Controller
 				->take(8)
 				->get();
 				//get all the calls corresponding to current kid
-								
+
 				$calls = Kid::find($currentKidId)->calls()->orderBy('start_time')->get();
 				//get all the sms corresponding to current kid
 			 	$smss = Kid::find($currentKidId)->smss()->orderBy('time')->get();

@@ -128,6 +128,8 @@ jQuery(function(){
 	var arr=['{{route("beacons")}}','{{route("deviecs")}}','{{route("calls")}}','{{route("sms")}}',
 	'{{route("location")}}','{{ url("/panics") }}'];	//add all route here
 		$('.select_button').on('click', function(e) {
+			$('div[class*="box-profile"]').removeClass('well');
+			$(e.target).parent().parent().parent().addClass('well');
 			var id = $(e.target).data('id');
 			var name = $(e.target).data('kidname');
 			var urlString = "id=" + id + "&name=" + name;
@@ -163,14 +165,14 @@ jQuery(function(){
 				localStorage.setItem("localEndTime", $('#date_timepicker_end').val());
 				}
 			}
-			
+
 			$.ajax
 			({
 				url: "selectKid",
 				type: "GET",
 				data: urlString,
 				success: function(responseText) {
-					$('#kid_text').html("Current Child is: " + responseText);
+					$('#kid_text').html("Current Child is: " + responseText+" ***");
 					window.location="{{URL::current()}}";
 				}
 			});

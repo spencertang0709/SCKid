@@ -14,7 +14,7 @@
                         <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this device?
                     </div>
                 </div>
-                <form id="delModal" action=" " method="post">
+                <form id="delModal" action="" method="post">
                     {!! csrf_field() !!}
                     {{--Spoofing our delete method--}}
                     {!! method_field('DELETE') !!}
@@ -122,10 +122,10 @@
                                                 <td>Kid Name</td>
                                                 {{--<td>{{$device->kid()->name}}</td> --}}
                                                 <td>
-                                                    {{--TODO edit--}}
+                                                    <!-- {{--TODO edit--}}
                                                     <button class="btn btn-primary btn-xs"  data-title="Edit" data-id={{$device->id}} data-toggle="modal" data-target="#edit" >
                                                         <span class="glyphicon glyphicon-pencil"></span>
-                                                    </button>
+                                                    </button> -->
                                                     <button class="btn btn-primary btn-xs"  data-title="Delete" data-id={{$device->id}} data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete" >
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </button>

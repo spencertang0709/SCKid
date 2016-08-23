@@ -91,7 +91,7 @@
 	                        </div>
 	                        <div class="box-body">
 	                            <div id="piechart_3d"></div>
-	                        </div>                        
+	                        </div>
 	                        <!-- /.box-body -->
 	                    </div>
 	                    <!-- /.box -->

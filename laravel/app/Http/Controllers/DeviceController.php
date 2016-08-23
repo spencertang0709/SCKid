@@ -35,7 +35,7 @@ class DeviceController extends Controller
         } else {
         	$currentDevice = $currentKid->devices()->get();
         	return view('devices', [
-        		'devices' => $devices,
+        		'devices' => $currentDevice,
         		//'currentDevice' => $currentDevice
         	]);
         }
@@ -51,15 +51,20 @@ class DeviceController extends Controller
     {
         //Generate verification code
         $code = rand(1, 1000000);//TODO better algorithm for encryption and avoid same value
-        
+
         //Get current user associated with the current code and save it
         $user = $request->user();
-		
+
         App\VerificationCode::create(array(
         	'value' => $code,
         	'user_id'=> $user->id
         ));
-		
+
 		echo $code;
+    }
+
+    public function destroy(Request $request, App\Device $device_id){
+        $device_id->delete();
+        return redirect('/devices');
     }
 }
