@@ -83,7 +83,6 @@ class GCMManager extends Object {
                                 @$data['message_id'],
                                 @$data['from']);
             $this->sendAck($message);
-            //echo "message sent";
             $this->onMessage($this, $message);
         });
 
@@ -141,9 +140,9 @@ class GCMManager extends Object {
 
         protected function sendAck(ReceivedMessage $message) {
            $this->sendGCMMessage([
-                'to' => $message->getFrom(),
-                'message_type' => 'ack',
-                'message_id' => $message->getMessageId(),
+               'to' => $message->getFrom(),
+               'message_id' => $message->getMessageId(),
+               'message_type' => 'ack'
             ]);
         }
 

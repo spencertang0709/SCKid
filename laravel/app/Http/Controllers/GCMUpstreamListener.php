@@ -18,9 +18,7 @@ class GCMUpstreamListener extends Controller
         $messageManager = new GCMManager(self::SENDER_ID, self::API_KEY, false);
 
         $messageManager->onReady[] = function(GCMManager $currentManager) {
-            global $messageManager;
             echo "Ready / Auth success. Waiting for Messages";
-            $messageManager->stop();
         };
 
         $messageManager->onAuthFailure[] = function(GCMManager $currentManager, $reason) {
