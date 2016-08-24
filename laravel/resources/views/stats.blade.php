@@ -13,6 +13,21 @@
         <!-- Navigation -->
         <div id="page-wrapper">
             <div class="row">
+                @if(!Session::has('current_kid'))
+                <div class="alert alert-warning fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Oooops!</strong> please select one of your children!
+                    <br/>
+                </div>
+                @endif
+                @if(!Session::has('startPickTime')||!Session::has('endPickTime')
+                ||Session('startPickTime')===""||Session('endPickTime')==="")                
+                <div class="alert alert-warning fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Oooops!</strong> please select the period of time!
+                    <br/>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-2">
                         <h1 class="page-header">Statistic</h1>
@@ -175,7 +190,7 @@
 			}
 
 			if($('#date_timepicker_end').val()===""){
-                if(localStorage.getItem("localEndTime")!="undefined"){         
+                if(localStorage.getItem("localEndTime")!="undefined"){
 	                $('#date_timepicker_end').val(localStorage.getItem("localEndTime"));
                 }
 			}

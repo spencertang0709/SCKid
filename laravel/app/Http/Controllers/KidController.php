@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App;
+use App\Kid;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -112,7 +113,10 @@ class KidController extends Controller
         $this->authorize('destroy', $kid);
 
         //Detaching all relationships in many to many tables
-        $kid->beacons()->detach();
+        $kid->timeSlots()->detach();
+        $kid->socialMedias()->detach();
+        $kid->apps()->detach();
+        $kid->websites()->detach();
         $kid->users()->detach();
 
         //We can now delete the kid

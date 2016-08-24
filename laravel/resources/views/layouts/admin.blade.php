@@ -172,7 +172,7 @@ jQuery(function(){
 				type: "GET",
 				data: urlString,
 				success: function(responseText) {
-					$('#kid_text').html("Current Child is: " + responseText+" ***");
+					$('#kid_text').html("Current Child is: " + responseText);
 					window.location="{{URL::current()}}";
 				}
 			});

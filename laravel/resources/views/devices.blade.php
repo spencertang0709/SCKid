@@ -119,8 +119,10 @@
                                                 <td>{{$device->name}}</td>
                                                 <td>{{$device->model}}</td>
                                                 <td>{{$device->unique_id}}</td>
-                                                <td>Kid Name</td>
-                                                {{--<td>{{$device->kid()->name}}</td> --}}
+                                                {{--<td>Kid Name</td>--}}
+                                                @if(count($kids) > 0)
+                                                <td>{{$device->kid()->first()->name}}</td>
+                                                @endif
                                                 <td>
                                                     <!-- {{--TODO edit--}}
                                                     <button class="btn btn-primary btn-xs"  data-title="Edit" data-id={{$device->id}} data-toggle="modal" data-target="#edit" >
@@ -159,6 +161,18 @@
     <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
+    <script>
+    $('button[data-dismiss="modal"]:contains("Close")').click(function(){
+        // $.ajax
+        // ({
+        //     url: "{{route('deviecs')}}",
+        //     type: "GET",
+        //     success: function(responseText) {
+        //     }
+        // });
+        window.location.replace('{{route("deviecs")}}');
+    })
+    </script>
     {{--check current kid if they exist--}}
     <script>
     kid_name="{{Session::get('current_kid_name')}}";

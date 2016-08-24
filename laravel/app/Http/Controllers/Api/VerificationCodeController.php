@@ -50,8 +50,10 @@ class VerificationCodeController extends Controller
                 //$device->kid()->associate($currentKid);
                 $currentKid->devices()->save($device);
 
-                echo 'Successfully added device, user, kid';
-
+                return Response::json(
+                array(
+                    'success' => true,
+                ));
             } else {
                 return Response::json (
                 array(

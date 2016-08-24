@@ -16,7 +16,7 @@
 								<h4 class="modal-title">Add A New App</h4>
 							</div>
 							<div class="modal-body">
-								<div class="form-group has-feedback{{ $errors->has('location') ? ' has-error' : '' }}">
+								<div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
 									<label for="name">App Name:</label>
 									<input type="text" class="form-control" id="name" name="name" value="">
 									@if ($errors->has('name'))
@@ -36,11 +36,16 @@
 								</div>
 								<div class="form-group has-feedback{{ $errors->has('blocked') ? ' has-error' : '' }}">
 									<label for="blocked">Blocked</label>
-									<input type="checkbox" class="form-control" id="package" name="package" value="">
+									<select class="form-control" name="blocked" id="blocked">
+					                	<option value="1">Yes</option>
+				                    	<option value="0">No</option>
+					                </select>
+
+									{{--<input type="checkbox" class="form-control" id="blocked" name="blocked">--}}
 									@if ($errors->has('blocked'))
 										<span class="help-block">
-                                    <strong>{{ $errors->first('blocked')}}</strong>
-                                </span>
+                                    		<strong>{{ $errors->first('blocked')}}</strong>
+                                		</span>
 									@endif
 								</div>
 							</div>
@@ -64,7 +69,7 @@
 					<div class="col-xs-12">
 					  <div class="box box-info">
 						<div class="box-header">
-						  <h3 class="box-title">Change App settings below for: 
+						  <h3 class="box-title">Change App settings below for:
 						  	<button>{{Session::get('current_kid_name')}}</button>
 
 						  </h3>
@@ -106,7 +111,7 @@
 							{{--TODO pagination--}}
 							{{--!! $apps->render() !!--}}
 						</div>
-						
+
 						<!-- /.box-body -->
 					  </div>
 					  <!-- /.box -->

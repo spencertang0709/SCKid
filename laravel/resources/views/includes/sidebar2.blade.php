@@ -215,4 +215,13 @@
         <!-- /.sidebar-collapse -->
     </div>
     <!-- /.navbar-static-side -->
+    <script>
+    $('#logoutBt').click(function(){
+        $.ajax({
+            method: 'GET',
+            url: '{{route("logout.session")}}',
+            async: false, //blocks window close
+        });        
+    });
+    </script>
 </nav>

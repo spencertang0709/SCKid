@@ -12,12 +12,12 @@ class CreateKidTimeslotTable extends Migration
      */
     public function up()
     {
-        Schema::create('kid_timeslot', function (Blueprint $table) {
+        Schema::create('kid_time_slot', function (Blueprint $table) {
 			$table->increments('id');
-			
+
 			$table->integer('timeslot_id')->unsigned();
 			$table->foreign('timeslot_id')->references('id')->on('times');
-			
+
 			$table->integer('kid_id')->unsigned();
 			$table->foreign('kid_id')->references('id')->on('kids')->onDelete('cascade');
 
@@ -32,6 +32,6 @@ class CreateKidTimeslotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('kid_timeslot');
+        Schema::drop('kid_time_slot');
     }
 }

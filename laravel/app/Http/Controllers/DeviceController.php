@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
+use App\VerificationCode;
 use App\Http\Requests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,9 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         //TODO authorisation controls the device that they are wanting to edit
-//        $this->authorize('owns', $request->user());
+        // $this->authorize('owns', $request->user());
 
-//        $devices = DB::table('devices')->get();
+        // $devices = DB::table('devices')->get();
 
 		//Get all the devices that a user owns
         $devices = $request->user()->devices()->get();
@@ -30,13 +31,15 @@ class DeviceController extends Controller
         //Kids will be accessible in our home view
         if ($currentKid == NULL) {
         	return view('devices', [
-        		'devices' => $devices
+        		'devices' => $devices,
+                'kids' => $currentKid
         	]);
         } else {
         	$currentDevice = $currentKid->devices()->get();
         	return view('devices', [
         		'devices' => $currentDevice,
         		//'currentDevice' => $currentDevice
+                'kids' => $currentKid
         	]);
         }
 
@@ -54,8 +57,9 @@ class DeviceController extends Controller
 
         //Get current user associated with the current code and save it
         $user = $request->user();
+        VerificationCode::where('user_id',$user->id)->delete();
 
-        App\VerificationCode::create(array(
+        VerificationCode::create(array(
         	'value' => $code,
         	'user_id'=> $user->id
         ));

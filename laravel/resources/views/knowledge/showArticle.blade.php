@@ -27,7 +27,7 @@ Knowledgebase - Articles
         @if(count($articles) == 0)
         <div class="alert alert-info">
         <strong>Oooops!</strong> I have got nothing here.
-        <a href="/home">Click here go Home</a>
+        <a href="{{route('showCategory.knowledge')}}">Click here go Home</a>
         </div>
         @endif
         <!-- <div class="row">

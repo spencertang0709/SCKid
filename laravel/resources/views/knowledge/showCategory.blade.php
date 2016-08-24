@@ -40,7 +40,7 @@ Knowledgebase - Categories
             @if(count($categories) == 0)
             <div class="alert alert-info">
             <strong>Oooops!</strong> I have got nothing here.
-            <a href="/home">Click here go Home</a>
+            <a href="/home">Click here go Back</a>
             </div>
             @endif
 
