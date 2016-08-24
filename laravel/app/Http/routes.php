@@ -17,6 +17,8 @@ Route::get('/GCMServiceWorker', function () {
 
 Route::get('/GCMSend', 'GCMController@index');
 
+Route::get('/GCMUpstream', 'GCMUpstreamListener@index');
+
 //These are public pages the user can access basic routes
 /////////////////////////////////////////////////////////
 

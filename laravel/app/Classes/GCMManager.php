@@ -69,6 +69,7 @@ class GCMManager extends Object {
         });
 
         $this->client->add_cb('on_disconnect', function () {
+            echo 'disconnect<br>';
             var_dump($this->client);
             //$this->onDisconnect($this);
         });
