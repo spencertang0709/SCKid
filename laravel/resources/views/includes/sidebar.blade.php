@@ -236,7 +236,7 @@
             method: 'GET',
             url: '{{route("logout.session")}}',
             async: false, //blocks window close
-        })
+        });
         // .done(function(responseText) {
         //     //$('#kid_text').html("logout");
         //     //alert('cleared session');

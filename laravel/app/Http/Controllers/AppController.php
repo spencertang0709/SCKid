@@ -18,9 +18,9 @@ class AppController extends Controller
         $kidID = Session::get('current_kid');
 		$currentKid = App\Kid::find($kidID);
 		if ($currentKid != NULL) {
-			$apps = $currentKid->apps()->get();	
+			$apps = $currentKid->apps()->get();
 		}
-		
+
         //Get all of current kids and show to user
         //$apps = DB::table('apps')->get();
 
@@ -36,7 +36,7 @@ class AppController extends Controller
 //                //
 //            }
 //        });
-	
+
         //Kids will be accessible in our home view
         return view('apps', ['apps' => $apps ]);
     }
@@ -72,14 +72,20 @@ class AppController extends Controller
         //Retrieve the app by instance or create if does not exist
         //$app = App::firstOrCreate($request->all());
 
-//        $this->validate($request, [
-//            'name' => 'required|max:255',
-//            'package' => 'integer|required|max:255',
-//            'blocked' => 'integer|required|max:255'
-//        ]);
+       $this->validate($request, [
+           'name' => 'required|max:255',
+           'package' => 'required|max:255',
+           'blocked' => 'integer|required|max:255'
+       ]);
 
         //mass assignment
-        $app = App::create($request->all());
+        $app = App\App::create([
+            'name' => $request['name'],
+            'package' => $request['package']
+        ]);
+        $kidID = Session::get('current_kid');
+		// $currentKid = App\Kid::find($kidID);
+        $app->kids()->attach($kidID);
 
         return redirect('/apps');
     }

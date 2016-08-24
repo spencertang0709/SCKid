@@ -19,10 +19,7 @@
         </div>
       </div>
 
-      <div class="row">
-          @if ($errors->has('msg'))
-          <script>alert('ss');</script>
-          @endif
+      <div class="row">          
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
