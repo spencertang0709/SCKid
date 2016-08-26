@@ -6,7 +6,8 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
-            <input type="button" id="run" value="run"/>
+            <input type="button" id="run" value="Listen"/>
+            <input type="button" id="stop" value="Stop"/>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">GCM Messages</h1>
@@ -66,6 +67,28 @@ $('#run').click(function(){
         }
     });
 });
+
+// $('#stop').click(function(){
+//     $.ajax
+//     ({
+//         url: "GCMUpstreamStop",
+//         type: "GET",
+//         data: "command=stop",
+//         success: function(responseText) {
+//             var messages = JSON.parse(responseText);
+//
+//             var tr = "<table id='datatable' class='table table-bordered table-hover'><thead><tr><th>Kid name</th><th>title</th><th>Content</th></tr></thead>";
+//             for(var index in messages){
+//                 tr +="<tr><td>" +messages[index]['IMEI'] +"</td><td>"+ messages[index]['title']
+//                 +"</td><td>"+ messages[index]['content'] +"</td></tr>";
+//             }
+//             tr +="</table>";
+//             document.getElementById("innerTable").innerHTML=tr;
+//             $("#datatable").DataTable();
+//
+//         }
+//     });
+// });
 </script>
 <script>
 $(function () {

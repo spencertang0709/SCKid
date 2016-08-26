@@ -52,13 +52,11 @@ class HomeController extends Controller
 			}
 		}
 		if ($isAdmin) {
-
-
 			return view('home2');
 		} else {
 			//get current kid id
 			$currentKidId = Session::get('current_kid', $request->id);
-			$locations="";			
+			$locations="";
 			//$locations = DB::table('locations')->orderBy('updated_at', 'desc')->take(5)->get();
 			if($currentKidId!=null){
 				$locations = Kid::find($currentKidId)->locations()->orderBy('updated_at', 'desc')->take(10)->get();

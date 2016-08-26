@@ -19,13 +19,15 @@ class GCMUpstreamListener extends Controller
     const SENDER_ID = "219888626249";//"253574901081";//"e2G0JEsUxnU:APA91bGC5PgoSMKznTtdutQkiTUDNg7vjsEHELgMGoi07asFIHWMJ7ONpXnY3465o7gY6sZPzEwIrLmvHGS3CNoYy1wKq6xA7yB-XvOZ7OawnAUWMW9eWWxYrsWzuf5Gtm3n2EknUazR";
     const API_KEY = "AIzaSyD8hGzuCCaWcHmGdzlI2G4Hdo84iQWgB_o";//"AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE";//
 
-    //protected $messages = array();
-
     public function index(Request $request) {
-        global $messages;
-        $messages = array();
+        set_time_limit(0);
         global $messageManager;
         $messageManager = new GCMManager(self::SENDER_ID, self::API_KEY, false);
+        global $counter;
+        $counter = 0;
+
+        global $messages;
+        $messages = array();
 
         $messageManager->onReady[] = function(GCMManager $currentManager) {
             //echo "Ready / Auth success. Waiting for Messages";
@@ -48,12 +50,11 @@ class GCMUpstreamListener extends Controller
             //  var_dump($message);
              $payload = $message->getData();
              $payload = (array) $payload;
-              //var_dump($payload);
+            //var_dump($payload);
             //   echo "<br/>";
 
             //"IMEI" "title" "content"
             //echo $payload['IMEI'];
-//            global $messages;
             global $messages;
             //var_dump($messages);
             array_push($messages,
@@ -63,24 +64,26 @@ class GCMUpstreamListener extends Controller
                 ]
              );
 
+
+
             //  $device = App\Device::where('unique_id', $payload['IMEI'])->first();
-            //  //
-            //  $message = new App\GcmMessage();
-            //  $message->title = $payload['title'];
-            //  $message->content = $payload['content'];
-            //  $message->device()->associate($device);
-            //  $message->save();
+             //
+             $device = App\Device::where('unique_id', 'beb6b6eb-af79-3246-a9cc-cb633d0da523')->first();
+             $GcmMessage = new App\GcmMessage();
+             $GcmMessage->title = $payload['title'];
+             $GcmMessage->content = $payload['content'];
+             $GcmMessage->device()->associate($device);
+             $GcmMessage->save();
 
-            // echo "encode:";
-            // echo "<br/>";
-            echo json_encode($messages);
-
-             global $messageManager;
-             $messageManager->stop();
-             $messageManager->run();
+            global $counter;
+            $counter++;
+            if ($counter>=3) {
+                global $messageManager;
+                $messageManager->stop();
+                global $messages;
+                echo json_encode($messages);
+            }
         };
-
         $messageManager->run();
-
     }
 }

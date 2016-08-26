@@ -18,6 +18,7 @@ Route::get('/GCMServiceWorker', function () {
 Route::get('/GCMSend', 'GCMController@index');
 
 Route::get('/GCMUpstream', 'GCMUpstreamListener@index');
+Route::get('/GCMUpstreamStop', 'GCMUpstreamListener@index');
 
 Route::get('/GCM', [
 	'uses' => 'GCMSendController@index',
@@ -62,6 +63,11 @@ Route::get('/sessionLogout',[
 ]);
 
 //use this way to avid routes appending itself
+Route::get('/knowledge/addCategory',[
+	'uses'=>'KnowledgeAddCategoyController@index',
+	'as'=>'addCategory.knowledge'
+]);
+
 Route::get('/knowledge/addArticle',[
 	'uses'=>'KnowledgeAddArticleController@index',
 	'as'=>'addArticle.knowledge'
