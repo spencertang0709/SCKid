@@ -85,6 +85,13 @@ jQuery(function(){
 				$('#lbVerification').text('Your Verification Code is: ' + responseText);
 			});
 		});
+
+		$('#GCMMessageModel').on('show.bs.modal', function(e) {
+			var id =  $(e.relatedTarget).data('id');
+			var dir="/GCM/"+id;
+
+			$('#GCMForm').attr('action', dir);
+	   	});
 	</script>
 
 	{{--THESE ARE FOR APPS--}}

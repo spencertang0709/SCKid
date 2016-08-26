@@ -171,7 +171,7 @@
         //     }
         // });
         window.location.replace('{{route("deviecs")}}');
-    })
+    });
     </script>
     {{--check current kid if they exist--}}
     <script>

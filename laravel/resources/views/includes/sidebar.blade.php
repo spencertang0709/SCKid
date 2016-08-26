@@ -60,7 +60,6 @@
         <li class="text-primary">{{Auth::user()->name}} </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-
                 <i class="fa fa-envelope fa-fw"></i>
                 <span id="message_update" class="label label-danger">5</span>
                 <i class="fa fa-caret-down"></i>
@@ -70,12 +69,14 @@
                 {{--TODO for loop here that prints out notifications from mobile--}}
                 <li><a href="#"><div><strong>User ID
                 </strong><span class="pull-right text-muted"><em>1 minutes ago</em></span></div>
-                        <div>
+                <div>
                 User Message
-                </div></a></li><li class="divider"></li>
-
+                </div></a></li>
+                <li class="divider"></li>
                 <li class="divider"></li>
                 <li><a href="/messages"><i class="fa fa-inbox fa-fw"></i> All Messages</a>
+                <li class="divider"></li>
+                <li><a href="/GCM"><i class="fa fa-inbox fa-fw"></i> Send Messages</a>
             </ul>
             <!-- /.dropdown-messages -->
         </li>
