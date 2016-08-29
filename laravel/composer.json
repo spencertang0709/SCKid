@@ -13,7 +13,9 @@
         "madcoda/php-youtube-api": "1.*",
         "laravel/socialite": "^2.0",
         "socialiteproviders/instagram": "^1.1",
-        "socialiteproviders/tumblr": "^1.1"
+        "socialiteproviders/tumblr": "^1.1",
+        "abhinavsingh/jaxl": "^3.0",
+        "nette/utils": "^2.4"
 
     },
     "require-dev": {

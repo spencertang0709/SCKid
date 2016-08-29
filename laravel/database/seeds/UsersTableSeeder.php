@@ -32,9 +32,7 @@ class UsersTableSeeder extends Seeder
 						$kid->apps()->saveMany(factory(App\App::class, 5)->create());
 
 						//Attach one device to each kid
-						$kid->devices()->save(factory(App\Device::class)->create());
-
-
+						$kid->devices()->save(factory(App\Device::class)->create());                        
                     })
                 );
 

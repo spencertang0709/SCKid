@@ -22,6 +22,14 @@
                 </div>
 
 		        <div class="row">
+                    @if(!Session::has('current_kid'))
+                    <div class="alert alert-warning fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Oooops!</strong> please select one of your children!
+                        <br/>
+                    </div>
+                    @endif
+
 		        	{{--
 		            <div class="col-lg-12">
 		                <h1 class="page-header">Current Children</h1>
@@ -91,7 +99,7 @@
 	                        </div>
 	                        <div class="box-body">
 	                            <div id="piechart_3d"></div>
-	                        </div>                        
+	                        </div>
 	                        <!-- /.box-body -->
 	                    </div>
 	                    <!-- /.box -->

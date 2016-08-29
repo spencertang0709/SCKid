@@ -14,7 +14,7 @@
                         <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this device?
                     </div>
                 </div>
-                <form id="delModal" action=" " method="post">
+                <form id="delModal" action="" method="post">
                     {!! csrf_field() !!}
                     {{--Spoofing our delete method--}}
                     {!! method_field('DELETE') !!}
@@ -119,13 +119,15 @@
                                                 <td>{{$device->name}}</td>
                                                 <td>{{$device->model}}</td>
                                                 <td>{{$device->unique_id}}</td>
-                                                <td>Kid Name</td>
-                                                {{--<td>{{$device->kid()->name}}</td> --}}
+                                                {{--<td>Kid Name</td>--}}
+                                                @if(count($kids) > 0)
+                                                <td>{{$device->kid()->first()->name}}</td>
+                                                @endif
                                                 <td>
-                                                    {{--TODO edit--}}
+                                                    <!-- {{--TODO edit--}}
                                                     <button class="btn btn-primary btn-xs"  data-title="Edit" data-id={{$device->id}} data-toggle="modal" data-target="#edit" >
                                                         <span class="glyphicon glyphicon-pencil"></span>
-                                                    </button>
+                                                    </button> -->
                                                     <button class="btn btn-primary btn-xs"  data-title="Delete" data-id={{$device->id}} data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete" >
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </button>
@@ -146,7 +148,7 @@
                 <div class="row">
                     <div class="col-md-12 text-right">
                         <button id="verifyDevice" data-toggle="modal" data-target="#verifyDevice" class="btn btn-success" style="float: right;" >Verification</button>
-                        <button id="add device" data-toggle="modal" data-target="#addWeb" class="btn btn-primary" style="float: right;" >Add A Device</button>
+                        {{--<button id="add device" data-toggle="modal" data-target="#addWeb" class="btn btn-primary" style="float: right;" >Add A Device</button>--}}
                     </div>
                 </div>
 
@@ -159,6 +161,18 @@
     <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
+    <script>
+    $('button[data-dismiss="modal"]:contains("Close")').click(function(){
+        // $.ajax
+        // ({
+        //     url: "{{route('deviecs')}}",
+        //     type: "GET",
+        //     success: function(responseText) {
+        //     }
+        // });
+        window.location.replace('{{route("deviecs")}}');
+    });
+    </script>
     {{--check current kid if they exist--}}
     <script>
     kid_name="{{Session::get('current_kid_name')}}";

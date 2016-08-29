@@ -12,7 +12,7 @@ class CallsTableSeeder extends Seeder
     public function run()
     {
         //Make 20 calls then associate these with random kids
-        factory(App\Call::class, 20)->make()
+        factory(App\Call::class, 300)->make()
             ->each(function($call){
 
                 //Associate an sms with a single random kid picked from the kid table

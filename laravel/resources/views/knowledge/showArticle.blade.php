@@ -24,34 +24,14 @@ Knowledgebase - Articles
      </h2>
     </header>
       <div class="form-group">
-        @if(count($articles) == 0)
+        @if(count($article) == 0)
         <div class="alert alert-info">
         <strong>Oooops!</strong> I have got nothing here.
-        <a href="/home">Click here go Home</a>
+        <a href="{{route('showCategory.knowledge')}}">Click here go Home</a>
         </div>
         @endif
-        <!-- <div class="row">
-          @if(count($articles) > 0)
-            @foreach($articles as $article)
-             <div class="6u 12u(narrower)">
-                <section class="box special">
-                  <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
-                  <h3>{{$article->subheading}}</h3>
-                  <p>{{$article->content}}</p>
-                </section>
-             </div>
-            @endforeach
-          @endif
-        </div> -->
         <div class="list-group">
-            @if(count($articles) > 0)
-              @foreach($articles as $article)
-                <section class="box special">
-                    <h3>{{$article->subheading}}</h3>
-                    <p>{{$article->content}}</p>
-                </section>
-            @endforeach
-            @endif
+            {!! html_entity_decode($article->content) !!}
         </div>
       </div>
       {{--original--}}

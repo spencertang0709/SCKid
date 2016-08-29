@@ -17,6 +17,22 @@ Route::get('/GCMServiceWorker', function () {
 
 Route::get('/GCMSend', 'GCMController@index');
 
+Route::get('/GCMUpstream', 'GCMUpstreamListener@index');
+Route::get('/GCMUpstreamStop', 'GCMUpstreamListener@index');
+
+Route::get('/GCM', [
+	'uses' => 'GCMSendController@index',
+	'as' => 'GCM'
+]);
+
+Route::get('/GCMReceive', function(){
+	 return view('GCMReceive');
+ });
+
+Route::get('/GCMTest','GCMTestController@index');
+
+Route::post('/GCM/{device}', 'GCMSendController@send');
+
 //These are public pages the user can access basic routes
 /////////////////////////////////////////////////////////
 
@@ -27,7 +43,6 @@ Route::get('/', function () {
 Route::get('/elements', function () {
     return view('knowledgeContent.elements');
 });
-
 
 Route::get('/file',function(){
     echo asset('storage/file.txt');
@@ -42,7 +57,17 @@ Route::get('/arrangeTimeSlots', 'ArrangeTimeSlotsController@arrange');
 
 Route::get('/selectKid', 'CurrentKidController@Select');
 
+Route::get('/sessionLogout',[
+	'uses' => 'LogOut@index',
+	'as' => 'logout.session'
+]);
+
 //use this way to avid routes appending itself
+Route::get('/knowledge/addCategory',[
+	'uses'=>'KnowledgeAddCategoyController@index',
+	'as'=>'addCategory.knowledge'
+]);
+
 Route::get('/knowledge/addArticle',[
 	'uses'=>'KnowledgeAddArticleController@index',
 	'as'=>'addArticle.knowledge'
@@ -191,6 +216,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/likes', 'LikeController@index');
 
+    Route::delete('/devices/destroy/{device_id}', 'DeviceController@destroy');
+
     Route::get('/devices', [
         'uses' => 'DeviceController@index',
         'as' => 'deviecs']
@@ -313,7 +340,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
     Route::resource('registerDevices','Api\VerificationCodeController');
 
-
+	Route::resource('updateGCMKey', 'Api\GCMKeyController');
 
     //Sync routes
     Route::resource('sync','Api\SyncController');
