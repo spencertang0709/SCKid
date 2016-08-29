@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Kid;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -27,6 +28,7 @@ class CheckerController extends Controller
                 $posts = $kid->posts()->get();
             }
         }
-        return view('sensitive_checker', ['posts' => $posts]);
+        $words = DB::table('sensitive_words')->pluck('keyword');
+        return view('sensitive_checker', ['posts' => $posts,'words' => $words]);
     }
 }

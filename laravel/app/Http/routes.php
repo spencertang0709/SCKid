@@ -212,6 +212,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/posts', 'PostController@index');
 
+    Route::get('/checker', 'CheckerController@index');
+
     Route::get('/image', 'ImageController@index');
 
 	Route::get('/likes', 'LikeController@index');

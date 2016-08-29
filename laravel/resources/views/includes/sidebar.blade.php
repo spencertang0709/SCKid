@@ -200,6 +200,9 @@
                             <a href="/posts"><i class="fa fa-facebook-square fa-fw"></i>Posts</a>
                         </li>
                         <li>
+                            <a href="/checker"><i class="fa fa-facebook-square fa-fw"></i>Sensitive Keyword Checker</a>
+                        </li>
+                        <li>
                             <a href="/image"><i class="fa fa-facebook-square fa-fw"></i>Images</a>
                         </li>
                         <li>
