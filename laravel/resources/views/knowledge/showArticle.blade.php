@@ -31,7 +31,7 @@ Knowledgebase - Articles
         </div>
         @endif
         <div class="list-group">
-            <p>{{html_entity_decode($article->content)}}</p>
+            {!! html_entity_decode($article->content) !!}
         </div>
       </div>
       {{--original--}}

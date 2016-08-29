@@ -16,9 +16,9 @@ class GCMController extends Controller
                     ->first();
 
 		// API access key from Google API's Console
-		define('API_ACCESS_KEY', $gcmKey->api_key);//'AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE');
+		define('API_ACCESS_KEY',$gcmKey->api_key);// 'AIzaSyD8hGzuCCaWcHmGdzlI2G4Hdo84iQWgB_o');
 		
-		$registrationIds = $gcmKey->registration_token;//"cYLIzTmJ598:APA91bFyjjsr5TuGCmBP6CZ6bb2fYhwm21joPsvxmN50873Csjaqc36EB3qSgk63OKcbe3X-QRbf6j_zCpjHk79nuNwwE8B8mblUUTl3CxNBFaKgjK9nWig7PhVmFpYpLVcwFyxd8YoD";
+		$registrationIds = $gcmKey->registration_token;//"e2G0JEsUxnU:APA91bGC5PgoSMKznTtdutQkiTUDNg7vjsEHELgMGoi07asFIHWMJ7ONpXnY3465o7gY6sZPzEwIrLmvHGS3CNoYy1wKq6xA7yB-XvOZ7OawnAUWMW9eWWxYrsWzuf5Gtm3n2EknUazR";//
 
 		//prep the bundle
 		$msg = array
@@ -44,7 +44,7 @@ class GCMController extends Controller
 		(
 			'registration_ids' => array($registrationIds),
             'priority' => 'high',
-			'data' => (array) $dataMessage
+			'data' => (array) $msg//$dataMessage
 		);
 
 		$headers = array

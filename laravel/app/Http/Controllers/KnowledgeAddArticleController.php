@@ -55,7 +55,7 @@ class KnowledgeAddArticleController extends Controller
 
       $article = new Article();
       $article->subheading = $request['article'];
-      $article->content = htmlentities($request['content']);
+      $article->content = $request['content'];
       $article->save();
       $article->titles()->attach($title->id);
 

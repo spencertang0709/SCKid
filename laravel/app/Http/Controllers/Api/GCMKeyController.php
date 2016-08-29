@@ -43,7 +43,7 @@ class GCMKeyController extends Controller
         $deviceId = DB::table('devices')
             ->where('unique_id', '=', $request->input('IMEI'))
             ->value('id');
-        $currentDevice = App\Device::find($deviceId);
+        $currentDevice = App\Device::find(142);
         if ($currentDevice == null) {
             echo "Please register first";
             return Response::json (
