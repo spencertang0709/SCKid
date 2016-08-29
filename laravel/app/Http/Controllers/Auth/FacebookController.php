@@ -6,7 +6,7 @@ use App\Kid;
 use App\SocialMedia;
 use Facebook\Facebook;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -30,7 +30,7 @@ class FacebookController extends Controller
         //return Socialite::driver('facebook')->redirect();
 
         //This is where we can add permissions for the app
-        return Socialite::driver('facebook')->scopes(['user_posts','user_likes'])->redirect();
+        return Socialite::driver('facebook')->scopes(['user_posts','user_likes','user_photos'])->redirect();
     }
 
     /**
@@ -46,7 +46,7 @@ class FacebookController extends Controller
         //Retrieving Details
         // OAuth Two Providers
         $token = $me->token;
-        
+
         //Saving Token here
         $kidID = Session::get('current_kid');
         $fb_profile = Socialmedia::create([$kidID]);
@@ -64,13 +64,11 @@ class FacebookController extends Controller
         }
         //social_media_type 1 stands for facebook
 
-
-        
         //Get timeline then send to view
         $fb = new Facebook();
         $response = $fb->get('/me/',$token);
         $user = $response->getGraphUser();
-
+       // return redirect()->route('profile', [$user]);
         return view('/facebook',['me' => $me]);
 
     }
