@@ -75,6 +75,30 @@ class VerificationCodeController extends Controller
             array(
                 'error' => true,
             ));
+                echo "User verified";
+
+                $currentDevice = DB::table('devices')
+                                    ->where('unique_id', '=', $request['IMEI'])
+                                    ->first();
+                if ($currentDevice == null) {
+                    $device = new Device();
+                    $device->name = $request['name'];
+                    $device->model = $request['model'];
+                    $device->unique_id = $request['IMEI'];
+                    $device->save();
+
+                    $device->users()->attach($user->id);
+                    echo "Device registered";
+                } else {
+                    echo "Device already registered";
+                }
+
+
+            } else {
+                echo "Verification code has expired ".$timeLimit.' secs';
+            }
+        } else{
+            echo "Verification code is incorrect"
         }
     }
 

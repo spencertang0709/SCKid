@@ -20,7 +20,7 @@ class GCMUpstreamListener extends Controller
     const API_KEY = "AIzaSyD8hGzuCCaWcHmGdzlI2G4Hdo84iQWgB_o";//"AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE";//
 
     public function index(Request $request) {
-        //set_time_limit(0);
+        set_time_limit(0);
         global $messageManager;
         $messageManager = new GCMManager(self::SENDER_ID, self::API_KEY, false);
         global $counter;
@@ -46,29 +46,27 @@ class GCMUpstreamListener extends Controller
         };
 
         $messageManager->onMessage[] = function(GCMManager $currentManager, ReceivedMessage $message) {
-            //echo "Received message from GCM";
-            //  var_dump($message);
+//            echo "Received message from GCM";
+//            var_dump($message);
+//            global $messageManager;
+//            $messageManager->stop();
              $payload = $message->getData();
              $payload = (array) $payload;
-            //var_dump($payload);
-            //   echo "<br/>";
 
-            //"IMEI" "title" "content"
-            //echo $payload['IMEI'];
+              //"IMEI" "title" "content"
             global $messages;
-            //var_dump($messages);
             array_push($messages,
-                 ['IMEI' => $payload['IMEI'],
-                 'title' => $payload['title'],
-                 'content' => $payload['content']
+                ['IMEI' => $payload['IMEI'],
+                    'title' => $payload['title'],
+                    'content' => $payload['content']
                 ]
-             );
-
-
-
+            );
+//
+//
+//
             //  $device = App\Device::where('unique_id', $payload['IMEI'])->first();
              //
-             $device = App\Device::where('unique_id', 'beb6b6eb-af79-3246-a9cc-cb633d0da523')->first();
+             $device = App\Device::where('unique_id', '8fc67a5d-0b8e-39b3-a9ca-21f903c9d2fd')->first();
              $GcmMessage = new App\GcmMessage();
              $GcmMessage->title = $payload['title'];
              $GcmMessage->content = $payload['content'];

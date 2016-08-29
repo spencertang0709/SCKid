@@ -16,6 +16,7 @@ class CreateAlbumsTable extends Migration
             $table->increments('id');
             //$table->string('album_id');
 			$table->string('name');
+			$table->double('album_id')->nullable();
 			$table->string('comments')->nullable();
 			$table->integer('count')->nullable();
 			$table->string('privacy')->nullable();

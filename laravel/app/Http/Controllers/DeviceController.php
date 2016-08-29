@@ -53,7 +53,7 @@ class DeviceController extends Controller
     public function verifyCode(Request $request)
     {
         //Generate verification code
-        $code = rand(1, 1000000);//TODO better algorithm for encryption and avoid same value
+        $code = rand(100000, 1000000);//TODO better algorithm for encryption and avoid same value
 
         //Get current user associated with the current code and save it
         $user = $request->user();

@@ -62,9 +62,6 @@ class GCMSendController extends Controller
 		(
             'title' => $request['GCMTitle'],
             'message' => $request['GCMMessage'],
-            //'sutitle' => $device->id,
-			// 'message' => 'here is a message. message',
-			// 'title'	=> 'This is a title. title',
 			'subtitle' => 'This is a subtitle. subtitle',
 			'tickerText' => 'Ticker text here...Ticker text here...Ticker text here',
 			'vibrate' => 1,
