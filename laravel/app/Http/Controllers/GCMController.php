@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
+use App\Device;
 
 class GCMController extends Controller
 {
@@ -18,7 +19,7 @@ class GCMController extends Controller
 		define('API_ACCESS_KEY', $gcmKey->api_key);//'AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE');
 		
 		$registrationIds = $gcmKey->registration_token;//"cYLIzTmJ598:APA91bFyjjsr5TuGCmBP6CZ6bb2fYhwm21joPsvxmN50873Csjaqc36EB3qSgk63OKcbe3X-QRbf6j_zCpjHk79nuNwwE8B8mblUUTl3CxNBFaKgjK9nWig7PhVmFpYpLVcwFyxd8YoD";
-		
+
 		//prep the bundle
 		$msg = array
 		(
@@ -38,13 +39,14 @@ class GCMController extends Controller
             'command' => 'getLocation'
         );
 		
+        
 		$fields = array
 		(
 			'registration_ids' => array($registrationIds),
             'priority' => 'high',
 			'data' => (array) $dataMessage
 		);
-		 
+
 		$headers = array
 		(
 			'Authorization: key=' . API_ACCESS_KEY,
@@ -59,10 +61,12 @@ class GCMController extends Controller
 		curl_setopt($connection, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($connection, CURLOPT_POSTFIELDS, json_encode($fields));
-		
+
 		$result = curl_exec($connection);
 		curl_close($connection);
-		
+
 		echo $result;
 	}
+
+
 }

@@ -33,4 +33,8 @@ class Device extends Model
     public function gcmkey() {
         return $this->belongsTo(GcmKey::class);
     }
+
+    public function gcmMessages(){
+        return $this->hasMany(GcmMessage::class);
+    }
 }

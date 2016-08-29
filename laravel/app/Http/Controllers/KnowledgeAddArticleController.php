@@ -55,7 +55,7 @@ class KnowledgeAddArticleController extends Controller
 
       $article = new Article();
       $article->subheading = $request['article'];
-      $article->content = $request['content'];
+      $article->content = htmlentities($request['content']);
       $article->save();
       $article->titles()->attach($title->id);
 
@@ -80,9 +80,10 @@ class KnowledgeAddArticleController extends Controller
 
     public function showArticle($title_id){
     	$title = Title::where('id', $title_id)->with('articles')->first();
-    	$article = $title->articles()->get();
+    	$article = $title->articles()->first();
+
     	return view('knowledge.showArticle', [
-    		'articles' => $article
+    		'article' => $article
     	]);
     }
 
