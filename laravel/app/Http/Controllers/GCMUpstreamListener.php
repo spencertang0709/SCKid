@@ -20,7 +20,7 @@ class GCMUpstreamListener extends Controller
     const API_KEY = "AIzaSyD8hGzuCCaWcHmGdzlI2G4Hdo84iQWgB_o";//"AIzaSyD-NwwakxSb9czyuRycV6reTBjq0OJqhKE";//
 
     public function index(Request $request) {
-        //set_time_limit(0);
+        set_time_limit(0);
         global $messageManager;
         $messageManager = new GCMManager(self::SENDER_ID, self::API_KEY, false);
         global $counter;

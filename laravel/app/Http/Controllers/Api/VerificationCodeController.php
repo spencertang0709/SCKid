@@ -30,15 +30,15 @@ class VerificationCodeController extends Controller
         if ($resultCode != null)
         {
             //Check if the code has expired
-            $timeLimit = 600;
+            $timeLimit = 60;
             $initialTime = $resultCode->created_at;
             $secsElapsed = strtotime(date("Y-m-d h:i:sa")) - strtotime($initialTime->toDateTimeString());
             if ($secsElapsed <= $timeLimit) {
                 $user = $resultCode->user()->first();
-                echo "user verified ";
+                echo "User verified";
 
-                $currentDevice = DB::table('Device')
-                                    ->where('IMEI', '=', $request['IMEI'])
+                $currentDevice = DB::table('devices')
+                                    ->where('unique_id', '=', $request['IMEI'])
                                     ->first();
                 if ($currentDevice == null) {
                     $device = new Device();
@@ -48,31 +48,17 @@ class VerificationCodeController extends Controller
                     $device->save();
 
                     $device->users()->attach($user->id);
-                    echo "device registered";
-                    return Response::json(
-                        array(
-                            'success' => true
-                        ));
+                    echo "Device registered";
                 } else {
-                    echo "device already registered";
-                    return Response::json(
-                        array(
-                            'error' => 'already registered'
-                        ));
+                    echo "Device already registered";
                 }
 
 
             } else {
-                return Response::json (
-                array(
-                    'error' => 'expired '.$timeLimit.' secs'
-                ));
+                echo "Verification code has expired ".$timeLimit.' secs';
             }
         } else{
-            return Response::json(
-            array(
-                'error' => true,
-            ));
+            echo "Verification code is incorrect"
         }
     }
 
