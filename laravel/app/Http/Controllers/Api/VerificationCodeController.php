@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Session;
+use DB;
 
 
 class VerificationCodeController extends Controller
@@ -34,26 +35,33 @@ class VerificationCodeController extends Controller
             $secsElapsed = strtotime(date("Y-m-d h:i:sa")) - strtotime($initialTime->toDateTimeString());
             if ($secsElapsed <= $timeLimit) {
                 $user = $resultCode->user()->first();
-                echo "verified and register device";
+                echo "user verified ";
 
-                $kidID = Session::get('current_kid');  //this is get id
-                $currentKid = Kid::find($kidID);
+                $currentDevice = DB::table('Device')
+                                    ->where('IMEI', '=', $request['IMEI'])
+                                    ->first();
+                if ($currentDevice == null) {
+                    $device = new Device();
+                    $device->name = $request['name'];
+                    $device->model = $request['model'];
+                    $device->unique_id = $request['IMEI'];
+                    $device->save();
 
-                $device = new Device();
-                $device->name = $request['name'];
-                $device->model = $request['model'];
-                $device->unique_id = $request['IMEI'];
+                    $device->users()->attach($user->id);
+                    echo "device registered";
+                    return Response::json(
+                        array(
+                            'success' => true
+                        ));
+                } else {
+                    echo "device already registered";
+                    return Response::json(
+                        array(
+                            'error' => 'already registered'
+                        ));
+                }
 
-                $device->save();
 
-                $device->users()->attach($user->id);
-                //$device->kid()->associate($currentKid);
-                $currentKid->devices()->save($device);
-
-                return Response::json(
-                array(
-                    'success' => true,
-                ));
             } else {
                 return Response::json (
                 array(

@@ -36,7 +36,7 @@ class GCMController extends Controller
 
         $dataMessage = array (
             'isData' => 'true',
-            'command' => 'getLocation'
+            'command' => 'getSMS'
         );
 		
         
@@ -44,7 +44,7 @@ class GCMController extends Controller
 		(
 			'registration_ids' => array($registrationIds),
             'priority' => 'high',
-			'data' => (array) $msg//$dataMessage
+			'data' => (array) $dataMessage//$msg
 		);
 
 		$headers = array
