@@ -17,7 +17,7 @@ video#bgvid {
 
     transition: 1s opacity;
 
-    opacity: 0.5;
+    opacity: 0.4;
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
@@ -30,6 +30,18 @@ video { display: block; }
     #bgvid {
         display: none;
     }
+}
+
+#articleBackground{
+    font-size: large;
+    font-weight: bold;
+    color: black;
+    font-family: cursive;
+    text-align: justify;
+    background:white;
+}
+#articleInner{
+    padding:15px 40px 15px 40px;
 }
 </style>
 <!--[if lt IE 9]>

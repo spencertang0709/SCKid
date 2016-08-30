@@ -22,7 +22,7 @@
             </div>
             <div class="form-group has-feedback{{ $errors->has('content') ? ' has-error' : '' }}">
                 <label for="content">Content:</label>
-                <textarea class="form-control" rows="9" name="content" id="content" value="{{ Request::old('content') }}"></textarea>
+                <textarea class="form-control" rows="9" name="content" id="content" value="{{ Request::old('content') }}">{{$article->content}}</textarea>
                 @if ($errors->has('content'))
                 <span class="help-block">
                     <strong>{{ $errors->first('content')}}</strong>
@@ -30,18 +30,19 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <input id="articleId" name="articleId" value='{{$article->id}}'/>
+            <input id="articleId" type="hidden" name="articleId" value='{{$article->id}}'/>
             <input type="hidden" name="_token" value="{{ Session::token() }}">
         </form>
     </div>
 </div>
 
 <script>
-$('#content').val('{{$article->content}}');
+// $('#content').val('{{--$article->content--}}');
+// $('div[class*=" nicEdit-main"]').html('{{--$article->content--}}');
 $('#category').change(function(){
     var selectedCategory = $('#category').val();
     urlString = "selectedCategory=" + selectedCategory;
-     alert(urlString);
+    //  alert(urlString);
     $.ajax
     ({
         url: "{{ route('updateTitles.knowledge') }}",
@@ -74,7 +75,7 @@ $('#title').change(function(e){
         success: function(responseText) {
             // alert(responseText);
             $response = JSON.parse(responseText);
-             alert($response[1]);
+            //  alert($response[1]);
              $('div[class*=" nicEdit-main"]').html($response[0].toString());
              $('#articleId').val($response[1].toString());
         }
