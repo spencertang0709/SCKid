@@ -22,9 +22,15 @@ class KnowledgeAddCategoryController extends Controller
         'newCategory' => 'required',
       ]);
 
-      $category = new App\Category();
-      $category->name = $request['newCategory'];
-      $category->save();
-      echo "success";     
+      $checkCategory = App\Category::where('name',$request['newCategory'])->first();
+      if($checkCategory==null){
+          $category = new App\Category();
+          $category->name = $request['newCategory'];
+          $category->save();
+          echo "success";
+      }else{
+          echo "exist";
+      }
+
     }
 }

@@ -3,7 +3,7 @@
 <div class="row" style="margin-top:50px;">
     <div class="col-sm-4">.col-sm-4</div>
     <div class="col-sm-4">
-        <form action="{{Route('saveArticle')}}" method="post">
+        <form action="{{Route('saveConent.knowledge')}}" method="get">
             <div class="form-group has-feedback{{ $errors->has('category') ? ' has-error' : '' }}">
                 <label class="inline" for="category">Categories:</label>
                 <select class="form-control" name="category" id="category">
@@ -16,7 +16,7 @@
                 <label class="inline" for="title">Title:</label>
                 <select class="form-control" name="title" id="title">
                     @foreach($titles as $title)
-                    <option>{{$title->name}}</option>
+                    <option value={{$title->id}}>{{$title->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -30,28 +30,56 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <input id="articleId" name="articleId" value='{{$article->id}}'/>
             <input type="hidden" name="_token" value="{{ Session::token() }}">
         </form>
     </div>
 </div>
-</div>
+
 <script>
-$('#saveCategoryBt').on('click',function(){
-    var newCategory = $('#newCategory').val();
-    var urlString = "newCategory=" + newCategory;
+$('#content').val('{{$article->content}}');
+$('#category').change(function(){
+    var selectedCategory = $('#category').val();
+    urlString = "selectedCategory=" + selectedCategory;
+     alert(urlString);
     $.ajax
     ({
-        url: "{{ route('saveCategory') }}",
+        url: "{{ route('updateTitles.knowledge') }}",
         type: "GET",
         data: urlString,
         success: function(responseText) {
-            if(responseText=="success")
-            {
-                window.location="{{Route('addArticle.knowledge')}}";
+            var response = JSON.parse(responseText);
+            //construct title
+            var options = "";
+            for(var index in response[0]){
+                // alert(response[0][index]);
+                options += "<option value='"+response[2][index]+"'>" + response[0][index] +"</option>";
             }
+            // alert(options);
+            $("#title").html(options);
+            $('div[class*=" nicEdit-main"]').html(response[1].toString());
         }
     });
 });
-$('#content').val('{{$content}}');
+
+$('#title').change(function(e){
+    var selectedTitle = $('#title').val();
+    var urlString = "selectTitle= " + selectedTitle;
+    //   alert(urlString);
+    $.ajax
+    ({
+        url: "{{ route('updateContent.knowledge') }}",
+        type: "GET",
+        data: urlString,
+        success: function(responseText) {
+            // alert(responseText);
+            $response = JSON.parse(responseText);
+             alert($response[1]);
+             $('div[class*=" nicEdit-main"]').html($response[0].toString());
+             $('#articleId').val($response[1].toString());
+        }
+    });
+});
+
 </script>
 @endsection
