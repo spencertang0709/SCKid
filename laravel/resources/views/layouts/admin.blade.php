@@ -76,20 +76,179 @@ jQuery(function(){
 			$('#delPolicy').attr('action', dir);
 	   	});
 
-		$('#verifyDevice').on('show.bs.modal', function(e) {
-			$.ajax({
-				method: 'GET',
-				url: '{{route("verify.devices")}}',
-			})
-			.done(function(responseText) {
-				$('#lbVerification').text('Your Verification Code is: ' + responseText);
-			});
+		$('#generateCode').on('click', function(e) {
+			var passphrase = $('#passphrase').val();
+			var minLength = 4;
+			if (passphrase.length < minLength) {
+				$('#lbVerification').text('Passphrase is less than four characters');
+			} else {
+				var urlString = "passphrase="+ passphrase;
+				$.ajax({
+					type: "GET",
+					url: "devices/verify",
+					data: urlString,
+					success: function(responseText) {
+						$('#lbVerification').text('Your Verification Code is: ' + responseText);
+					}
+				});
+			}
+		});
+
+		$('.associateKid').on('click', function(e) {
+			//Get current button and change layout accordingly
+			var currentElement = e.target;
+			if (currentElement.tagName == "SPAN") {
+				currentElement = currentElement.parentNode;
+			}
+			var deviceId = currentElement.getAttribute("data-id");
+			var editingButtonElement = currentElement;
+			var childArray = editingButtonElement.childNodes;
+
+			if (editingButtonElement.getAttribute("editing") == "false") {
+				editingButtonElement.setAttribute("editing", "true");
+				for (var i = 0; i < childArray.length; i++) {
+					if (childArray[i].tagName == "SPAN") {
+						childArray[i].className = "glyphicon glyphicon-ok";
+					}
+				}
+
+				//Find the corresponding column
+				currentElement = currentElement.parentNode;
+				do {
+					currentElement = currentElement.previousSibling;
+				} while (currentElement.className != "kidColumn");
+				var kidColumn = currentElement;
+				do {
+					currentElement = currentElement.previousSibling;
+				} while (currentElement.className != "nameColumn");
+				var nameColumn = currentElement;
+
+				//Alter name field
+				var deviceName = nameColumn.innerHTML;
+				var nameField = document.createElement("INPUT");
+				nameField.value = deviceName;
+				nameColumn.innerHTML = "";
+				nameColumn.appendChild(nameField);
+
+				//Alter kid field
+				kidColumn.innerHTML = "";
+				var kidSelectionList = document.createElement("SELECT");
+				kidColumn.appendChild(kidSelectionList);
+
+				var urlString = "deviceId=" + deviceId;
+				$.ajax ({
+					type: "GET",
+					url: "devices/getKid",
+					data: urlString,
+					success: function(responseText) {
+						var kidObjectArray = JSON.parse(responseText);
+						var preselectedKidId = -1;
+						var index = 1;
+						var notAssociated = false;
+						for (var kidId in kidObjectArray) {
+							var kidDescription = kidObjectArray[kidId];
+							if (kidId == 0 && index == 1) {
+								preselectedKidId = kidDescription;
+							} else {
+								var listElement = document.createElement("OPTION");
+								listElement.setAttribute("kidId", kidId);
+								listElement.innerHTML = kidDescription;
+								if (preselectedKidId == kidId) {
+									listElement.selected = true;
+								}
+								if (kidId == -1) {
+									if (preselectedKidId == -1) {
+										notAssociated = true;
+									}
+								}
+								if (!notAssociated) {
+									kidSelectionList.appendChild(listElement);
+								}
+							}
+							index++;
+						}
+					}
+				});
+			} else {
+				//Find the corresponding column
+				currentElement = currentElement.parentNode;
+				do {
+					currentElement = currentElement.previousSibling;
+				} while (currentElement.className != "kidColumn");
+				var kidColumn = currentElement;
+				do {
+					currentElement = currentElement.previousSibling;
+				} while (currentElement.className != "nameColumn");
+				var nameColumn = currentElement;
+
+				//Alter name field
+				var nameInputField = nameColumn.firstChild;
+				var deviceName = nameInputField.value;
+
+				if (deviceName == "") {
+					nameColumn.style.backgroundColor = 'red';
+				} else {
+					nameColumn.innerHTML = deviceName;
+
+					//Send the changed name to the database
+					var urlString = "deviceId=" + deviceId + "&deviceName=" + deviceName;
+					$.ajax({
+						type: "GET",
+						url: "devices/changeName",
+						data: urlString,
+						success: function() {
+							nameColumn.style.backgroundColor = 'white';
+						}
+					});
+
+					//Find the selected option and alter kid column
+					var kidList = kidColumn.firstChild;
+					var selectedKid = kidList.options[kidList.selectedIndex];
+					var kidId = selectedKid.getAttribute('kidId');
+					if (kidId == -1) {
+						kidColumn.innerHTML = "None";
+						kidColumn.style.border = "none";
+					} else {
+						kidColumn.innerHTML = selectedKid.innerHTML;
+						var currentKidId;
+						$.ajax ({
+							type: "GET",
+							url: "getCurrentKid",
+							success: function(responseText) {
+								if (kidId == responseText) {
+									kidColumn.style.border = "1px solid red";
+									var kidName = kidColumn.innerHTML;
+									kidColumn.innerHTML = "";
+									var highlightElement = document.createElement("STRONG");
+									highlightElement.innerHTML = kidName;
+									kidColumn.appendChild(highlightElement);
+								}
+							}
+						});
+					}
+
+					//Update the associated kid to the database
+					var urlString = "deviceId=" + deviceId + "&kidId=" + kidId;
+					$.ajax({
+						type:"GET",
+						url: "devices/associateKid",
+						data: urlString
+					});
+
+					//Alter layout after processing is finished
+					editingButtonElement.setAttribute("editing", "false");
+					for (var i = 0; i < childArray.length; i++) {
+						if (childArray[i].tagName == "SPAN") {
+							childArray[i].className = "glyphicon glyphicon-pencil";
+						}
+					}
+				}
+			}
 		});
 
 		$('#GCMMessageModel').on('show.bs.modal', function(e) {
 			var id =  $(e.relatedTarget).data('id');
 			var dir="/GCM/"+id;
-
 			$('#GCMForm').attr('action', dir);
 	   	});
 	</script>
@@ -132,7 +291,7 @@ jQuery(function(){
 
 {{--THESE ARE FOR CHECKING IF THE ROUTE NEEDS TO REDIRECT BACK--}}
 	<script>
-	var arr=['{{route("beacons")}}','{{route("deviecs")}}','{{route("calls")}}','{{route("sms")}}',
+	var arr=['{{route("beacons")}}','{{route("devices")}}','{{route("calls")}}','{{route("sms")}}',
 	'{{route("location")}}','{{ url("/panics") }}'];	//add all route here
 		$('.select_button').on('click', function(e) {
 			$('div[class*="box-profile"]').removeClass('well');
