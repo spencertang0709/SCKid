@@ -60,7 +60,7 @@ Route::get('/selectKid', 'CurrentKidController@select');
 Route::get('/getCurrentKid', 'CurrentKidController@getCurrentKid');
 
 Route::get('/sessionLogout',[
-	'uses' => 'ClearSessionOnLogOut@index',
+	'uses' => 'LogOut@index',
 	'as' => 'logout.session'
 ]);
 
@@ -386,6 +386,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
     //Sync routes
     Route::resource('sync','Api\SyncController');
+
 
     //AUTHENTICATED ROUTES ONLY
     //All these routes are restricted to authenticated API users only using JWT
