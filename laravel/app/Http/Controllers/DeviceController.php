@@ -113,6 +113,7 @@ class DeviceController extends Controller
         if ($kidId == -1) {
             $kidId = NULL;
         }
+
         DB::table('devices')
             ->where('id', $deviceId)
             ->update(['kid_id' => $kidId]);

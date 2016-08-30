@@ -97,6 +97,7 @@ jQuery(function(){
 		$('.associateKid').on('click', function(e) {
 			//Get current button and change layout accordingly
 			var currentElement = e.target;
+			//To solve event capturing issues that accidentally captures the nested element
 			if (currentElement.tagName == "SPAN") {
 				currentElement = currentElement.parentNode;
 			}
@@ -222,6 +223,8 @@ jQuery(function(){
 									var highlightElement = document.createElement("STRONG");
 									highlightElement.innerHTML = kidName;
 									kidColumn.appendChild(highlightElement);
+								} else {
+									kidColumn.style.border = "none";
 								}
 							}
 						});
