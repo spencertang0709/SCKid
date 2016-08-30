@@ -19,4 +19,9 @@ class CurrentKidController extends Controller
         Session::put('endPickTime', $request->endPickTime);
 		echo $request->name;
     }
+
+    public function getCurrentKid(Request $request) {
+        $kidId = Session::get('current_kid');
+        echo $kidId;
+    }
 }

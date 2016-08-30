@@ -237,23 +237,23 @@
                                     <th>Minor Number</th>
                                 </tr>
                                 @if(count($beacons) > 0)
-                                @foreach($beacons as $beacon)
-                                <tr data-info="{{$beacon->id}}">
-                                    <td>{{$beacon->location}}</td>
-                                    <td>{{$beacon->major}}</td>
-                                    <td>{{$beacon->minor}}</td>
-                                    <td>
-                                        <a href="#" class="table-link">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-title="DELETEBEACON" data-id={{$beacon->id}}
-                                                    data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete"></i>
+                                    @foreach($beacons as $beacon)
+                                    <tr data-info="{{$beacon->id}}">
+                                        <td>{{$beacon->location}}</td>
+                                        <td>{{$beacon->major}}</td>
+                                        <td>{{$beacon->minor}}</td>
+                                        <td>
+                                            <a href="#" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-title="DELETEBEACON" data-id={{$beacon->id}}
+                                                        data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete"></i>
                                                 </span>
                                             </a>
                                         </td>
                                     </tr>
                                     @endforeach
-                                    @endif
+                                @endif
                                 </table>
                             </div>
                             <!-- /.box-body -->
@@ -353,11 +353,11 @@ var check =checkKid(kid_name,'#nonKidAlert');
 
 <script>
 var inputBeaconId = -1;
-$( "#BeaConfig" ).children().children().each(function() {
+$("#BeaConfig").children().children().each(function() {
     $(this).click(function() {
         if($(this).hasClass("info")){
             $(this).removeClass("info");
-            selectedBeaconId=-1;
+            selectedBeaconId = -1;
         }else{
             // var inputBeaconId = $(this).attr("data-info");
             var inputBeaconId = $(this).data("info");

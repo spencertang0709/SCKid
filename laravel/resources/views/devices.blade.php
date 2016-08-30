@@ -28,40 +28,10 @@
         </div>
     </div>
 
-    <div id="wrapper">
-        <div id="addWeb" class="modal fade" role="dialog">
-            <form action="" method="post">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add a Device</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="name">Name: </label>
-                                <input type="text" class="form-control" id="name" name="name" value="">
-                                <label for="model">Model:</label>
-                                <input type="text" class="form-control" id="model" name="model" value="">
-                                <label for="category">Number: </label>
-                                <input type="text" class="form-control" id="cat" name="cat" value="">
-                                {!! csrf_field() !!}
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input name="AddDevice" type="submit" id="AddWeb" value="Add" class="btn btn-primary" />
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
         <!-- verification -->
         <div id="wrapper">
             <div id="verifyDevice" class="modal fade" role="dialog">
-                <form action="/devices/verify" method="get">
+                <form action="" method="get">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -71,10 +41,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
+                                    <label for="product">Enter a passphrase of you choice to generate a verification code (4 chars minimum):</label>
+                                    <input type="text" class="form-control" id="passphrase" name="passphrase" value="">
+                                </div>
+                                <div class="form-group">
                                     <label id="lbVerification"></label>
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <button id="generateCode" type="button" class="btn btn-primary">Generate</button>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -106,28 +81,33 @@
                                 <table id="datatable" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Device Name</th>
                                         <th>Model</th>
-                                        <th>Unique ID</th>
-                                        <th>Current Kid</th>
+                                        <!--<th>Unique ID</th>-->
+                                        <th>Current Kid in Use</th>
                                     </tr>
                                     </thead>
 
                                     @if(count($devices) > 0)
                                         @foreach($devices as $device)
                                             <tr>
-                                                <td>{{$device->name}}</td>
+                                                <td class="nameColumn">{{$device->name}}</td>
                                                 <td>{{$device->model}}</td>
-                                                <td>{{$device->unique_id}}</td>
+                                                <!--<td>{{--$device->unique_id--}}</td>-->
                                                 {{--<td>Kid Name</td>--}}
-                                                @if(count($kids) > 0)
-                                                <td>{{$device->kid()->first()->name}}</td>
+                                                @if($device->kid()->first() != NULL)
+                                                    @if ($device->kid()->first()->name == Session::get('current_kid_name'))
+                                                        <td class="kidColumn" style="border:1px solid red;"><strong>{{$device->kid()->first()->name}}</strong></td>
+                                                    @else
+                                                        <td class="kidColumn">{{$device->kid()->first()->name}}</td>
+                                                    @endif
+                                                @else
+                                                    <td class="kidColumn">None</td>
                                                 @endif
                                                 <td>
-                                                    <!-- {{--TODO edit--}}
-                                                    <button class="btn btn-primary btn-xs"  data-title="Edit" data-id={{$device->id}} data-toggle="modal" data-target="#edit" >
+                                                    <button class="btn btn-primary btn-xs associateKid" editing="false" data-id={{$device->id}}>
                                                         <span class="glyphicon glyphicon-pencil"></span>
-                                                    </button> -->
+                                                    </button>
                                                     <button class="btn btn-primary btn-xs"  data-title="Delete" data-id={{$device->id}} data-dir={{Route::getFacadeRoot()->current()->uri()}} data-toggle="modal" data-target="#delete" >
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </button>
@@ -135,7 +115,6 @@
                                             </tr>
                                         @endforeach
                                     @endif
-
 
                                 </table>
                             </div>
@@ -147,8 +126,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button id="verifyDevice" data-toggle="modal" data-target="#verifyDevice" class="btn btn-success" style="float: right;" >Verification</button>
-                        {{--<button id="add device" data-toggle="modal" data-target="#addWeb" class="btn btn-primary" style="float: right;" >Add A Device</button>--}}
+                        <button data-toggle="modal" data-target="#verifyDevice" class="btn btn-success" style="float: right;" >Verification</button>
                     </div>
                 </div>
 
@@ -163,19 +141,12 @@
     <!-- /#wrapper -->
     <script>
     $('button[data-dismiss="modal"]:contains("Close")').click(function(){
-        // $.ajax
-        // ({
-        //     url: "{{route('deviecs')}}",
-        //     type: "GET",
-        //     success: function(responseText) {
-        //     }
-        // });
-        window.location.replace('{{route("deviecs")}}');
+        window.location.replace('{{route("devices")}}');
     });
     </script>
     {{--check current kid if they exist--}}
     <script>
-    kid_name="{{Session::get('current_kid_name')}}";
-    var check =checkKid(kid_name,'#nonKidAlert');
+        kid_name="{{Session::get('current_kid_name')}}";
+        var check = checkKid(kid_name,'#nonKidAlert');
     </script>
 @endsection

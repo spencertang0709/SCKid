@@ -55,7 +55,9 @@ Route::get('/filemake',function(){
 
 Route::get('/arrangeTimeSlots', 'ArrangeTimeSlotsController@arrange');
 
-Route::get('/selectKid', 'CurrentKidController@Select');
+Route::get('/selectKid', 'CurrentKidController@select');
+
+Route::get('/getCurrentKid', 'CurrentKidController@getCurrentKid');
 
 Route::get('/sessionLogout',[
 	'uses' => 'LogOut@index',
@@ -216,11 +218,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/likes', 'LikeController@index');
 
+    /*
+     * Devices related
+     */
     Route::delete('/devices/destroy/{device_id}', 'DeviceController@destroy');
 
     Route::get('/devices', [
         'uses' => 'DeviceController@index',
-        'as' => 'deviecs']
+        'as' => 'devices']
     );
 
     Route::get('/devices/verify', [
@@ -228,6 +233,15 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'verify.devices'
     ]);
 
+    Route::get('/devices/getKid', 'DeviceController@getKidAvailable');
+
+    Route::get('/devices/associateKid', 'DeviceController@associateKidDevice');
+
+    Route::get('/devices/changeName', 'DeviceController@changeDeviceName');
+
+    /*
+     * Settings
+     */
     Route::get('/settings', 'SettingController@index');
 
     Route::get('/time', 'TimeController@index');
