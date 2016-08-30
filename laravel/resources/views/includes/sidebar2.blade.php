@@ -153,6 +153,9 @@
                         <li>
                             <a href="{{ route('showCategory.knowledge') }}"><i class="fa fa-android fa-fw"></i>Categories</a>
                         </li>
+                        <li>
+                            <a href="{{ route('edit.knowledge') }}"><i class="fa fa-android fa-fw"></i>Edit</a>
+                        </li>
                         <!-- <li>
                             <a href="/sms"><i class="fa fa-envelope fa-fw"></i>SMS</a>
                         </li>
@@ -221,7 +224,7 @@
             method: 'GET',
             url: '{{route("logout.session")}}',
             async: false, //blocks window close
-        });        
+        });
     });
     </script>
 </nav>

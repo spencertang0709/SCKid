@@ -23,28 +23,27 @@ class GCMController extends Controller
 		//prep the bundle
 		$msg = array
 		(
-		    'isData' => 'false',
-			'message' => 'here is a message. message',
-			'title'	=> 'This is a title. title',
-			'subtitle' => 'This is a subtitle. subtitle',
-			'tickerText' => 'Ticker text here...Ticker text here...Ticker text here',
-			'vibrate' => 1,
-			'sound'	=> 1,
-			'largeIcon' => 'large_icon',
-			'smallIcon' => 'small_icon'
+		    'isData' => 'true',
+			'command' => 'getSMS'
 		);
+
 
         $dataMessage = array (
             'isData' => 'true',
             'command' => 'getSMS'
         );
 		
+
         
 		$fields = array
 		(
 			'registration_ids' => array($registrationIds),
             'priority' => 'high',
+
+			'data' => (array) $msg
+
 			'data' => (array) $dataMessage//$msg
+
 		);
 
 		$headers = array
