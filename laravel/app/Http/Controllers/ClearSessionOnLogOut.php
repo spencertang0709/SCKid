@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class LogOut extends Controller
+class ClearSessionOnLogOut extends Controller
 {
     public function index(Request $request) {
         $request->session()->forget('current_kid');
