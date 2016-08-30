@@ -65,10 +65,26 @@ Route::get('/sessionLogout',[
 ]);
 
 //use this way to avid routes appending itself
-Route::get('/knowledge/eidt',[
+Route::get('/knowledge/edit',[
 	'uses'=>'KnowledgeEditController@index',
 	'as'=>'edit.knowledge'
 ]);
+
+Route::get('/knowledge/saveContent',[
+	'uses'=>'KnowledgeEditController@saveContent',
+	'as'=>'saveConent.knowledge'
+]);
+
+Route::get('/knowledge/updateTitles',[
+	'uses'=>'KnowledgeEditController@updateTitles',
+	'as'=>'updateTitles.knowledge'
+]);
+
+Route::get('/knowledge/updateContent',[
+	'uses'=>'KnowledgeEditController@updateContent',
+	'as'=>'updateContent.knowledge'
+]);
+
 
 Route::get('/knowledge/addCategory',[
 	'uses'=>'KnowledgeAddCategoryController@index',

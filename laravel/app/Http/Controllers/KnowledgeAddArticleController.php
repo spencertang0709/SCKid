@@ -42,10 +42,6 @@ class KnowledgeAddArticleController extends Controller
         'content' => 'required|min:5',
       ]);
 
-    //   $category = new Category();
-    //   $category->name = $request['category'];
-    //   $category->save();
-
       $category = Category::where('name',$request['category'])->first();
 
       $title = new Title();

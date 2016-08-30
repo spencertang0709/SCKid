@@ -3,6 +3,13 @@
 <div class="row" style="margin-top:50px;">
   <div class="col-sm-4">.col-sm-4</div>
   <div class="col-sm-4">
+
+      <div id="categoryExist" class="alert alert-warning fade">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Oooops!</strong> The category already exists!
+          <br/>
+      </div>      
+
     <form action="{{Route('saveArticle')}}" method="post">
         <div class="row">
             <div class="col-sm-6">
@@ -82,6 +89,9 @@ $('#saveCategoryBt').on('click',function(){
             if(responseText=="success")
             {
                 window.location="{{Route('addArticle.knowledge')}}";
+            }else{
+                // alert("this cateogry already exists");
+                $('#categoryExist').addClass("in");
             }
         }
     });

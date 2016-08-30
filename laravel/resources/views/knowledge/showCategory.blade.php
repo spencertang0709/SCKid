@@ -49,7 +49,7 @@ Knowledgebase - Categories
                     @foreach($categories as $category)
                     <div class="6u 12u(narrower)">
                         <a href="{{ route('showTitle.knowledge', ['category_id' => $category->id]) }}">
-                            <section class="box special sectionImg">
+                            <section id="secImg" class="box special sectionImg">
                               <span class="image featured" style="margin-top: 180px;">
                                   <div class="opBackground">
                                   <h3>
@@ -61,7 +61,6 @@ Knowledgebase - Categories
                     </div>
                     @endforeach
                 @endif
-
                 <!-- @if(count($categories) > 0)
                     @foreach($categories as $category)
                     <div class="6u 12u(narrower)">
@@ -81,6 +80,11 @@ Knowledgebase - Categories
 </div>
 
 @section('customFunction')
+<!-- <script>
+alert('s');
+$('.sectionImg').css("background-image", "/img/lock.jpg");
+alert('s');
+</script> -->
 <!--[if lte IE 8]><script src="/js/welcome/ie/html5shiv.js"></script><![endif]-->
 <script src="/js/welcome/jquery.min.js"></script>
 <script src="/js/welcome/jquery.dropotron.min.js"></script>

@@ -20,7 +20,7 @@ Knowledgebase - Articles
 {{--original--}}
     <header>
       <h2 style="color:white;">
-        All the Articles
+        Article
      </h2>
     </header>
       <div class="form-group">
@@ -30,8 +30,10 @@ Knowledgebase - Articles
         <a href="{{route('showCategory.knowledge')}}">Click here go Home</a>
         </div>
         @endif
-        <div class="list-group">
+        <div class="list-group" id="articleBackground">
+            <div id="articleInner" >
             {!! html_entity_decode($article->content) !!}
+            </div>
         </div>
       </div>
       {{--original--}}
