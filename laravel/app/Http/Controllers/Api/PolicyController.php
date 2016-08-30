@@ -14,8 +14,7 @@ class PolicyController extends Controller
 {	 
 	public function index(Request $request)
     {
-		//$deviceId = $request->input('unique_id');
-		$deviceId = 1234;
+		$deviceId = $request->input('unique_id');
 		
 		//Get related data from input
 		$currentDevice = DB::table('devices')

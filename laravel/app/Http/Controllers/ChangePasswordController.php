@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class ChangePasswrodController extends Controller
+class ChangePasswordController extends Controller
 {
     //use ResetsPasswords;
 

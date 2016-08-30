@@ -65,14 +65,15 @@ $factory->define(App\Call::class, function (Faker\Generator $faker) {
     // Random datetime of the current week
     $startDate = $faker->dateTimeBetween('this week', '+6 days');
     // Random datetime of the current week *after* `$startingDate`
-    $endDate   = $faker->dateTimeBetween($startDate, strtotime('+6 days'));
+    //$endDate   = $faker->dateTimeBetween($startDate, strtotime('+6 days'));
 
     return [
         'number' => $faker->phoneNumber,
         'contact' => $faker->firstName,
         'direction' => $faker->boolean(50),
-        'start_time' => $startDate,
-        'end_time' => $endDate,
+        'time' => $startDate,
+//        'start_time' => $startDate,
+//        'end_time' => $endDate,
     ];
 });
 
