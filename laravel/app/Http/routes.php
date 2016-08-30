@@ -60,7 +60,7 @@ Route::get('/selectKid', 'CurrentKidController@select');
 Route::get('/getCurrentKid', 'CurrentKidController@getCurrentKid');
 
 Route::get('/sessionLogout',[
-	'uses' => 'LogOut@index',
+	'uses' => 'ClearSessionOnLogOut@index',
 	'as' => 'logout.session'
 ]);
 
@@ -172,7 +172,7 @@ Route::get('/login', function () {
 
 //Password change
 Route::post('/password/change', [
-'uses' => 'ChangePasswrodController@change',
+'uses' => 'ChangePasswordController@change',
 'as' => 'changePassword'
 ]);
 
