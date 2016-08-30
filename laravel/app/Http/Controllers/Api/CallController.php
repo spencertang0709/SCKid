@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App;
 use App\Call;
 use App\Kid;
 use App\User;
@@ -24,15 +25,37 @@ class CallController extends Controller
      */
     public function index(Request $request)
     {
-        $kid = $request->input('kid.id');
-        $calls = DB::table('calls')->where('kid_id', '=', $kid)->get();
+        $deviceId = $request->input('device.IMEI');
+
+        try {
+            $currentDevice = App\Device::findOrFail($deviceId);
+        } catch (App\Classes\Exception $e) {
+            return Response::json(
+                array (
+                    'response' => 'Device not found'
+                )
+            );
+        }
+
+        try {
+            $currentKid = App\Kid::findOrFail($currentDevice->kid_id);
+        } catch (App\Classes\Exception $e) {
+            return Response::json(
+                array (
+                    'response' => 'Device not associated with a kid'
+                )
+            );
+        }
+
+        $calls = DB::table('calls')->where('kid_id', '=', $currentKid->id)->get();
 
         return Response::json(
-            array(
-                'method' => 'index',
-                'error' => false,
-                'status' => '200',
-                'calls' => $calls)
+            array (
+//                'method' => 'index',
+//                'error' => false,
+//                'status' => '200',
+                'calls' => $calls
+            )
         );
 
         //return Call::paginate(100);
@@ -68,18 +91,36 @@ class CallController extends Controller
     public function store(Request $request)
     {
         //Dot syntax for digging deeper in array
-        $id = $request->input('kid.id');
-        $calls = $request->input('kid.calls');
+        $deviceId = $request->input('device.IMEI');
+        $calls = $request->input('device.calls');
 
-        $kid = Kid::find($id);
-        $kid->calls()->createMany($calls);
+        try {
+            $currentDevice = App\Device::findOrFail($deviceId);
+        } catch (App\Classes\Exception $e) {
+            return Response::json(
+                array (
+                    'response' => 'Device not found'
+                )
+            );
+        }
 
+        try {
+            $currentKid = App\Kid::findOrFail($currentDevice->kid_id);
+        } catch (App\Classes\Exception $e) {
+            return Response::json(
+                array (
+                    'response' => 'Device not associated with a kid'
+                )
+            );
+        }
+
+        $currentKid->calls()->createMany($calls);
         return Response::json(
-            array(
-                'kid' => $kid,
-                'calls' => $calls,
-                'status' => 'Success Added Calls!')
+            array (
+                'response' => 'Success'
+            )
         );
+
     }
 
     /**
@@ -88,10 +129,19 @@ class CallController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($deviceId)
     {
-        $kid = Kid::find($id);
-        return $kid->calls()->get();
+        $currentDevice = App\Device::find($deviceId);
+        try {
+            $currentKid = App\Kid::findOrFail($currentDevice->kid_id);
+        } catch (App\Classes\Exception $e) {
+            return Response::json(
+                array (
+                    'response' => 'Device not associated with a kid'
+                )
+            );
+        }
+        return $currentKid->calls()->get();
     }
 
     /**

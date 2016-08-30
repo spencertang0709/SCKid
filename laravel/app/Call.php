@@ -13,7 +13,7 @@ class Call extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'contact', 'direction', 'start_time', 'end_time'
+        'number', 'contact', 'direction', 'time'//'start_time', 'end_time'
     ];
 
     /**
