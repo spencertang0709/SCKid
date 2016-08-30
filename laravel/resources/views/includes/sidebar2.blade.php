@@ -50,11 +50,11 @@
     		{{Session::get('kid_text')}}
     		<span id="current_kid_name">{{Session::get('current_kid_name')}}</span>
     	</li>
-    	<li>
+    	{{-- <li>
     		<a href="/kids">
     			<button>Change</button>
     		</a>
-    	</li>
+    	</li> --}}
 
         <li class="text-primary">{{Auth::user()->name}} </li>
         <li class="dropdown">
@@ -73,8 +73,8 @@
                 User Message
                 </div></a></li><li class="divider"></li>
 
-                <li class="divider"></li>
-                <li><a href="/messages"><i class="fa fa-inbox fa-fw"></i> All Messages</a>
+                <!-- <li class="divider"></li> -->
+                <!-- <li><a href="/messages"><i class="fa fa-inbox fa-fw"></i> All Messages</a></li> -->
             </ul>
             <!-- /.dropdown-messages -->
         </li>
@@ -117,7 +117,7 @@
                 </li>
 
                 <li>
-                    <a href="#">Management<span class="fa arrow"></span></a>
+                    <!-- <a href="#">Management<span class="fa arrow"></span></a> -->
                     <ul class="nav nav-second-level">
                         {{--<li>--}}
                             {{--<a href="kid"><i class='fa fa-tachometer fa-fw'></i>Kid Dashboard</a>--}}

@@ -12,7 +12,7 @@ class LocationsTableSeeder extends Seeder
     public function run()
     {
         //We can use model factories or standard db calls
-        factory(App\Location::class, 20)->make()
+        factory(App\Location::class, 200)->make()
                 ->each(function($location){
 
                     //Associate an sms with a single random kid picked from the kid table

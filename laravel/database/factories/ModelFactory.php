@@ -110,7 +110,7 @@ $factory->define(App\Location::class, function (Faker\Generator $faker) {
         //New Zealand
         'latitude' => $faker->randomFloat(null,-47,-33),
         'longitude' => $faker->randomFloat(null,164, 179),
-        'time' => $faker->dateTime,
+        'time' => $faker->dateTimeBetween('this week', '+6 days'),
     ];
 });
 

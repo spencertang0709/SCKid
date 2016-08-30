@@ -73,8 +73,8 @@
                 User Message
                 </div></a></li>
                 <li class="divider"></li>
-                <li class="divider"></li>
-                <li><a href="/messages"><i class="fa fa-inbox fa-fw"></i> All Messages</a>
+                <!-- <li class="divider"></li> -->
+                <!-- <li><a href="/messages"><i class="fa fa-inbox fa-fw"></i> All Messages</a></li> -->
                 <li class="divider"></li>
                 <li><a href="/GCM"><i class="fa fa-inbox fa-fw"></i> Send Messages</a>
             </ul>
@@ -168,7 +168,7 @@
                             <a href="/time"><i class="fa fa-clock-o fa-fw"></i>Time Restrictions</a>
                         </li>
                         <li>
-                            <a href="/settings"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                            <!-- <a href="/settings"><i class="fa fa-gear fa-fw"></i>Settings</a> -->
                         </li>
                     </ul>
                 </li>
@@ -176,13 +176,13 @@
                 <li>
                     <a href="#">Social Media<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
+                        <!-- <li>
                             <a href="/social"><i class="fa fa-globe fa-fw"></i>Overview</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="/facebook"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="/instagram"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
                         </li>
                         <li>
@@ -190,7 +190,7 @@
                         </li>
                         <li>
                             <a href="/tumblr"><i class="fa fa-tumblr-square fa-fw"></i>Tumblr</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li>
@@ -218,7 +218,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#">Help<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -228,7 +228,7 @@
                             <a href="/knowledge/categories"><i class="fa fa-question fa-fw"></i>Learn About Privacy</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

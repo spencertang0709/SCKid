@@ -3,7 +3,7 @@
 <div class="row" style="margin-top:50px;">
     <div class="col-sm-4">.col-sm-4</div>
     <div class="col-sm-4">
-        <form action="{{Route('saveConent.knowledge')}}" method="get">
+        <form action="{{Route('saveConent.knowledge')}}" method="post">
             <div class="form-group has-feedback{{ $errors->has('category') ? ' has-error' : '' }}">
                 <label class="inline" for="category">Categories:</label>
                 <select class="form-control" name="category" id="category">

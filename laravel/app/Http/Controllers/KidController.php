@@ -143,4 +143,14 @@ class KidController extends Controller
         );
     }
 
+    // public function saveAvatar(Requset $request){
+    //
+    // }
+
+    public function initialAvatar(Request $request){
+        $user = Auth::user()->first();
+        $kid = $user->kids()->get();
+        return view('addAvatar',['kids'=>$kid]);
+    }
+
 }

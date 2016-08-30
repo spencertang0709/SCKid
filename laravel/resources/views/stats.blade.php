@@ -21,7 +21,7 @@
                 </div>
                 @endif
                 @if(!Session::has('startPickTime')||!Session::has('endPickTime')
-                ||Session('startPickTime')===""||Session('endPickTime')==="")                
+                ||Session('startPickTime')===""||Session('endPickTime')==="")
                 <div class="alert alert-warning fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>Oooops!</strong> please select the period of time!
@@ -96,7 +96,7 @@
                                 {{--Well is for colouring--}}
                                 <div class="box box-primary">
                                     <div class="box-body box-profile @if($kid->id == Session::get('current_kid')) well @endif">
-                                        <img class="profile-user-img img-responsive img-circle stats_select" src="/img/avatar{{rand(1,4)}}.png" alt="User profile picture"
+                                        <img class="profile-user-img img-responsive img-circle stats_select" src="/img/avatar{{rand(4,4)}}.png" alt="User profile picture"
                                              data-id={{$kid->id}} data-kidname={{$kid->name}}>
                                         <h3 class="profile-username text-center">{{$kid->name}}</h3>
                                         <p class="text-muted text-center"></p>

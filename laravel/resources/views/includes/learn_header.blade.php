@@ -5,6 +5,10 @@
         <ul>
             <li> | </li>
             <li>
+                <a href="/home" class="icon fa-angle-down">Go Home</a>                
+            </li>
+            <!--<li> | </li>
+            <li>
                 <a href="#" class="icon fa-angle-down">Go</a>
                 <ul>
                     <li><a href="/home">Home</a></li>
@@ -60,7 +64,7 @@
                     <li><a href="#">Software</a></li>
                     <li><a href="#">Parenting Tips</a></li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </nav>
 </header>

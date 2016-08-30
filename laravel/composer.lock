@@ -259,7 +259,6 @@
                 "facebook",
                 "sdk"
             ],
-<<<<<<< HEAD
             "time": "2016-05-18 22:04:36"
         },
         {
@@ -357,10 +356,8 @@
             ],
             "abandoned": "guzzlehttp/guzzle",
             "time": "2015-03-18 18:23:50"
-=======
             "abandoned": "facebook/graph-sdk",
             "time": "2016-08-09 11:32:26"
->>>>>>> 032ef6b862b4026cb11a64c8e4787eebf9172194
         },
         {
             "name": "guzzlehttp/guzzle",
