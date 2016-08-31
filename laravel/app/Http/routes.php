@@ -35,14 +35,19 @@ Route::post('/GCM/{device}', 'GCMSendController@send');
 
 //These are public pages the user can access basic routes
 /////////////////////////////////////////////////////////
-// Route::post('/saveAvatar', [
-// 	'use' => 'KidController@saveAvatar',
-// 	'as' => 'saveAvatar'
-// ]);
+Route::post('/saveAvatar', [
+	'uses' => 'KidController@svAvatar',
+	'as' => 'saveAvatar'
+]);
 
 Route::get('/avatar', [
 	'uses' => 'KidController@initialAvatar',
 	'as' => 'avatar'
+]);
+
+Route::get('/avatarImage/{filename}', [
+    'uses' => 'KidController@getKIdImage',
+    'as' => 'avatar.image'
 ]);
 
 Route::get('/', function () {

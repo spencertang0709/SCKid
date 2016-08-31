@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Repository\KidRepository;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use App;
 use App\Kid;
-
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -143,14 +144,39 @@ class KidController extends Controller
         );
     }
 
-    // public function saveAvatar(Requset $request){
-    //
-    // }
+    public function svAvatar(Request $request){
+
+        $user = $request->user();
+        $kidId = $request['kid'];
+        // var_dump($request->images->path());
+        // $filePath=$request->images->path();
+        // $file = $request->file('images');
+        // var_dump($file);
+
+        $filename = $user->name . '-' . $kidId . '.jpg';
+        // if ($file) {
+        //     Storage::disk('local')->put($filename, $file);
+        // }
+        //  return redirect()->route('avatar');
+        //  return Redirect::back()->with('msg', $filename);
+        // return Redirect::back()->with('kidId', $kidId);
+        return Redirect::back()->with('filename', $filename);
+    }
 
     public function initialAvatar(Request $request){
-        $user = Auth::user()->first();
+        $user = $request->user();
         $kid = $user->kids()->get();
-        return view('addAvatar',['kids'=>$kid]);
+        return view('/addAvatar',[
+            'kids' => $kid,
+            'user' => $user,
+            // 'kidId' => $kid->first()->id
+    ]);
+    }
+
+    public function getKIdImage($filename)
+    {
+        $file = Storage::disk('local')->get($filename);
+        return new Response($file, 200);
     }
 
 }
