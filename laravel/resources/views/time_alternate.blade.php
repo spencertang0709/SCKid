@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
-
 	<div id="page-wrapper">
 		<div class="container-fluid">
 			<div class="row">
@@ -16,27 +14,23 @@
 				<div class="col-lg-12">
 					<div class="box box-info">
 						<div class="box-header">
-							@if (Session::get('current_kid_name') != NULL)
-								<h3 class="box-title">Set Times for:
-									<button>{{Session::get('current_kid_name')}}</button>
-								</h3>
-							@else
-								<h3 class="box-title"><strong>Please select a kid first</strong></h3>
-							@endif
+							<h3 class="box-title">Set Times for:
+								<button>{{Session::get('current_kid_name')}}</button>
+							</h3>
 						</div>
 						<div class="box-body">
 
 							{{--<table style="border:1px solid black">--}}
-							{{--<thead>--}}
-							{{--<td>--}}
-							{{--<button id="previousButton">Previous</button>--}}
-							{{--</td>--}}
-							{{--<td id="currentDay"> </td>--}}
-							{{--<td>--}}
-							{{--<button id="nextButton">Next</button>--}}
-							{{--</td>--}}
-							{{--</thead>--}}
-							{{--<tbody id="timeSlots"> </tbody>--}}
+								{{--<thead>--}}
+								{{--<td>--}}
+									{{--<button id="previousButton">Previous</button>--}}
+								{{--</td>--}}
+								{{--<td id="currentDay"> </td>--}}
+								{{--<td>--}}
+									{{--<button id="nextButton">Next</button>--}}
+								{{--</td>--}}
+								{{--</thead>--}}
+								{{--<tbody id="timeSlots"> </tbody>--}}
 							{{--</table>--}}
 
 
@@ -97,17 +91,19 @@
 			var dayIndex = startingDayIndex;
 
 			var startTime = 0,
-					endTime = 24;
+				endTime = 24;
 			var hourString = "",
-					minuteString = "";
+				minuteString = "";
 			var currentHour = startTime,
-					currentMinute = 0;
+				currentMinute = 0;
 			var hourRow,
-					minuteColumn;
+				minuteColumn;
 			var hourCycle = 2;
 
 			var hourClassWord = "h hour";
 			var minuteClassWord = "m minute";
+
+			var initialTime = true;
 
 			var selectedSlots = [];
 			var selectedIndex = 0;
@@ -118,6 +114,14 @@
 				parentContainer : document.getElementById("timeSlots"),//TODO flexible parent container
 
 				dayContainer : document.getElementById("currentDay"),//TODO create fixed container
+
+				adjustUpRow : document.createElement("TR"),
+				adjustUpColumn: null,
+				adjustUpButton: null,
+
+				adjustDownRow : document.createElement("TR"),
+				adjustDownColumn: null,
+				adjustDownButton: null,
 
 				hourRow : null,
 				hourColumn : null,
@@ -133,6 +137,19 @@
 			var createTimeSlot = function() {
 				//Display current day
 				ui.dayContainer.innerHTML = dayInWeek[dayIndex];
+
+				//Setup and attach adjustment row
+				for (var i = 1; i <= hourCycle; i++) {
+					ui.adjustUpButton = document.createElement("BUTTON");
+					ui.adjustUpButton.className = "adjustUp";
+					ui.adjustUpButton.innerHTML = "Up";
+
+					ui.adjustUpColumn = document.createElement("TD");
+					ui.adjustUpColumn.appendChild(ui.adjustUpButton);
+					ui.adjustUpRow.appendChild(ui.adjustUpColumn);
+				}
+				ui.parentContainer.appendChild(ui.adjustUpRow);
+
 				//Display time slots
 				do {
 					for (var i = 1; i <= hourCycle; i++) {
@@ -166,7 +183,6 @@
 						//Add events for minute columns
 						ui.minuteColumn.onclick = function(e) {
 							//Check if current slot is selected
-							//TODO better check condition, remove this slot if selected instead of alerting
 							if (this.style.backgroundColor != "blue") {
 								var hour = e.target.parentNode.className.substring(hourClassWord.length + 1 - 1);
 								var minute = e.target.className.substring(minuteClassWord.length + 1 - 1);
@@ -196,12 +212,51 @@
 							this.parentNode.style.border = "none";
 						}
 
+						//Setup styles for current displaying column
+						if (initialTime) {
+							initialTime = false;
+							ui.hourRow.setAttribute("current_row", "true");
+						} else {
+							//ui.hourColumn.style.display = "none";
+							//ui.minuteColumn.style.display = "none";
+							ui.hourRow.style.display = "none";
+							ui.hourRow.setAttribute("current_row", "false");
+						}
+
 						//Arrange DOM
 						ui.hourRow.appendChild(ui.hourColumn);
 						ui.hourRow.appendChild(ui.minuteColumn);
 						ui.parentContainer.appendChild(ui.hourRow);
+
 					}
 				} while (currentHour < endTime);
+
+				//Setup and attach adjustment row
+				for (var i = 1; i <= hourCycle; i++) {
+					ui.adjustDownButton = document.createElement("BUTTON");
+					ui.adjustDownButton.className = "adjustDown";
+					ui.adjustDownButton.innerHTML = "Down";
+
+					ui.adjustDownColumn = document.createElement("TD");
+					ui.adjustDownColumn.appendChild(ui.adjustDownButton);
+					ui.adjustDownRow.appendChild(ui.adjustDownColumn);
+
+					//Add events
+					ui.adjustDownButton.onclick = function(e) {
+						var rowArray = document.getElementsByTagName("TR");
+						for (var i = 0; i < rowArray.length; i++) {
+							if (rowArray[i].getAttribute("current_row") == "true") {
+								var currentRow = rowArray[i];
+								currentRow.style.display = "none";
+							}
+						}
+
+						var nextRow = currentRow.nextSibling;
+						nextRow.style.display = "block";
+						nextRow.setAttribute("current_row", "true");
+					}
+				}
+				ui.parentContainer.appendChild(ui.adjustDownRow);
 
 				//Set attributes for slot managing buttons
 				ui.scheduleButton.id = "scheduleButton";
@@ -217,11 +272,11 @@
 					}
 					selectedSlots.sort(compareFunction);
 
-
 					//Prepare data to send to database;
 					var allTimeSlots = [];
 					for (var i = 0; i < selectedSlots.length; i++) {
 						allTimeSlots.push(selectedSlots[i].hourString + ":" + selectedSlots[i].minuteString);
+						alert(selectedSlots[i].hourString + ":" + selectedSlots[i].minuteString);
 					}
 					var dayData = "day=" + dayInWeek[dayIndex];
 					var slotsData = "slots=" + JSON.stringify(allTimeSlots);
@@ -235,7 +290,7 @@
 						type: "GET",
 						data: dataString,
 						success: function(responseText) {
-							alert(responseText);
+							//alert(responseText);
 						}
 					});
 

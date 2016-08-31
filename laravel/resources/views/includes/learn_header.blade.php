@@ -5,7 +5,7 @@
         <ul>
             <li> | </li>
             <li>
-                <a href="/home" class="icon fa-angle-down">Go Home</a>                
+                <a href="{{URL::previous()}}" class="icon fa-angle-down">Go Back</a>
             </li>
             <!--<li> | </li>
             <li>

@@ -87,8 +87,7 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="/account"><i class="fa fa-user fa-fw"></i> Account</a></li>
-                <li><a href="/settings"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+                <li><a href="/account"><i class="fa fa-user fa-fw"></i> Account Settings</a></li>
                 <li class="divider"></li>
                 <li><a id="logoutBt" href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
@@ -134,13 +133,7 @@
                             <a href="/beacons"><i class="fa fa-bell fa-fw"></i>Beacons</a>
                         </li>
                         <li>
-                            <a href="/smart_filter"><i class="fa fa-fighter-jet fa-fw"></i>Smart Filtering</a>
-                        </li>
-                        <li>
                             <a href="/stats"><i class="fa fa-pie-chart fa-fw"></i>Stats</a>
-                        </li>
-                        <li>
-                            <a href="/panics"><i class="fa fa-exclamation fa-fw"></i>Child Panics</a>
                         </li>
                     </ul>
                 </li>
@@ -166,9 +159,6 @@
                         </li>
                         <li>
                             <a href="/time"><i class="fa fa-clock-o fa-fw"></i>Time Restrictions</a>
-                        </li>
-                        <li>
-                            <!-- <a href="/settings"><i class="fa fa-gear fa-fw"></i>Settings</a> -->
                         </li>
                     </ul>
                 </li>

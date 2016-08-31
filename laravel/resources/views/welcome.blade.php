@@ -19,7 +19,7 @@
             	<li> | </li>
                 <li><a href="#banner">About</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="/knowledge/categories">Learn</a></li>
+                <li><a href="/knowledge/showCategory">Learn</a></li>
                 <li><a href="#footer">Contact</a></li>
                 <li> | </li>
                 <li><a href="login" class="button">Login</a></li>
@@ -95,10 +95,11 @@
 
                 <section class="box special">
                     <span class="image featured"><img src="/img/portfolio/1.png" alt="" /></span>
-                    <h3>Manage Children Websites</h3>
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    <h3>Raise safety awareness</h3>
+                    <p>General information about internet privacy and security</p>
+                    <p>How online communication, including email, social media sites (Facebook), online forms and forums, can compromise your privacy</p>
                     <ul class="actions">
-                        <li><a href="/welcome/web" class="button alt">Learn More</a></li>
+                        <li><a href="/knowledge/showTitle/1" class="button alt">Learn More</a></li>
                     </ul>
                 </section>
 
@@ -107,10 +108,11 @@
 
                 <section class="box special">
                     <span class="image featured"><img src="/img/portfolio/2.png" alt="" /></span>
-                    <h3>Monitor Children on Mobile</h3>
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    <h3>Find tools and resources</h3>
+                    <p>Understand and identify common computer and mobile attacks and protect yourself against them</p>
+                    <p>Suggested tools and resources to protect yourself online</p>
                     <ul class="actions">
-                        <li><a href="/welcome/mobile" class="button alt">Learn More</a></li>
+                        <li><a href="/knowledge/showTitle/2" class="button alt">Learn More</a></li>
                     </ul>
                 </section>
 
