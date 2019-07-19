@@ -109,7 +109,4 @@ SocialiteProviders for extra access to(instagram and tumblr) http://socialitepro
 Google fonts
 Font Awesome  
 
-##Contact:
-Any issues or problems please contact Ben Edridge  
-Email: edridge.ben@gmail.com  
-Skype: ben.edridge1  
+
